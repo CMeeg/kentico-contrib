@@ -1568,6 +1568,7 @@
     <Content Include="CMSAdminControls\UI\UniGrid\Pages\MassDelete.aspx" />
     <Content Include="CMSAdminControls\UI\Selectors\FaviconSelector.ascx" />
     <Content Include="CMSAdminControls\UI\FontIconSelector.ascx" />
+    <Content Include="CMSFormControls\Meeg.Kentico.ContentComponents.Cms\ContentComponent.ascx" />
     <Content Include="CMSInstall\Controls\WizardSteps\CollationDialog.ascx" />
     <Content Include="CMSModules\AdminControls\Controls\UIControls\SmartTipPlaceholder.ascx" />
     <Content Include="CMSModules\BizForms\FormControls\FormFieldSelector.ascx" />
@@ -22265,6 +22266,12 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\AWSSDK.S3.3.1.9.0\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Meeg.Kentico.ContentComponents.Cms\Meeg.Kentico.ContentComponents.Cms.csproj">
+      <Project>{0c4d4b15-4a02-488c-84e6-042e46c4bf73}</Project>
+      <Name>Meeg.Kentico.ContentComponents.Cms</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

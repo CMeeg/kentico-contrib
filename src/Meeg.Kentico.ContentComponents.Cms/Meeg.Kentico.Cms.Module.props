@@ -1,0 +1,6 @@
+<Project>
+ <PropertyGroup>
+    <CmsPath>..\CMS</CmsPath>
+    <CmsModuleName>Meeg.Kentico.ContentComponents.Cms</CmsModuleName>
+ </PropertyGroup>
+</Project>
