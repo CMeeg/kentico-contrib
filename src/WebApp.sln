@@ -4,7 +4,7 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMSApp", "CMS\CMSApp.csproj", "{BB8817AE-48DF-4672-A1CB-CFB7441B88DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meeg.Kentico.ContentComponents.Cms", "Meeg.Kentico.ContentComponents.Cms\Meeg.Kentico.ContentComponents.Cms.csproj", "{0C4D4B15-4A02-488C-84E6-042E46C4BF73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meeg.Kentico.ContentComponents.Cms", "Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.Cms\Meeg.Kentico.ContentComponents.Cms.csproj", "{0C4D4B15-4A02-488C-84E6-042E46C4BF73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
