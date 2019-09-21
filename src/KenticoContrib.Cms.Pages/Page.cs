@@ -3,7 +3,7 @@
 // ReSharper disable once CheckNamespace
 namespace CMS.DocumentEngine.Types.KenticoContrib
 {
-    public partial class Home
+    public partial class Page
     {
         public Metadata MetadataComponent => this.GetContentComponent<Metadata>(nameof(Metadata));
     }

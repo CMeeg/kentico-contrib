@@ -67,15 +67,15 @@ namespace CMS.DocumentEngine.Types.KenticoContrib
 		/// Title.
 		/// </summary>
 		[DatabaseField]
-		public string MetadataOpenGraphTitle
+		public string OpenGraphTitle
 		{
 			get
 			{
-				return ValidationHelper.GetString(GetValue("MetadataOpenGraphTitle"), @"");
+				return ValidationHelper.GetString(GetValue("OpenGraphTitle"), @"");
 			}
 			set
 			{
-				SetValue("MetadataOpenGraphTitle", value);
+				SetValue("OpenGraphTitle", value);
 			}
 		}
 
@@ -84,15 +84,15 @@ namespace CMS.DocumentEngine.Types.KenticoContrib
 		/// Description.
 		/// </summary>
 		[DatabaseField]
-		public string MetadataOpenGraphDescription
+		public string OpenGraphDescription
 		{
 			get
 			{
-				return ValidationHelper.GetString(GetValue("MetadataOpenGraphDescription"), @"");
+				return ValidationHelper.GetString(GetValue("OpenGraphDescription"), @"");
 			}
 			set
 			{
-				SetValue("MetadataOpenGraphDescription", value);
+				SetValue("OpenGraphDescription", value);
 			}
 		}
 
@@ -155,11 +155,11 @@ namespace CMS.DocumentEngine.Types.KenticoContrib
 			{
 				get
 				{
-					return mInstance.MetadataOpenGraphTitle;
+					return mInstance.OpenGraphTitle;
 				}
 				set
 				{
-					mInstance.MetadataOpenGraphTitle = value;
+					mInstance.OpenGraphTitle = value;
 				}
 			}
 
@@ -171,11 +171,11 @@ namespace CMS.DocumentEngine.Types.KenticoContrib
 			{
 				get
 				{
-					return mInstance.MetadataOpenGraphDescription;
+					return mInstance.OpenGraphDescription;
 				}
 				set
 				{
-					mInstance.MetadataOpenGraphDescription = value;
+					mInstance.OpenGraphDescription = value;
 				}
 			}
 		}

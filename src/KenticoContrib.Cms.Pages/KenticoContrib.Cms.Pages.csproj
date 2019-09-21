@@ -66,6 +66,7 @@
     <Compile Include="Generated\KenticoContrib\PageProvider.generated.cs" />
     <Compile Include="Home.cs" />
     <Compile Include="Metadata.cs" />
+    <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
