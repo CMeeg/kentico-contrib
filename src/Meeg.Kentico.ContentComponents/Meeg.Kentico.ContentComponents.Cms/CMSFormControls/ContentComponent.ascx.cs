@@ -1,14 +1,11 @@
-﻿using CMS.DataEngine.Serialization;
-using CMS.DocumentEngine;
+﻿using CMS.DocumentEngine;
 using CMS.FormEngine;
 using CMS.FormEngine.Web.UI;
-using CMS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using System.Xml;
 
 namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
 {
@@ -16,26 +13,14 @@ namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
     {
         private string PageType
         {
-            get
-            {
-                return GetValue("PageType", string.Empty);
-            }
-            set
-            {
-                SetValue("PageType", value);
-            }
+            get => GetValue("PageType", string.Empty);
+            set => SetValue("PageType", value);
         }
 
         private string AlternativeFormName
         {
-            get
-            {
-                return GetValue("AlternativeFormName", string.Empty);
-            }
-            set
-            {
-                SetValue("AlternativeFormName", value);
-            }
+            get => GetValue("AlternativeFormName", string.Empty);
+            set => SetValue("AlternativeFormName", value);
         }
 
         private string PageTypeFormName
@@ -64,10 +49,10 @@ namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
 
                 SetPageSystemFields(componentFields);
 
-                // Return the component node serialised to XML
+                // Return the component node serialized to XML
 
-                XmlElement xml = ContentComponentNode.Serialize();
-                return xml.OuterXml;
+                var serializer = new ContentComponentSerializer();
+                return serializer.Serialize(ContentComponentNode);
             }
             set
             {
@@ -83,9 +68,10 @@ namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
                     return;
                 }
 
-                // Deserialise the component XML to a TreeNode that represents the component
+                // Deserialize the component XML to a TreeNode that represents the component
 
-                ContentComponentNode = GetContentComponentFromXml(componentXml);
+                var deserializer = new ContentComponentDeserializer();
+                ContentComponentNode = deserializer.Deserialize(PageType, componentXml);
             }
         }
 
@@ -174,18 +160,6 @@ namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
             componentFields.ApplyFieldsTo(page, field => field.IsSystem);
         }
 
-        private TreeNode GetContentComponentFromXml(string xml)
-        {
-            DataSet contentData = DataHelper.GetDataSetFromXml(xml);
-
-            if (DataHelper.DataSourceIsEmpty(contentData))
-            {
-                return null;
-            }
-
-            return TreeNode.New(PageType, contentData.Tables[0].Rows[0]);
-        }
-
         public override bool IsValid()
         {
             return ContentComponentForm.ValidateData();
@@ -212,7 +186,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
                     return;
                 }
 
-                foreach (Field field in Fields.Where(f => fieldPredicate == null ? true : fieldPredicate.Invoke(f)))
+                foreach (Field field in Fields.Where(f => fieldPredicate?.Invoke(f) ?? true))
                 {
                     // Prefer setting TreeNode properties over using TreeNode.SetValue in case there is any specific logic in the property setter that wouldn't be executed when using TreeNode.SetValue
 
