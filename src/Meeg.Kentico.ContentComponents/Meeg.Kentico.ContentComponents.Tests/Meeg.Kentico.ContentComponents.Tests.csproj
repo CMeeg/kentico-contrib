@@ -54,9 +54,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KenticoContrib.Cms.Pages\KenticoContrib.Cms.Pages.csproj">
-      <Project>{4109e77e-e92b-42ab-89c6-7da2a65fc774}</Project>
-      <Name>KenticoContrib.Cms.Pages</Name>
+    <ProjectReference Include="..\..\KenticoContrib.Content\KenticoContrib.Content.Cms\KenticoContrib.Content.Cms.csproj">
+      <Project>{918d7de0-32e5-4b7d-8658-2f63a4ec0d79}</Project>
+      <Name>KenticoContrib.Content.Cms</Name>
     </ProjectReference>
     <ProjectReference Include="..\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.csproj">
       <Project>{3fd614a5-aa27-4352-9666-adf01fdd205c}</Project>

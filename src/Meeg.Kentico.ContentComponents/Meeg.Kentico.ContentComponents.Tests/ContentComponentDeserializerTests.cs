@@ -38,8 +38,8 @@ namespace Meeg.Kentico.ContentComponents.Tests
 
             Assert.Multiple(() =>
             {
-                Assert.That(actual.DocumentPageTitle, Is.EqualTo(expected.PageTitle));
-                Assert.That(actual.DocumentPageDescription, Is.EqualTo(expected.PageDescription));
+                Assert.That(actual.DocumentPageTitle, Is.EqualTo(expected.DocumentPageTitle));
+                Assert.That(actual.DocumentPageDescription, Is.EqualTo(expected.DocumentPageDescription));
                 Assert.That(actual.GetValue("OpenGraphTitle", string.Empty), Is.EqualTo(expected.OpenGraphTitle));
                 Assert.That(actual.GetValue("OpenGraphDescription", string.Empty), Is.EqualTo(expected.OpenGraphDescription));
             });
@@ -60,8 +60,8 @@ namespace Meeg.Kentico.ContentComponents.Tests
 
             Assert.Multiple(() =>
             {
-                Assert.That(actual.PageTitle, Is.EqualTo(expected.PageTitle));
-                Assert.That(actual.PageDescription, Is.EqualTo(expected.PageDescription));
+                Assert.That(actual.DocumentPageTitle, Is.EqualTo(expected.DocumentPageTitle));
+                Assert.That(actual.DocumentPageDescription, Is.EqualTo(expected.DocumentPageDescription));
                 Assert.That(actual.OpenGraphTitle, Is.EqualTo(expected.OpenGraphTitle));
                 Assert.That(actual.OpenGraphDescription, Is.EqualTo(expected.OpenGraphDescription));
             });

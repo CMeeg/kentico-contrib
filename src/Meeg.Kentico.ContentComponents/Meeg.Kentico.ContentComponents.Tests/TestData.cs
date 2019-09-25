@@ -15,8 +15,8 @@ namespace Meeg.Kentico.ContentComponents.Tests
         private static Metadata CreateMetadataComponent()
         {
             var metadata = TreeNode.New<Metadata>();
-            metadata.PageTitle = "Fake page title";
-            metadata.PageDescription = "Fake page description";
+            metadata.SetValue(nameof(Metadata.DocumentPageTitle), "Fake page title");
+            metadata.SetValue(nameof(Metadata.DocumentPageDescription), "Fake page description");
             metadata.OpenGraphTitle = "Fake Open Graph title";
             metadata.OpenGraphDescription = "Fake Open Graph description.";
 

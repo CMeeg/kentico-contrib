@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KenticoContrib.Cms.Pages")]
+[assembly: AssemblyTitle("KenticoContrib.Content.Cms")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KenticoContrib.Cms.Pages")]
+[assembly: AssemblyProduct("KenticoContrib.Content.Cms")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4109e77e-e92b-42ab-89c6-7da2a65fc774")]
+[assembly: Guid("918d7de0-32e5-4b7d-8658-2f63a4ec0d79")]
 
 // Version information for an assembly consists of the following four values:
 //

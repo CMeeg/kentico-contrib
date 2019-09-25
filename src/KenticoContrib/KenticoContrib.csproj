@@ -55,6 +55,15 @@
       <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Autofac, Version=4.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.0.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="AWSSDK.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604">
       <HintPath>..\..\packages\AWSSDK.Core.3.1.11.0\lib\net45\AWSSDK.Core.dll</HintPath>
       <Private>True</Private>
@@ -395,6 +404,9 @@
       <HintPath>..\..\packages\MaxMind.GeoIP2.3.0.0\lib\net45\MaxMind.GeoIP2.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MediatR, Version=7.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MediatR.7.0.0\lib\net461\MediatR.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -706,7 +718,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -821,11 +832,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ApplicationConfig.cs" />
+    <Compile Include="App_Start\DependencyResolverConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Features\Home\HomeController.cs" />
+    <Compile Include="Features\Home\HomeMappingProfile.cs" />
+    <Compile Include="Features\Home\HomeViewModel.cs" />
+    <Compile Include="Features\Layout\LayoutController.cs" />
+    <Compile Include="Features\Layout\LayoutMappingProfile.cs" />
+    <Compile Include="Features\Layout\PageMetadataViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AutoMapperRegistrationModule.cs" />
+    <Compile Include="Infrastructure\MediatrRegistrationModule.cs" />
+    <Compile Include="Infrastructure\MvcRegistrationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\WebAssemblyInfo.cs" />
   </ItemGroup>
@@ -835,7 +855,7 @@
     </Content>
     <Content Include="AppSettings.config" />
     <Content Include="ConnectionStrings.config" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Layout\_DefaultLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
@@ -844,9 +864,20 @@
     <Content Include="Kentico\Scripts\builders\Core-icons.ttf" />
     <Content Include="Kentico\Scripts\builders\Core-icons.eot" />
     <None Include="packages.config" />
+    <Content Include="Views\Layout\_PageMetadata.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\AWSSDK.S3.3.1.9.0\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KenticoContrib.Content\KenticoContrib.Content.Cms\KenticoContrib.Content.Cms.csproj">
+      <Project>{918d7de0-32e5-4b7d-8658-2f63a4ec0d79}</Project>
+      <Name>KenticoContrib.Content.Cms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KenticoContrib.Content\KenticoContrib.Content\KenticoContrib.Content.csproj">
+      <Project>{fad608c9-9033-4a9d-8649-81972193cd15}</Project>
+      <Name>KenticoContrib.Content</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

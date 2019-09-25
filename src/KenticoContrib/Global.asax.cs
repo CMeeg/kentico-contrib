@@ -11,6 +11,8 @@ namespace KenticoContrib
         {
             ApplicationConfig.RegisterFeatures(ApplicationBuilder.Current);
 
+            DependencyResolverConfig.RegisterDependencies();
+
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

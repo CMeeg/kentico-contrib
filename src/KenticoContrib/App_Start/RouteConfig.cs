@@ -20,6 +20,12 @@ namespace KenticoContrib
                 "",
                 new { controller = "Home", action = "Index" }
             );
+
+            routes.MapRoute(
+                "Default",
+                "{controller}/{action}/{id}",
+                new { action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

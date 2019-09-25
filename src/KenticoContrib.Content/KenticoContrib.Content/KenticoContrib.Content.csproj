@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4109E77E-E92B-42AB-89C6-7DA2A65FC774}</ProjectGuid>
+    <ProjectGuid>{FAD608C9-9033-4A9D-8649-81972193CD15}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KenticoContrib.Cms.Pages</RootNamespace>
-    <AssemblyName>KenticoContrib.Cms.Pages</AssemblyName>
+    <RootNamespace>KenticoContrib.Content</RootNamespace>
+    <AssemblyName>KenticoContrib.Content</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,21 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CMS.Base">
-      <HintPath>..\Lib\CMS.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="CMS.Core">
-      <HintPath>..\Lib\CMS.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CMS.DataEngine">
-      <HintPath>..\Lib\CMS.DataEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="CMS.DocumentEngine">
-      <HintPath>..\Lib\CMS.DocumentEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="CMS.Helpers">
-      <HintPath>..\Lib\CMS.Helpers.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,24 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Generated\CMS\File.generated.cs" />
-    <Compile Include="Generated\CMS\FileProvider.generated.cs" />
-    <Compile Include="Generated\KenticoContrib\Home.generated.cs" />
-    <Compile Include="Generated\KenticoContrib\HomeProvider.generated.cs" />
-    <Compile Include="Generated\KenticoContrib\Metadata.generated.cs" />
-    <Compile Include="Generated\KenticoContrib\MetadataProvider.generated.cs" />
-    <Compile Include="Generated\KenticoContrib\Page.generated.cs" />
-    <Compile Include="Generated\KenticoContrib\PageProvider.generated.cs" />
-    <Compile Include="Home.cs" />
-    <Compile Include="Metadata.cs" />
-    <Compile Include="Page.cs" />
+    <Compile Include="CurrentPageContext.cs" />
+    <Compile Include="Home\GetHomePageQuery.cs" />
+    <Compile Include="Home\HomePage.cs" />
+    <Compile Include="ICurrentPageContext.cs" />
+    <Compile Include="IPage.cs" />
+    <Compile Include="PageMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.csproj">
-      <Project>{3fd614a5-aa27-4352-9666-adf01fdd205c}</Project>
-      <Name>Meeg.Kentico.ContentComponents</Name>
-    </ProjectReference>
+    <PackageReference Include="MediatR">
+      <Version>7.0.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
