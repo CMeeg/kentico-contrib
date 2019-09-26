@@ -69,7 +69,7 @@
     <Compile Include="Home\GetHomePageQueryHandler.cs" />
     <Compile Include="Home\Home.cs" />
     <Compile Include="Home\HomeMappingProfile.cs" />
-    <Compile Include="Infrastructure\Mediatr\SetCurrentPagePipelineBehaviour.cs" />
+    <Compile Include="Infrastructure\Mediatr\SetCurrentPageRequestPostProcessor.cs" />
     <Compile Include="MetadataMappingProfile.cs" />
     <Compile Include="Page\Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

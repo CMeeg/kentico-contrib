@@ -2,6 +2,7 @@
 using AutoMapper;
 using KenticoContrib.Content.Cms.Infrastructure.Mediatr;
 using MediatR;
+using MediatR.Pipeline;
 
 namespace KenticoContrib.Content.Cms.Infrastructure.Autofac
 {
@@ -24,7 +25,7 @@ namespace KenticoContrib.Content.Cms.Infrastructure.Autofac
                 .AsClosedTypesOf(typeof(IRequestHandler<,>))
                 .AsImplementedInterfaces();
 
-            builder.RegisterGeneric(typeof(SetCurrentPagePipelineBehaviour<,>)).As(typeof(IPipelineBehavior<,>));
+            builder.RegisterGeneric(typeof(SetCurrentPageRequestPostProcessor<,>)).As(typeof(IRequestPostProcessor<,>));
         }
 
         private void RegisterAutoMapperComponents(ContainerBuilder builder)
