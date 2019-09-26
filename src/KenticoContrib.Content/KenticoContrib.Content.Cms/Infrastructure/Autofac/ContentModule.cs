@@ -1,10 +1,11 @@
 ﻿using Autofac;
 using AutoMapper;
+using KenticoContrib.Content.Cms.Infrastructure.Mediatr;
 using MediatR;
 
-namespace KenticoContrib.Content.Cms.Infrastructure
+namespace KenticoContrib.Content.Cms.Infrastructure.Autofac
 {
-    public class ContentRegistrationModule : Module
+    public class ContentModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

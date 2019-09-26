@@ -2,9 +2,9 @@
 using MediatR;
 using MediatR.Pipeline;
 
-namespace KenticoContrib.Infrastructure
+namespace KenticoContrib.Infrastructure.Autofac
 {
-    public class MediatrRegistrationModule : Module
+    public class MediatrModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 
-namespace KenticoContrib.Content.Cms.Infrastructure
+namespace KenticoContrib.Content.Cms.Infrastructure.Mediatr
 {
     public class SetCurrentPagePipelineBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 
-namespace KenticoContrib.Infrastructure
+namespace KenticoContrib.Infrastructure.Autofac
 {
-    public class MvcRegistrationModule : Module
+    public class MvcModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

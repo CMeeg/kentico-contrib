@@ -2,9 +2,9 @@
 using Autofac;
 using AutoMapper;
 
-namespace KenticoContrib.Infrastructure
+namespace KenticoContrib.Infrastructure.Autofac
 {
-    public class AutoMapperRegistrationModule : Module
+    public class AutoMapperModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

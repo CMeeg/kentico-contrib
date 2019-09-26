@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
-using KenticoContrib.Content.Cms.Infrastructure;
-using KenticoContrib.Infrastructure;
+using KenticoContrib.Content.Cms.Infrastructure.Autofac;
+using KenticoContrib.Infrastructure.Autofac;
 
 namespace KenticoContrib
 {
@@ -14,13 +14,13 @@ namespace KenticoContrib
 
             // Register application modules
 
-            builder.RegisterModule<MvcRegistrationModule>();
-            builder.RegisterModule<MediatrRegistrationModule>();
-            builder.RegisterModule<AutoMapperRegistrationModule>();
+            builder.RegisterModule<MvcModule>();
+            builder.RegisterModule<MediatrModule>();
+            builder.RegisterModule<AutoMapperModule>();
 
             // Register external (from outside of this assembly) modules
 
-            builder.RegisterModule<ContentRegistrationModule>();
+            builder.RegisterModule<ContentModule>();
 
             // Set dependency resolver
 

@@ -843,9 +843,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\AutoMapperRegistrationModule.cs" />
-    <Compile Include="Infrastructure\MediatrRegistrationModule.cs" />
-    <Compile Include="Infrastructure\MvcRegistrationModule.cs" />
+    <Compile Include="Infrastructure\Autofac\AutoMapperModule.cs" />
+    <Compile Include="Infrastructure\Autofac\MediatrModule.cs" />
+    <Compile Include="Infrastructure\Autofac\MvcModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\WebAssemblyInfo.cs" />
   </ItemGroup>

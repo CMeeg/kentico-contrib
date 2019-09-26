@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmsMappingProfile.cs" />
-    <Compile Include="Infrastructure\ContentRegistrationModule.cs" />
+    <Compile Include="Infrastructure\Autofac\ContentModule.cs" />
     <Compile Include="Generated\Pages\CMS\File.generated.cs" />
     <Compile Include="Generated\Pages\CMS\FileProvider.generated.cs" />
     <Compile Include="Generated\Pages\KenticoContrib\Home.generated.cs" />
@@ -69,7 +69,7 @@
     <Compile Include="Home\GetHomePageQueryHandler.cs" />
     <Compile Include="Home\Home.cs" />
     <Compile Include="Home\HomeMappingProfile.cs" />
-    <Compile Include="Infrastructure\SetCurrentPagePipelineBehaviour.cs" />
+    <Compile Include="Infrastructure\Mediatr\SetCurrentPagePipelineBehaviour.cs" />
     <Compile Include="MetadataMappingProfile.cs" />
     <Compile Include="Page\Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
