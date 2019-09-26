@@ -21,9 +21,9 @@ namespace KenticoContrib.Content.Cms.Home
                 .Columns(
                     nameof(CMS.DocumentEngine.Types.KenticoContrib.Home.DocumentID),
                     nameof(CMS.DocumentEngine.Types.KenticoContrib.Home.DocumentName),
-                    nameof(CMS.DocumentEngine.Types.KenticoContrib.Home.Metadata)
+                    nameof(CMS.DocumentEngine.Types.KenticoContrib.Home.HomeMetadata)
                 )
-                .Culture("en-gb")
+                .Culture("en-gb") // TODO: Don't hardcode this
                 .ToList()
                 .FirstOrDefault();
 

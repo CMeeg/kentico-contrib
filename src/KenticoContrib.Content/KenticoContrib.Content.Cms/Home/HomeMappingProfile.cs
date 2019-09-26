@@ -8,8 +8,7 @@ namespace KenticoContrib.Content.Cms.Home
         {
             RecognizePrefixes(GetCmsPrefixes(CMS.DocumentEngine.Types.KenticoContrib.Home.CLASS_NAME));
 
-            CreateMap<CMS.DocumentEngine.Types.KenticoContrib.Home, HomePage>()
-                .ForMember(dest => dest.Metadata, member => member.MapFrom(source => source.MetadataComponent));
+            CreateMap<CMS.DocumentEngine.Types.KenticoContrib.Home, HomePage>();
         }
     }
 }

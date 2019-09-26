@@ -13,8 +13,8 @@ namespace Meeg.Kentico.ContentComponents.Tests
             var page = TreeNode.New<Page>();
             page.DocumentName = "Fake page";
 
-            // `page.MetadataComponent` uses the extension method we are testing
-            Metadata actual = page.MetadataComponent;
+            // `page.Metadata` uses the extension method we are testing
+            Metadata actual = page.Metadata;
 
             Assert.That(actual, Is.Null);
         }
@@ -28,17 +28,17 @@ namespace Meeg.Kentico.ContentComponents.Tests
 
             var page = TreeNode.New<Page>();
             page.DocumentName = "Fake page";
-            page.Metadata = serializer.Serialize(expected);
+            page.PageMetadata = serializer.Serialize(expected);
 
-            // `page.MetadataComponent` uses the extension method we are testing
-            Metadata actual = page.MetadataComponent;
+            // `page.Metadata` uses the extension method we are testing
+            Metadata actual = page.Metadata;
 
             Assert.Multiple(() =>
             {
                 Assert.That(actual.DocumentPageTitle, Is.EqualTo(expected.DocumentPageTitle));
                 Assert.That(actual.DocumentPageDescription, Is.EqualTo(expected.DocumentPageDescription));
-                Assert.That(actual.OpenGraphTitle, Is.EqualTo(expected.OpenGraphTitle));
-                Assert.That(actual.OpenGraphDescription, Is.EqualTo(expected.OpenGraphDescription));
+                Assert.That(actual.MetadataOpenGraphTitle, Is.EqualTo(expected.MetadataOpenGraphTitle));
+                Assert.That(actual.MetadataOpenGraphDescription, Is.EqualTo(expected.MetadataOpenGraphDescription));
             });
         }
     }

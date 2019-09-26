@@ -40,8 +40,8 @@ namespace Meeg.Kentico.ContentComponents.Tests
             {
                 Assert.That(actual.DocumentPageTitle, Is.EqualTo(expected.DocumentPageTitle));
                 Assert.That(actual.DocumentPageDescription, Is.EqualTo(expected.DocumentPageDescription));
-                Assert.That(actual.GetValue("OpenGraphTitle", string.Empty), Is.EqualTo(expected.OpenGraphTitle));
-                Assert.That(actual.GetValue("OpenGraphDescription", string.Empty), Is.EqualTo(expected.OpenGraphDescription));
+                Assert.That(actual.GetValue("MetadataOpenGraphTitle", string.Empty), Is.EqualTo(expected.MetadataOpenGraphTitle));
+                Assert.That(actual.GetValue("MetadataOpenGraphDescription", string.Empty), Is.EqualTo(expected.MetadataOpenGraphDescription));
             });
         }
 
@@ -62,8 +62,8 @@ namespace Meeg.Kentico.ContentComponents.Tests
             {
                 Assert.That(actual.DocumentPageTitle, Is.EqualTo(expected.DocumentPageTitle));
                 Assert.That(actual.DocumentPageDescription, Is.EqualTo(expected.DocumentPageDescription));
-                Assert.That(actual.OpenGraphTitle, Is.EqualTo(expected.OpenGraphTitle));
-                Assert.That(actual.OpenGraphDescription, Is.EqualTo(expected.OpenGraphDescription));
+                Assert.That(actual.MetadataOpenGraphTitle, Is.EqualTo(expected.MetadataOpenGraphTitle));
+                Assert.That(actual.MetadataOpenGraphDescription, Is.EqualTo(expected.MetadataOpenGraphDescription));
             });
         }
     }

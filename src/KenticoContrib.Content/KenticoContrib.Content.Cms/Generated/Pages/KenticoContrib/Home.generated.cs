@@ -64,18 +64,18 @@ namespace CMS.DocumentEngine.Types.KenticoContrib
 
 
 		/// <summary>
-		/// Metadata.
+		/// HomeMetadata.
 		/// </summary>
 		[DatabaseField]
-		public string Metadata
+		public string HomeMetadata
 		{
 			get
 			{
-				return ValidationHelper.GetString(GetValue("Metadata"), @"");
+				return ValidationHelper.GetString(GetValue("HomeMetadata"), @"");
 			}
 			set
 			{
-				SetValue("Metadata", value);
+				SetValue("HomeMetadata", value);
 			}
 		}
 
@@ -132,17 +132,17 @@ namespace CMS.DocumentEngine.Types.KenticoContrib
 
 
 			/// <summary>
-			/// Metadata.
+			/// HomeMetadata.
 			/// </summary>
 			public string Metadata
 			{
 				get
 				{
-					return mInstance.Metadata;
+					return mInstance.HomeMetadata;
 				}
 				set
 				{
-					mInstance.Metadata = value;
+					mInstance.HomeMetadata = value;
 				}
 			}
 		}
