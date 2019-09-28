@@ -14,6 +14,7 @@ namespace KenticoContrib.Content.Cms.Home
         {
             this.mapper = mapper;
         }
+
         protected override HomePage Handle(GetHomePageQuery request)
         {
             CMS.DocumentEngine.Types.KenticoContrib.Home homeNode = DocumentHelper.GetDocuments<CMS.DocumentEngine.Types.KenticoContrib.Home>()

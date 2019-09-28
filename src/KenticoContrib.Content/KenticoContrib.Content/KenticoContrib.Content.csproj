@@ -46,7 +46,7 @@
     <Compile Include="Home\HomePage.cs" />
     <Compile Include="ICurrentPageContext.cs" />
     <Compile Include="IPage.cs" />
-    <Compile Include="PageMetadata.cs" />
+    <Compile Include="Metadata\PageMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,5 +54,6 @@
       <Version>7.0.0</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,43 +1,29 @@
-﻿using System.Web.Mvc;
-using AutoMapper;
-using KenticoContrib.Content;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using MediatR;
 
 namespace KenticoContrib.Features.Layout
 {
     public class LayoutController : Controller
     {
-        private readonly ICurrentPageContext currentPageContext;
-        private readonly IMapper mapper;
+        private readonly IMediator mediator;
 
-        public LayoutController(ICurrentPageContext currentPageContext, IMapper mapper)
+        public LayoutController(IMediator mediator)
         {
-            this.currentPageContext = currentPageContext;
-            this.mapper = mapper;
+            this.mediator = mediator;
         }
 
         [ChildActionOnly]
-        public ActionResult PageMetadata()
+        public async Task<ActionResult> PageMetadata()
         {
-            IPage page = currentPageContext.Page;
+            PageMetadataViewModel viewModel = await mediator.Send(new PageMetadataQuery());
 
-            if (page == null)
+            if (viewModel == null)
             {
                 return new EmptyResult();
             }
 
-            var viewModel = mapper.Map<PageMetadataViewModel>(page.Metadata);
-
-            EnsureRequiredPageMetadataIsPresent(viewModel, page);
-
             return PartialView("_PageMetadata", viewModel);
-        }
-
-        private void EnsureRequiredPageMetadataIsPresent(PageMetadataViewModel viewModel, IPage page)
-        {
-            if (string.IsNullOrEmpty(viewModel.PageTitle))
-            {
-                viewModel.PageTitle = page.Name;
-            }
         }
     }
 }

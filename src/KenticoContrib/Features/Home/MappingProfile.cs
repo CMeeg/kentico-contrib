@@ -3,9 +3,9 @@ using KenticoContrib.Content.Home;
 
 namespace KenticoContrib.Features.Home
 {
-    public class HomeMappingProfile : Profile
+    public class MappingProfile : Profile
     {
-        public HomeMappingProfile()
+        public MappingProfile()
         {
             CreateMap<HomePage, HomeViewModel>();
         }

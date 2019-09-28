@@ -1,4 +1,4 @@
-﻿namespace KenticoContrib.Content
+﻿namespace KenticoContrib.Content.Metadata
 {
     public class PageMetadata
     {

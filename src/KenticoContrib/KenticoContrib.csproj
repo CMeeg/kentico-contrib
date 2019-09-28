@@ -835,10 +835,12 @@
     <Compile Include="App_Start\DependencyResolverConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Features\Home\HomeController.cs" />
-    <Compile Include="Features\Home\HomeMappingProfile.cs" />
     <Compile Include="Features\Home\HomeViewModel.cs" />
+    <Compile Include="Features\Home\MappingProfile.cs" />
+    <Compile Include="Features\Home\IndexQuery.cs" />
     <Compile Include="Features\Layout\LayoutController.cs" />
-    <Compile Include="Features\Layout\LayoutMappingProfile.cs" />
+    <Compile Include="Features\Layout\MappingProfile.cs" />
+    <Compile Include="Features\Layout\PageMetadataQuery.cs" />
     <Compile Include="Features\Layout\PageMetadataViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -855,7 +857,7 @@
     </Content>
     <Content Include="AppSettings.config" />
     <Content Include="ConnectionStrings.config" />
-    <Content Include="Views\Layout\_DefaultLayout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>

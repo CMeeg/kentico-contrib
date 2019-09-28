@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoMapper;
 
-namespace KenticoContrib.Content.Cms
+namespace KenticoContrib.Content.Cms.Infrastructure.AutoMapper
 {
     public abstract class CmsMappingProfile : Profile
     {

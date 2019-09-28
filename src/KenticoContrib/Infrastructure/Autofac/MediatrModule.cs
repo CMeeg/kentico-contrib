@@ -28,6 +28,10 @@ namespace KenticoContrib.Infrastructure.Autofac
                 var componentContext = context.Resolve<IComponentContext>();
                 return serviceType => componentContext.Resolve(serviceType);
             });
+
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .AsClosedTypesOf(typeof(IRequestHandler<,>))
+                .AsImplementedInterfaces();
         }
     }
 }

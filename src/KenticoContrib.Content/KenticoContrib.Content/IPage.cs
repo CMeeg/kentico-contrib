@@ -1,4 +1,6 @@
-﻿namespace KenticoContrib.Content
+﻿using KenticoContrib.Content.Metadata;
+
+namespace KenticoContrib.Content
 {
     public interface IPage
     {

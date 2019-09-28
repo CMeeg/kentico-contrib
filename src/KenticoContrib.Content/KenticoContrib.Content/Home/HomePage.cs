@@ -1,4 +1,6 @@
-﻿namespace KenticoContrib.Content.Home
+﻿using KenticoContrib.Content.Metadata;
+
+namespace KenticoContrib.Content.Home
 {
     public class HomePage : IPage
     {

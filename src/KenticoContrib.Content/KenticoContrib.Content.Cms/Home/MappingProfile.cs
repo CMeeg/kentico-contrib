@@ -1,10 +1,11 @@
-﻿using KenticoContrib.Content.Home;
+﻿using KenticoContrib.Content.Cms.Infrastructure.AutoMapper;
+using KenticoContrib.Content.Home;
 
 namespace KenticoContrib.Content.Cms.Home
 {
-    public class HomeMappingProfile : CmsMappingProfile
+    public class MappingProfile : CmsMappingProfile
     {
-        public HomeMappingProfile()
+        public MappingProfile()
         {
             RecognizePrefixes(GetCmsPrefixes(CMS.DocumentEngine.Types.KenticoContrib.Home.CLASS_NAME));
 
