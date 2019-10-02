@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 
 namespace KenticoContrib.Content.Cms.Infrastructure.AutoMapper
@@ -7,7 +9,18 @@ namespace KenticoContrib.Content.Cms.Infrastructure.AutoMapper
     {
         private const string DocumentPrefix = "Document";
 
-        protected string[] GetCmsPrefixes(string className)
+        protected string[] GetCmsPrefixes(params string[] classNames)
+        {
+            var prefixes = new List<string>();
+
+            prefixes.Add(DocumentPrefix);
+
+            prefixes.AddRange(classNames.Select(GetClassNamePrefix));
+
+            return prefixes.ToArray();
+        }
+
+        private string GetClassNamePrefix(string className)
         {
             if (string.IsNullOrEmpty(className))
             {
@@ -17,9 +30,7 @@ namespace KenticoContrib.Content.Cms.Infrastructure.AutoMapper
             string[] classNameParts = className.Split('.');
             int numParts = classNameParts.Length;
 
-            string classPrefix = numParts == 1 ? classNameParts[0] : classNameParts[numParts - 1];
-
-            return new[] {DocumentPrefix, classPrefix};
+            return numParts == 1 ? classNameParts[0] : classNameParts[numParts - 1];
         }
     }
 }

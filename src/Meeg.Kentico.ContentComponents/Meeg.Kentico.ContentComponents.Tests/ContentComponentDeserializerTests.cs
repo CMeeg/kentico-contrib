@@ -13,8 +13,8 @@ namespace Meeg.Kentico.ContentComponents.Tests
         {
             var deserializer = new ContentComponentDeserializer();
 
-            TreeNode actualUntyped = deserializer.Deserialize(Metadata.CLASS_NAME, componentXml);
-            Metadata actualTyped = deserializer.Deserialize<Metadata>(componentXml);
+            TreeNode actualUntyped = deserializer.Deserialize(PageMetadata.CLASS_NAME, componentXml);
+            PageMetadata actualTyped = deserializer.Deserialize<PageMetadata>(componentXml);
 
             Assert.Multiple(() =>
             {
@@ -28,20 +28,18 @@ namespace Meeg.Kentico.ContentComponents.Tests
         {
             var serializer = new ContentComponentSerializer();
 
-            Metadata expected = TestData.MetadataComponent;
+            PageMetadata expected = TestData.PageMetadataComponent;
 
             string componentXml = serializer.Serialize(expected);
 
             var deserializer = new ContentComponentDeserializer();
 
-            TreeNode actual = deserializer.Deserialize(Metadata.CLASS_NAME, componentXml);
+            TreeNode actual = deserializer.Deserialize(PageMetadata.CLASS_NAME, componentXml);
 
             Assert.Multiple(() =>
             {
                 Assert.That(actual.DocumentPageTitle, Is.EqualTo(expected.DocumentPageTitle));
                 Assert.That(actual.DocumentPageDescription, Is.EqualTo(expected.DocumentPageDescription));
-                Assert.That(actual.GetValue("MetadataOpenGraphTitle", string.Empty), Is.EqualTo(expected.MetadataOpenGraphTitle));
-                Assert.That(actual.GetValue("MetadataOpenGraphDescription", string.Empty), Is.EqualTo(expected.MetadataOpenGraphDescription));
             });
         }
 
@@ -50,20 +48,61 @@ namespace Meeg.Kentico.ContentComponents.Tests
         {
             var serializer = new ContentComponentSerializer();
 
-            Metadata expected = TestData.MetadataComponent;
+            PageMetadata expected = TestData.PageMetadataComponent;
 
             string componentXml = serializer.Serialize(expected);
 
             var deserializer = new ContentComponentDeserializer();
 
-            Metadata actual = deserializer.Deserialize<Metadata>(componentXml);
+            PageMetadata actual = deserializer.Deserialize<PageMetadata>(componentXml);
 
             Assert.Multiple(() =>
             {
                 Assert.That(actual.DocumentPageTitle, Is.EqualTo(expected.DocumentPageTitle));
                 Assert.That(actual.DocumentPageDescription, Is.EqualTo(expected.DocumentPageDescription));
-                Assert.That(actual.MetadataOpenGraphTitle, Is.EqualTo(expected.MetadataOpenGraphTitle));
-                Assert.That(actual.MetadataOpenGraphDescription, Is.EqualTo(expected.MetadataOpenGraphDescription));
+            });
+        }
+
+        [Test]
+        public void Deserialize_NestedComponent_RetainsSerializedValues()
+        {
+            var serializer = new ContentComponentSerializer();
+
+            PageMetadata metadata = TestData.PageMetadataComponent;
+            OpenGraphMetadata expected = metadata.OpenGraph;
+
+            string componentXml = serializer.Serialize(metadata);
+
+            var deserializer = new ContentComponentDeserializer();
+
+            TreeNode actual = deserializer.Deserialize(PageMetadata.CLASS_NAME, componentXml)
+                .GetContentComponent(OpenGraphMetadata.CLASS_NAME, nameof(PageMetadata.PageMetadataOpenGraph));
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.GetStringValue(nameof(OpenGraphMetadata.OpenGraphMetadataTitle), string.Empty), Is.EqualTo(expected.OpenGraphMetadataTitle));
+                Assert.That(actual.GetStringValue(nameof(OpenGraphMetadata.OpenGraphMetadataDescription), string.Empty), Is.EqualTo(expected.OpenGraphMetadataDescription));
+            });
+        }
+
+        [Test]
+        public void Deserialize_NestedComponentOfType_RetainsSerializedValues()
+        {
+            var serializer = new ContentComponentSerializer();
+
+            PageMetadata metadata = TestData.PageMetadataComponent;
+            OpenGraphMetadata expected = metadata.OpenGraph;
+
+            string componentXml = serializer.Serialize(metadata);
+
+            var deserializer = new ContentComponentDeserializer();
+
+            OpenGraphMetadata actual = deserializer.Deserialize<PageMetadata>(componentXml).OpenGraph;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.OpenGraphMetadataTitle, Is.EqualTo(expected.OpenGraphMetadataTitle));
+                Assert.That(actual.OpenGraphMetadataDescription, Is.EqualTo(expected.OpenGraphMetadataDescription));
             });
         }
     }

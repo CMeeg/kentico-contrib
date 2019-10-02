@@ -5,22 +5,32 @@ namespace Meeg.Kentico.ContentComponents.Tests
 {
     public static class TestData
     {
-        public static readonly Metadata MetadataComponent;
+        public static readonly PageMetadata PageMetadataComponent;
 
         static TestData()
         {
-            MetadataComponent = CreateMetadataComponent();
+            PageMetadataComponent = CreatePageMetadataComponent();
         }
 
-        private static Metadata CreateMetadataComponent()
+        private static PageMetadata CreatePageMetadataComponent()
         {
-            var metadata = TreeNode.New<Metadata>();
-            metadata.SetValue(nameof(Metadata.DocumentPageTitle), "Fake page title");
-            metadata.SetValue(nameof(Metadata.DocumentPageDescription), "Fake page description");
-            metadata.MetadataOpenGraphTitle = "Fake Open Graph title";
-            metadata.MetadataOpenGraphDescription = "Fake Open Graph description.";
+            var node = TreeNode.New<PageMetadata>();
+            node.SetValue(nameof(PageMetadata.DocumentPageTitle), "Fake page title");
+            node.SetValue(nameof(PageMetadata.DocumentPageDescription), "Fake page description");
 
-            return metadata;
+            var serialiser = new ContentComponentSerializer();
+            node.PageMetadataOpenGraph = serialiser.Serialize(CreateOpenGraphMetadataComponent());
+
+            return node;
+        }
+
+        private static OpenGraphMetadata CreateOpenGraphMetadataComponent()
+        {
+            var node = TreeNode.New<OpenGraphMetadata>();
+            node.SetValue(nameof(OpenGraphMetadata.OpenGraphMetadataTitle), "Fake Open Graph title");
+            node.SetValue(nameof(OpenGraphMetadata.OpenGraphMetadataDescription), "Fake Open Graph description");
+
+            return node;
         }
     }
 }

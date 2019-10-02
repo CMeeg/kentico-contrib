@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
-using CMS.DocumentEngine;
+using KenticoContrib.Content.Cms.Infrastructure.Cms;
 using KenticoContrib.Content.Home;
 using MediatR;
 
@@ -9,31 +9,32 @@ namespace KenticoContrib.Content.Cms.Home
     public class GetHomePageQueryHandler : RequestHandler<GetHomePageQuery, HomePage>
     {
         private readonly IMapper mapper;
+        private readonly DocumentQueryService documentQueryService;
 
-        public GetHomePageQueryHandler(IMapper mapper)
+        public GetHomePageQueryHandler(IMapper mapper, DocumentQueryService documentQueryService)
         {
             this.mapper = mapper;
+            this.documentQueryService = documentQueryService;
         }
 
         protected override HomePage Handle(GetHomePageQuery request)
         {
-            CMS.DocumentEngine.Types.KenticoContrib.Home homeNode = DocumentHelper.GetDocuments<CMS.DocumentEngine.Types.KenticoContrib.Home>()
-                .TopN(1)
+            // TODO: Caching
+
+            var node = documentQueryService.GetQuery<CMS.DocumentEngine.Types.KenticoContrib.Home>()
                 .Columns(
-                    nameof(CMS.DocumentEngine.Types.KenticoContrib.Home.DocumentID),
-                    nameof(CMS.DocumentEngine.Types.KenticoContrib.Home.DocumentName),
                     nameof(CMS.DocumentEngine.Types.KenticoContrib.Home.HomeMetadata)
                 )
-                .Culture("en-gb") // TODO: Don't hardcode this
+                .AddColumns(ColumnDefinitions.IPageColumns)
                 .ToList()
                 .FirstOrDefault();
 
-            if (homeNode == null)
+            if (node == null)
             {
                 return null;
             }
 
-            var homePage = mapper.Map<HomePage>(homeNode);
+            var homePage = mapper.Map<HomePage>(node);
 
             return homePage;
         }

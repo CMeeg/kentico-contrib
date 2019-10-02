@@ -4,7 +4,8 @@
     {
         public string PageTitle { get; set; }
         public string PageDescription { get; set; }
-        public string OpenGraphTitle { get; set; }
-        public string OpenGraphDescription { get; set; }
+        public string PageTitleSuffix { get; set; }
+        public OpenGraphMetadata OpenGraph { get; set; }
+        public TwitterMetadata Twitter { get; set; }
     }
 }

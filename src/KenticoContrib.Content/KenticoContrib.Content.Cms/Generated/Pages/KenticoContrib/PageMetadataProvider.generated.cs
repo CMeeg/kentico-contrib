@@ -20,52 +20,52 @@ using CMS.Helpers;
 namespace CMS.DocumentEngine.Types.KenticoContrib
 {
 	/// <summary>
-	/// Provides methods for retrieving pages of type Metadata.
+	/// Provides methods for retrieving pages of type PageMetadata.
 	/// </summary>
-	public partial class MetadataProvider
+	public partial class PageMetadataProvider
 	{
 		/// <summary>
-		/// Returns a query that selects published pages of type Metadata.
+		/// Returns a query that selects published pages of type PageMetadata.
 		/// </summary>
-		public static DocumentQuery<Metadata> GetMetadatas()
+		public static DocumentQuery<PageMetadata> GetPageMetadatas()
 		{
-			return DocumentHelper.GetDocuments<Metadata>().PublishedVersion().Published();
+			return DocumentHelper.GetDocuments<PageMetadata>().PublishedVersion().Published();
 		}
 
 
 		/// <summary>
-		/// Returns a published page of type Metadata that matches the specified criteria.
+		/// Returns a published page of type PageMetadata that matches the specified criteria.
 		/// </summary>
 		/// <param name="nodeId">The identifier of the content tree node that represents the page.</param>
 		/// <param name="siteName">The name of the site where the page belongs.</param>
 		/// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
-		public static DocumentQuery<Metadata> GetMetadata(int nodeId, string cultureName, string siteName)
+		public static DocumentQuery<PageMetadata> GetPageMetadata(int nodeId, string cultureName, string siteName)
 		{
-			return GetMetadatas().OnSite(siteName).Culture(cultureName).WhereEquals("NodeID", nodeId);
+			return GetPageMetadatas().OnSite(siteName).Culture(cultureName).WhereEquals("NodeID", nodeId);
 		}
 
 
 		/// <summary>
-		/// Returns a published page of type Metadata that matches the specified criteria.
+		/// Returns a published page of type PageMetadata that matches the specified criteria.
 		/// </summary>
 		/// <param name="nodeGuid">The globally unique identifier of the content tree node that represents the page.</param>
 		/// <param name="siteName">The name of the site where the page belongs.</param>
 		/// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
-		public static DocumentQuery<Metadata> GetMetadata(Guid nodeGuid, string cultureName, string siteName)
+		public static DocumentQuery<PageMetadata> GetPageMetadata(Guid nodeGuid, string cultureName, string siteName)
 		{
-			return GetMetadatas().OnSite(siteName).Culture(cultureName).WhereEquals("NodeGUID", nodeGuid);
+			return GetPageMetadatas().OnSite(siteName).Culture(cultureName).WhereEquals("NodeGUID", nodeGuid);
 		}
 
 
 		/// <summary>
-		/// Returns a published page of type Metadata that matches the specified criteria.
+		/// Returns a published page of type PageMetadata that matches the specified criteria.
 		/// </summary>
 		/// <param name="nodeAliasPath">The alias path to the content tree node that represents the page.</param>
 		/// <param name="siteName">The name of the site where the page belongs.</param>
 		/// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
-		public static DocumentQuery<Metadata> GetMetadata(string nodeAliasPath, string cultureName, string siteName)
+		public static DocumentQuery<PageMetadata> GetPageMetadata(string nodeAliasPath, string cultureName, string siteName)
 		{
-			return GetMetadatas().OnSite(siteName).Culture(cultureName).Path(nodeAliasPath);
+			return GetPageMetadatas().OnSite(siteName).Culture(cultureName).Path(nodeAliasPath);
 		}
 	}
 }

@@ -5,6 +5,6 @@ namespace CMS.DocumentEngine.Types.KenticoContrib
 {
     public partial class Page
     {
-        public Metadata Metadata => this.GetContentComponent<Metadata>(nameof(PageMetadata));
+        public PageMetadata Metadata => this.GetContentComponent<PageMetadata>(nameof(PageMetadata));
     }
 }

@@ -11,8 +11,11 @@ namespace Meeg.Kentico.ContentComponents.Tests
         [SetUp]
         public void RegisterPageTypes()
         {
-            DocumentGenerator.RegisterDocumentType<Metadata>(Metadata.CLASS_NAME);
-            Fake().DocumentType<Metadata>(Metadata.CLASS_NAME);
+            DocumentGenerator.RegisterDocumentType<PageMetadata>(PageMetadata.CLASS_NAME);
+            Fake().DocumentType<PageMetadata>(PageMetadata.CLASS_NAME);
+
+            DocumentGenerator.RegisterDocumentType<OpenGraphMetadata>(OpenGraphMetadata.CLASS_NAME);
+            Fake().DocumentType<OpenGraphMetadata>(OpenGraphMetadata.CLASS_NAME);
 
             DocumentGenerator.RegisterDocumentType<Page>(Page.CLASS_NAME);
             Fake().DocumentType<Page>(Page.CLASS_NAME);

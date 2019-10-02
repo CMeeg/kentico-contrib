@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using KenticoContrib.Content.Cms.Infrastructure.Cms;
 using KenticoContrib.Content.Cms.Infrastructure.Mediatr;
 using MediatR;
 using MediatR.Pipeline;
@@ -17,6 +18,9 @@ namespace KenticoContrib.Content.Cms.Infrastructure.Autofac
             builder.RegisterType<CurrentPageContext>()
                 .As<ICurrentPageContext>()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<DocumentQueryService>()
+                .AsSelf();
         }
 
         private void RegisterMediatrComponents(ContainerBuilder builder)

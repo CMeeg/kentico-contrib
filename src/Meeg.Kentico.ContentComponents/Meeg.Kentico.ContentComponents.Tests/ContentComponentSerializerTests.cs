@@ -23,7 +23,7 @@ namespace Meeg.Kentico.ContentComponents.Tests
         {
             var serializer = new ContentComponentSerializer();
 
-            Metadata component = TestData.MetadataComponent;
+            PageMetadata component = TestData.PageMetadataComponent;
 
             string componentXml = serializer.Serialize(component);
 

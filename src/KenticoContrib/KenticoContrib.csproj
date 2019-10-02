@@ -845,6 +845,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\Autofac\AutoMapperModule.cs" />
     <Compile Include="Infrastructure\Autofac\MediatrModule.cs" />
     <Compile Include="Infrastructure\Autofac\MvcModule.cs" />

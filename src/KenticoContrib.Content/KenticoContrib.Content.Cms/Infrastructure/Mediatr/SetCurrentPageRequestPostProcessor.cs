@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
 using MediatR.Pipeline;
 
 namespace KenticoContrib.Content.Cms.Infrastructure.Mediatr

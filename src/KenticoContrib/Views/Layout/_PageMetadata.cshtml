@@ -1,3 +1,24 @@
-﻿@model KenticoContrib.Features.Layout.PageMetadataViewModel
+﻿@using KenticoContrib.Helpers
+@model KenticoContrib.Features.Layout.PageMetadataViewModel
 
 <title>@Model.PageTitle</title>
+@if (!string.IsNullOrEmpty(Model.PageDescription))
+{
+    <meta name="description" content="@Model.PageDescription">
+}
+
+@Html.Metadata("og:title", Model.OpenGraphTitle)
+@Html.Metadata("og:description", Model.OpenGraphDescription)
+@Html.Metadata("og:type", Model.OpenGraphType)
+@Html.Metadata("og:url", Model.OpenGraphUrl)
+@Html.Metadata("og:site_name", Model.OpenGraphSiteName)
+@Html.Metadata("og:image", Model.OpenGraphImage)
+@Html.Metadata("og:image:alt", Model.OpenGraphImageAltText)
+
+@Html.Metadata("twitter:title", Model.TwitterTitle)
+@Html.Metadata("twitter:description", Model.TwitterDescription)
+@Html.Metadata("twitter:card", Model.TwitterCard)
+@Html.Metadata("twitter:url", Model.TwitterUrl)
+@Html.Metadata("twitter:site", Model.TwitterSite)
+@Html.Metadata("twitter:image", Model.TwitterImage)
+@Html.Metadata("twitter:image:alt", Model.TwitterImageAltText)

@@ -7,5 +7,6 @@ namespace KenticoContrib.Content
         PageMetadata Metadata { get; set; }
         int Id { get; set; }
         string Name { get; set; }
+        string RelativeUrl { get; set; }
     }
 }
