@@ -9,6 +9,9 @@ using System.Reflection;
 
 namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
 {
+    /// <summary>
+    /// Form Control used to edit Content Component data in the CMS.
+    /// </summary>
     public partial class ContentComponent : FormEngineUserControl
     {
         private string PageType
@@ -36,6 +39,9 @@ namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
             }
         }
 
+        /// <summary>
+        /// Gets and sets the component field value. When getting the value, the values of the component Page Type's fields are serialised to XML. When setting the value the XML is deserialised and used to populate the fields of the component Page Type.
+        /// </summary>
         public override object Value
         {
             get
@@ -160,6 +166,10 @@ namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
             componentFields.ApplyFieldsTo(page, field => field.IsSystem);
         }
 
+        /// <summary>
+        /// Validates the fields of the component Page Type.
+        /// </summary>
+        /// <returns>True if all fields are valid; otherwise false.</returns>
         public override bool IsValid()
         {
             return ContentComponentForm.ValidateData();

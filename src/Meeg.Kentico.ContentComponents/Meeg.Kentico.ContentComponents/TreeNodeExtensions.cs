@@ -3,8 +3,18 @@ using CMS.DocumentEngine;
 
 namespace Meeg.Kentico.ContentComponents
 {
+    /// <summary>
+    /// TreeNode extension methods provided for convenience when using Content Components.
+    /// </summary>
     public static class TreeNodeExtensions
     {
+        /// <summary>
+        /// Gets the value from the node using the provided columnName and deserialises it to a new TreeNode instance containing component data.
+        /// </summary>
+        /// <param name="node">The node that contains the component data.</param>
+        /// <param name="pageType">The full class name of the component Page Type.</param>
+        /// <param name="columnName">The name of the column that stores component data as XML.</param>
+        /// <returns>A new TreeNode instance containing the deserialised component data.</returns>
         public static TreeNode GetContentComponent(this TreeNode node, string pageType, string columnName)
         {
             string componentXml = node.GetValue(columnName, string.Empty);
@@ -14,6 +24,13 @@ namespace Meeg.Kentico.ContentComponents
             return deserializer.Deserialize(pageType, componentXml);
         }
 
+        /// <summary>
+        /// Gets the value from the node using the provided columnName and deserialises it to a new TreeNode instance of type T containing component data.
+        /// </summary>
+        /// <typeparam name="T">A type representing the Page Type of the component.</typeparam>
+        /// <param name="node">The node that contains the component data.</param>
+        /// <param name="columnName">The name of the column that stores component data as XML.</param>
+        /// <returns>A new TreeNode instance of Type T containing the deserialised component data.</returns>
         public static T GetContentComponent<T>(this TreeNode node, string columnName)
             where T : TreeNode, new()
         {
@@ -24,6 +41,14 @@ namespace Meeg.Kentico.ContentComponents
             return deserializer.Deserialize<T>(componentXml);
         }
 
+        /// <summary>
+        /// Gets the value from the node using the provided function delegate and deserialises it to a new TreeNode instance of type TComponent containing component data.
+        /// </summary>
+        /// <typeparam name="TPage">A type representing the Page Type of the page that uses the component.</typeparam>
+        /// <typeparam name="TComponent">A type representing the Page Type of the component.</typeparam>
+        /// <param name="page">The TreeNode of type TPage that contains the component data.</param>
+        /// <param name="componentField">A function delegate that returns component XML from the page.</param>
+        /// <returns>A new TreeNode instance of Type TComponent containing the deserialised component data.</returns>
         public static TComponent GetContentComponent<TPage, TComponent>(this TPage page, Func<TPage, string> componentField)
             where TPage : TreeNode, new()
             where TComponent : TreeNode, new()
