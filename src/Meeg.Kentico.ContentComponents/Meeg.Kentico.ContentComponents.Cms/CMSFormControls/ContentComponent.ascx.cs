@@ -1,4 +1,4 @@
-﻿using CMS.DocumentEngine;
+using CMS.DocumentEngine;
 using CMS.FormEngine;
 using CMS.FormEngine.Web.UI;
 using System;
@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using CMS.Helpers;
 
 namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
 {
@@ -101,8 +102,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
             ContentComponentForm.SubmitButton.Visible = false;
             ContentComponentForm.MessagesPlaceHolder = MessagesPlaceHolder;
 
-            // TODO: Resource string  
-            ValidationError = "Please correct the above validation errors.";
+            ValidationError = ResHelper.GetString("Meeg.Kentico.ContentComponents.FormControls.ContentComponent.ValidationError");
 
             // Load and populate the form
 

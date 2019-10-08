@@ -22274,6 +22274,10 @@
       <Name>Meeg.Kentico.ContentComponents.Cms</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CMSResources\CMS.en-us.resx" />
+    <EmbeddedResource Include="CMSResources\Meeg.Kentico.ContentComponents.Cms\Custom.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
