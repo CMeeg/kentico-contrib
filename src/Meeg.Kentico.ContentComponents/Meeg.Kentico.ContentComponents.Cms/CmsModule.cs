@@ -34,12 +34,33 @@ namespace Meeg.Kentico.ContentComponents.Cms
         {
             base.OnInit();
 
+            ModulePackagingEvents.Instance.BuildNuSpecManifest.Before += ModifyNuSpecBuilder;
             ModulePackagingEvents.Instance.BuildNuSpecManifest.After += ModifyManifest;
+        }
+
+        private void ModifyNuSpecBuilder(object sender, BuildNuSpecManifestEventArgs e)
+        {
+            if (!ResourceIsModule(e.ResourceName))
+            {
+                return;
+            }
+
+            e.NuSpecBuilder.ReadmeFilePath = null;
+
+            e.NuSpecBuilder.ModulePackageMetadata.Id = AssemblyInfo.Title;
+            e.NuSpecBuilder.ModulePackageMetadata.Version = AssemblyInfo.InformationalVersion;
+            e.NuSpecBuilder.ModulePackageMetadata.Description = AssemblyInfo.Description;
+            e.NuSpecBuilder.ModulePackageMetadata.Authors = AssemblyInfo.Company;
+        }
+
+        private bool ResourceIsModule(string resourceName)
+        {
+            return resourceName.Equals(ModuleName, StringComparison.OrdinalIgnoreCase);
         }
 
         private void ModifyManifest(object sender, BuildNuSpecManifestEventArgs e)
         {
-            if (!e.ResourceName.Equals(ModuleName, StringComparison.OrdinalIgnoreCase))
+            if (!ResourceIsModule(e.ResourceName))
             {
                 return;
             }
@@ -92,20 +113,15 @@ namespace Meeg.Kentico.ContentComponents.Cms
 
         private Manifest MergeManifests(Manifest nuSpecManifest, Manifest moduleManifest)
         {
+            nuSpecManifest.Files = moduleManifest.Files;
+
             string readmeSource = $"CMSModules\\{ModuleName}\\README.md";
-            const string readmeTarget = "readme.txt";
 
-            List<ManifestFile> files = moduleManifest.Files
-                .Where(file => file.Target != readmeTarget)
-                .ToList();
-
-            files.Add(new ManifestFile
+            nuSpecManifest.Files.Add(new ManifestFile
             {
                 Source = readmeSource,
                 Target = string.Empty
             });
-
-            nuSpecManifest.Files = files;
 
             return nuSpecManifest;
         }
