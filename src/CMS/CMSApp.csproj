@@ -4596,6 +4596,7 @@
     <Content Include="CMSScripts\CMSModules\CMS.Charts\amCharts\plugins\responsive\responsive.min.js.map" />
     <Content Include="App_Themes\Default\CMSModules\cms.webanalytics\cms.autosaveform.less" />
     <Content Include="App_Themes\Default\CMSModules\cms.webanalytics\modal-dialog.less" />
+    <Content Include="CMSModules\Meeg.Kentico.ContentComponents.Cms\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

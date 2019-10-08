@@ -7,16 +7,20 @@
       CmsCopyLocal;
     </BuildDependsOn>
   </PropertyGroup>
-  <Target Name="CmsCopyLocal">
+  <ItemGroup>
+    <CmsFiles Include="$(MSBuildProjectDirectory)\CMS*\*.ascx" />
+    <CmsFiles Include="$(MSBuildProjectDirectory)\CMS*\README.md" />
+  </ItemGroup>
+  <Target Name="CmsCopyLocal" Outputs="%(CmsFiles.Identity)">
     <ItemGroup>
-      <CmsFiles Include="$(MSBuildProjectDirectory)\CMS*\*.ascx" />
-      <CmsFilesParsed Include="@(CmsFiles)">
-        <SubDir>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetDirectoryName(%(CmsFiles.RecursiveDir)))))</SubDir>
+      <CmsFilesParsed Include="%(CmsFiles.Identity)">
+        <SubDir>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetDirectoryName(%(CmsFiles.Identity)\%(RecursiveDir)))))</SubDir>
       </CmsFilesParsed>
     </ItemGroup>
-    <Message Text="Copying CMS files: @(CmsFiles)" Importance="high"/>
-    <Copy SourceFiles="@(CmsFiles)" 
-          DestinationFolder="@(CmsFilesParsed->'$(CmsPath)\%(SubDir)\$(CmsModuleName)')" 
+    <Message Text="Copying CMS files: %(CmsFiles.Identity)" Importance="high"/>
+    <Message Text="Parsed subdir: %(CmsFilesParsed.SubDir)" Importance="high"/>
+    <Copy SourceFiles="%(CmsFiles.Identity)"
+          DestinationFolder="@(CmsFilesParsed->'$(CmsPath)\%(SubDir)\$(CmsModuleName)')"
           OverwriteReadOnlyFiles="true">
     </Copy>
   </Target>
