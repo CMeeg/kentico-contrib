@@ -15,6 +15,8 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
     /// </summary>
     public partial class ContentComponent : FormEngineUserControl
     {
+        private string deserializationError;
+
         private string PageType
         {
             get => GetValue("PageType", string.Empty);
@@ -78,7 +80,17 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
                 // Deserialize the component XML to a TreeNode that represents the component
 
                 var deserializer = new ContentComponentDeserializer();
-                ContentComponentNode = deserializer.Deserialize(PageType, componentXml);
+
+                try
+                {
+                    ContentComponentNode = deserializer.Deserialize(PageType, componentXml);
+                }
+                catch (Exception e)
+                {
+                    // N.B. ShowError does not result in the error being rendered if called at this point
+
+                    deserializationError = e.Message;
+                }
             }
         }
 
@@ -93,6 +105,23 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             base.OnInit(e);
 
             LoadContentComponentForm();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            ShowErrorMessages();
+        }
+
+        private void ShowErrorMessages()
+        {
+            // Show the deserialisation error if there was one
+
+            if (!string.IsNullOrEmpty(deserializationError))
+            {
+                string errorMessage = ResHelper.GetString("Meeg.Kentico.ContentComponents.FormControls.ContentComponent.DeserializationError");
+
+                ShowError($"{Field}: {errorMessage}", deserializationError);
+            }
         }
 
         private void LoadContentComponentForm()
