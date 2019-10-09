@@ -56,8 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentComponentDeserializer.cs" />
-    <Compile Include="ContentComponentSerializer.cs" />
+    <Compile Include="PageTypeComponentDeserializer.cs" />
+    <Compile Include="PageTypeComponentSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TreeNodeExtensions.cs" />
   </ItemGroup>

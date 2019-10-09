@@ -5,12 +5,12 @@ using NUnit.Framework;
 namespace Meeg.Kentico.ContentComponents.Cms.Tests
 {
     [TestFixture]
-    public class ContentComponentSerializerTests : ContentComponentUnitTests
+    public class PageTypeComponentSerializerTests : PageTypeComponentUnitTests
     {
         [Test]
         public void Serialize_Null_ReturnsEmptyString()
         {
-            var serializer = new ContentComponentSerializer();
+            var serializer = new PageTypeComponentSerializer();
 
             string actual = serializer.Serialize(null);
             string expected = string.Empty;
@@ -21,7 +21,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
         [Test]
         public void Serialize_Component_ReturnsValidXml()
         {
-            var serializer = new ContentComponentSerializer();
+            var serializer = new PageTypeComponentSerializer();
 
             PageMetadata component = TestData.PageMetadataComponent;
 

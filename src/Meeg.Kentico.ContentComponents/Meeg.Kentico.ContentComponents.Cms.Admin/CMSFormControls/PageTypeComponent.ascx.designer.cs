@@ -10,7 +10,7 @@
 namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls {
     
     
-    public partial class ContentComponent {
+    public partial class PageTypeComponent {
         
         /// <summary>
         /// ContentComponentForm control.

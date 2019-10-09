@@ -18,7 +18,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
             node.SetValue(nameof(PageMetadata.DocumentPageTitle), "Fake page title");
             node.SetValue(nameof(PageMetadata.DocumentPageDescription), "Fake page description");
 
-            var serialiser = new ContentComponentSerializer();
+            var serialiser = new PageTypeComponentSerializer();
             node.PageMetadataOpenGraph = serialiser.Serialize(CreateOpenGraphMetadataComponent());
 
             return node;

@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentComponentDeserializerTests.cs" />
-    <Compile Include="ContentComponentSerializerTests.cs" />
-    <Compile Include="ContentComponentUnitTests.cs" />
+    <Compile Include="PageTypeComponentDeserializerTests.cs" />
+    <Compile Include="PageTypeComponentSerializerTests.cs" />
+    <Compile Include="PageTypeComponentUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData.cs" />
     <Compile Include="TreeNodeExtensionsTests.cs" />

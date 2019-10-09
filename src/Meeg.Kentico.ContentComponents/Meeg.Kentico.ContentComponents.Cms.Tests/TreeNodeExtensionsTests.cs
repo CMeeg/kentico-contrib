@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Meeg.Kentico.ContentComponents.Cms.Tests
 {
     [TestFixture]
-    public class TreeNodeExtensionsTests : ContentComponentUnitTests
+    public class TreeNodeExtensionsTests : PageTypeComponentUnitTests
     {
         [Test]
         public void GetContentComponent_NonComponentField_ReturnsNull()
@@ -22,7 +22,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
         [Test]
         public void GetContentComponent_ComponentField_ReturnsComponent()
         {
-            var serializer = new ContentComponentSerializer();
+            var serializer = new PageTypeComponentSerializer();
 
             var expected = TestData.PageMetadataComponent;
 

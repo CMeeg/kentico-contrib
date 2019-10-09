@@ -15,11 +15,11 @@ namespace Meeg.Kentico.ContentComponents.Cms
         /// <param name="pageType">The full class name of the component Page Type.</param>
         /// <param name="columnName">The name of the column that stores component data as XML.</param>
         /// <returns>A new TreeNode instance containing the deserialised component data.</returns>
-        public static TreeNode GetContentComponent(this TreeNode node, string pageType, string columnName)
+        public static TreeNode GetPageTypeComponent(this TreeNode node, string pageType, string columnName)
         {
             string componentXml = node.GetValue(columnName, string.Empty);
 
-            var deserializer = new ContentComponentDeserializer();
+            var deserializer = new PageTypeComponentDeserializer();
 
             return deserializer.Deserialize(pageType, componentXml);
         }
@@ -31,12 +31,12 @@ namespace Meeg.Kentico.ContentComponents.Cms
         /// <param name="node">The node that contains the component data.</param>
         /// <param name="columnName">The name of the column that stores component data as XML.</param>
         /// <returns>A new TreeNode instance of Type T containing the deserialised component data.</returns>
-        public static T GetContentComponent<T>(this TreeNode node, string columnName)
+        public static T GetPageTypeComponent<T>(this TreeNode node, string columnName)
             where T : TreeNode, new()
         {
             string componentXml = node.GetValue(columnName, string.Empty);
 
-            var deserializer = new ContentComponentDeserializer();
+            var deserializer = new PageTypeComponentDeserializer();
 
             return deserializer.Deserialize<T>(componentXml);
         }
@@ -49,13 +49,13 @@ namespace Meeg.Kentico.ContentComponents.Cms
         /// <param name="page">The TreeNode of type TPage that contains the component data.</param>
         /// <param name="componentField">A function delegate that returns component XML from the page.</param>
         /// <returns>A new TreeNode instance of Type TComponent containing the deserialised component data.</returns>
-        public static TComponent GetContentComponent<TPage, TComponent>(this TPage page, Func<TPage, string> componentField)
+        public static TComponent GetPageTypeComponent<TPage, TComponent>(this TPage page, Func<TPage, string> componentField)
             where TPage : TreeNode, new()
             where TComponent : TreeNode, new()
         {
             string componentXml = componentField.Invoke(page);
 
-            var deserializer = new ContentComponentDeserializer();
+            var deserializer = new PageTypeComponentDeserializer();
 
             return deserializer.Deserialize<TComponent>(componentXml);
         }

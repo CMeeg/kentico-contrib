@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Meeg.Kentico.ContentComponents.Cms
+namespace Meeg.Kentico.ContentComponents.Cms.Admin
 {
     internal class AssemblyInfo
     {

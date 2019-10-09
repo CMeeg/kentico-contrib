@@ -100,17 +100,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CMSFormControls\ContentComponent.ascx" />
+    <Content Include="CMSFormControls\PageTypeComponent.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="CMSFormControls\ContentComponent.ascx.cs">
-      <DependentUpon>ContentComponent.ascx</DependentUpon>
+    <Compile Include="CMSFormControls\PageTypeComponent.ascx.cs">
+      <DependentUpon>PageTypeComponent.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CMSFormControls\ContentComponent.ascx.designer.cs">
-      <DependentUpon>ContentComponent.ascx</DependentUpon>
+    <Compile Include="CMSFormControls\PageTypeComponent.ascx.designer.cs">
+      <DependentUpon>PageTypeComponent.ascx</DependentUpon>
     </Compile>
     <Compile Include="CmsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

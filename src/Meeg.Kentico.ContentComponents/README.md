@@ -1,6 +1,6 @@
 # Meeg.Kentico.ContentComponents
 
-Content Components provide a way of constructing your content models (Page Types) in Kentico using composition rather than inheritance.
+Content Components provide a way of constructing your Page Types in Kentico using composition rather than inheritance.
 
 > If you are familiar with [Kentico Kontent](https://kontent.ai) they are analogous to [content type snippets](https://docs.kontent.ai/tutorials/set-up-projects/define-content-models/reusing-groups-of-elements-with-snippets) though the same concept exists in other content management platforms.
 
@@ -11,7 +11,7 @@ Content Components provide a way of constructing your content models (Page Types
 There are two NuGet packages you will need to install:
 
 * `Meeg.Kentico.ContentComponents.Cms.Admin` must be installed into your CMS Administration project (typically named `CMSApp`)
-  * This package contains the `Content component` Form Control that is used to [add and edit content components](#usage) within your existing Page Types
+  * This package contains the `Page type component` Form Control that is used to [add and edit Content Components](#usage) within your existing Page Types
 * `Meeg.Kentico.ContentComponents` must be installed into any project outside of your main CMS project where you intend to [use the data stored in Content Component fields](#fetch-and-use-component-content)
 
 > Please note that:
@@ -45,7 +45,7 @@ Create a new Page Type or edit an existing Page Type that will use your componen
 * Add a new field for your component
 * Set the data type to `Long text`
 * (Optional) Instead of setting a field caption you may want to consider placing the component under a category as this puts the component fields in its own "section" when editing the content
-* Change the form control to `Content component`
+* Change the form control to `Page type component`
 * Under "Editing control settings" set the `Page type` to the Page Type that represents your component content model
 * (Optional) Enter the code name of an [Alternative form](https://docs.kentico.com/k12sp/developing-websites/defining-website-content-structure/creating-and-configuring-page-types/configuring-page-types/creating-alternative-forms-for-page-types) that will be used to present your component on the editing form (Form or Content tab)
 * Add any additional fields required for your content model
@@ -66,35 +66,24 @@ To fetch Content Component data:
 To use content component data:
 
 * Add a `using` statement for `Meeg.Kentico.ContentComponents.Cms`
-* Use one of the `GetContentComponent` extension methods that exist in the above namespace on the `TreeNode` instances returned by your `DocumentQuery`
+* Use one of the `GetPageTypeComponent` extension methods that exist in the above namespace on the `TreeNode` instances returned by your `DocumentQuery`
 
 There are three extension methods available:
-
-* `TreeNode GetContentComponent(this TreeNode node, string pageType, string columnName)`
-  * This can be used to fetch a component as a `TreeNode` where `pageType` is the Page Type code name of the component, and `columnName` is the name of the column where the component data is stored (the name of the field that uses the `Content component` form control)
-* `T GetContentComponent<T>(this TreeNode node, string columnName)`
-  * This can be used to fetch a component of type `T` where the `columnName` is the name of the column where the component data is stored
-  * This extension method can only be used if you have [generated a class](https://docs.kentico.com/k12sp/developing-websites/generating-classes-for-kentico-objects#GeneratingclassesforKenticoobjects-Workingwithpagetypecodegenerators) for your component Page Type
-* `TComponent GetContentComponent<TPage, TComponent>(this TPage page, Func<TPage, string> componentField)`
-  * This can be used to fetch a component of type `TComponent` where `componentField` is a function delegate that returns component data when provided an instance of type `TPage` (where `TPage` is derived from `TreeNode`)
-  * This extension method can only be used if you have [generated a class](https://docs.kentico.com/k12sp/developing-websites/generating-classes-for-kentico-objects#GeneratingclassesforKenticoobjects-Workingwithpagetypecodegenerators) for your component Page Type and have generated a class for the page Page Type that uses the component
-
-Examples:
 
 ```csharp
 using Meeg.Kentico.ContentComponents.Cms;
 
 // 1. Use this if you haven't generated a class for your component Page Type
 
-TreeNode component = node.GetContentComponent("Custom.ComponentPageType", "ComponentField");
+TreeNode component = node.GetPageTypeComponent("Custom.ComponentPageType", "ComponentFieldColumnName");
 
 // 2. Use this if you have generated a class for your component Page Type (`MyComponent` in the below example) and you don't need to use the function approach used in the next example
 
-MyComponent component = node.GetContentComponent<MyComponent>("ComponentField");
+MyComponent component = node.GetPageTypeComponent<MyComponent>("ComponentFieldColumnName");
 
 // 3. Use this if you have generated classes for your component ('MyComponent`) and page (`MyPage`) Page Types and you want to provide your own function delegate for accessing component data of the page
 
-MyComponent component => page.GetContentComponent<MyPage, MyComponent>(myPage => myPage.ComponentField);
+MyComponent component => page.GetPageTypeComponent<MyPage, MyComponent>(myPage => myPage.ComponentField);
 ```
 
 #### Recommendations
@@ -127,7 +116,7 @@ namespace CMS.DocumentEngine.Types.Custom
 {
     public partial class Home
     {
-        public PageMetadata Metadata => this.GetContentComponent<PageMetadata>(nameof(HomeMetadata));
+        public PageMetadata Metadata => this.GetPageTypeComponent<PageMetadata>(nameof(HomeMetadata));
     }
 }
 
@@ -149,17 +138,17 @@ PageMetadata component = page.Metadata;
 
 There are three main parts to this module:
 
-* The `Content component` form control
-* `ContentComponentSerializer`
-* `ContentComponentDeserializer`
+* The `Page type component` form control
+* `PageTypeComponentSerializer`
+* `PageTypeComponentDeserializer`
 
 The form control uses a `BasicForm` to load the relevant component Page Type's editing form on to the Content or Form tab in the CMS (using an Alternative Form if one was specified).
 
 When the page is saved the form control first validates the `BasicForm` and then if there are no errors it creates a new `TreeNode` instance using the appropriate Page Type and populates its fields using the values entered into the `BasicForm`.
 
-The component `TreeNode` instance is then serialised to XML by the `ContentComponentSerializer` and the XML is returned and stored against the page that is being edited in the corresponding component field. The values of any [Page fields](#page-fields) present on the component Page Type are also stored against the corresponding field(s) on the page.
+The component `TreeNode` instance is then serialised to XML by the `PageTypeComponentSerializer` and the XML is returned and stored against the page that is being edited in the corresponding component field. The values of any [Page fields](#page-fields) present on the component Page Type are also stored against the corresponding field(s) on the page.
 
-The component field data can then be deserialised using the `ContentComponentDeserializer`. This is used by the extension methods discussed in the [usage section](#fetch-and-use-component-content), and also by the `Content component` form control to populate the `BasicForm` with any existing data so that it can be edited. [Page fields](#page-fields) are stored with the component data, but can also be accessed via the corresponding field on the page.
+The component field data can then be deserialised using the `PageTypeComponentDeserializer`. This is used by the extension methods discussed in the [usage section](#fetch-and-use-component-content), and also by the `Page type component` form control to populate the `BasicForm` with any existing data so that it can be edited. [Page fields](#page-fields) are stored with the component data, but can also be accessed via the corresponding field on the page.
 
 ### Page fields
 
@@ -177,7 +166,7 @@ As with all features there are some scenarios where Content Components will fit 
 
 * ✔ Do use components where you need a reusable group of fields that you can place on any Page Type
   * Including Page Types that represent other components
-  * Because the component is added as a single field you also will never have to reorder multiple fields on every Page Type should you add a new field to the component, which you sometimes have to do when using inheritance!
+  * Because the component is added as a single field you also will never have to reorder multiple fields on every Page Type that uses the component should you add a new field to the component, which you sometimes have to do when adding a new field to an inherited Page Type
 * ✔ Do use components if you have a group of fields that need to be repeated on a Page Type
   * For example, if you had a group of fields that represented a "Call to action" (CTA) (e.g. Title, Description, Image, Link URL, Link text) and you want to have those groups repeated to model multiple CTAs
 * ✔ Do use components if the content you are modelling "belongs" to the page the component is placed on and doesn't require its own workflow
@@ -190,10 +179,10 @@ As with all features there are some scenarios where Content Components will fit 
   * Consider using [Pages fields](https://docs.kentico.com/k12sp/developing-websites/defining-website-content-structure/creating-and-configuring-page-types/configuring-page-types/reusing-existing-page-content) instead
 * ❌ Do not use components where you need to easily query the component data via SQL or as part of a `DocumentQuery`
   * The data is stored as XML and although it is possible to query it, it's not going to be as straight-forward or performant as using Standard or Inherited fields
-  * ❔ An exception is if you only need to query against [Page fields](#page-fields) as these are also set directly against the page
+  * ⚠ An exception is if you only need to query against [Page fields](#page-fields) as these are also set directly against the page
 * ❌ Do not use components where you need to search against component data using [Smart Search](https://docs.kentico.com/k12sp/configuring-kentico/setting-up-search-on-your-website)
-  * Because components are based on Page Types it is possible to configure [search fields](https://docs.kentico.com/k12sp/configuring-kentico/setting-up-search-on-your-website/using-locally-stored-search-indexes/creating-local-search-indexes/defining-local-page-indexes#Defininglocalpageindexes-Configuringsearchsettingsforpagefields), but the indexer will not know how to extract the component data and apply the search configuration because the data is stored as XML - see [known limitations](#smart-search) for some further discussion about Smart Search
-  * ❔ An exception is if you only need to query against [Page fields](#page-fields) as these are also set directly against the page
+  * Because components are based on Page Types it is possible to configure their [search fields](https://docs.kentico.com/k12sp/configuring-kentico/setting-up-search-on-your-website/using-locally-stored-search-indexes/creating-local-search-indexes/defining-local-page-indexes#Defininglocalpageindexes-Configuringsearchsettingsforpagefields), but the indexer will not know how to extract the component data and apply the search configuration because the data is stored as XML - see [known limitations](#smart-search) for some further discussion about Smart Search and potential workarounds
+  * ⚠ An exception is if you only need to query against [Page fields](#page-fields) as these are also set directly against the page and would therefore be available to the indexer
 
 ## Known limitations
 
@@ -203,7 +192,7 @@ Known limitations with Content Components are described below along with a discu
 
 Content Components are based on Page Types so it is possible to configure [search fields](https://docs.kentico.com/k12sp/configuring-kentico/setting-up-search-on-your-website/using-locally-stored-search-indexes/creating-local-search-indexes/defining-local-page-indexes#Defininglocalpageindexes-Configuringsearchsettingsforpagefields) against them, but the indexer will not know how to extract the component data and apply the search configuration because the data is stored as XML.
 
-A possible workaround is to:
+A possible (currently untested) workaround is to:
 
 * Handle events related to smart search for [local indexes](https://docs.kentico.com/k12sp/configuring-kentico/setting-up-search-on-your-website/customizing-the-content-of-search-indexes) or [Azure Search](#https://docs.kentico.com/k12sp/configuring-kentico/setting-up-search-on-your-website/using-azure-search/customizing-azure-search#CustomizingAzureSearch-Reference-AzureSearchevents)
 * In the event handler(s) [deserialise the component data](#fetch-and-use-component-content), fetch and apply search configuration, and operate on the search index as appropriate to index the component content alongside the standard page fields

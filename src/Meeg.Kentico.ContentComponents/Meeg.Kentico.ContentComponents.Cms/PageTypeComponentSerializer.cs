@@ -5,14 +5,14 @@ using CMS.DocumentEngine;
 namespace Meeg.Kentico.ContentComponents.Cms
 {
     /// <summary>
-    /// This class can be used to serialise Content Component data to XML.
+    /// This class can be used to serialise Page Type Component data to XML.
     /// </summary>
-    public class ContentComponentSerializer
+    public class PageTypeComponentSerializer
     {
         /// <summary>
-        /// Serialises a Content Component to XML.
+        /// Serialises a Page Type Component to XML.
         /// </summary>
-        /// <param name="component">The Content Component to serialise - can be an instance of any type derived from TreeNode.</param>
+        /// <param name="component">The Page Type Component to serialise - can be an instance of any type derived from TreeNode.</param>
         /// <returns>The component serialised to XML; or an empty string if the component is null.</returns>
         public string Serialize(TreeNode component)
         {

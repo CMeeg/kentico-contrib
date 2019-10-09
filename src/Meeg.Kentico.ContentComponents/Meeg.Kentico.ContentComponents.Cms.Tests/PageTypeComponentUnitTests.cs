@@ -6,7 +6,7 @@ using Tests.DocumentEngine;
 
 namespace Meeg.Kentico.ContentComponents.Cms.Tests
 {
-    public class ContentComponentUnitTests : UnitTests
+    public class PageTypeComponentUnitTests : UnitTests
     {
         [SetUp]
         public void RegisterPageTypes()

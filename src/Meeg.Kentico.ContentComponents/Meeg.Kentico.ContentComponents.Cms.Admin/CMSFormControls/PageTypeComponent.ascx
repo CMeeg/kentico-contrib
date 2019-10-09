@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ContentComponent.ascx.cs" Inherits="Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls.ContentComponent" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PageTypeComponent.ascx.cs" Inherits="Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls.PageTypeComponent" %>
 
 <cms:BasicForm ID="ContentComponentForm" runat="server"
     ShortID="cc"

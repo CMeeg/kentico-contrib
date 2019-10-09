@@ -5,13 +5,13 @@ using NUnit.Framework;
 namespace Meeg.Kentico.ContentComponents.Cms.Tests
 {
     [TestFixture]
-    public class ContentComponentDeserializerTests : ContentComponentUnitTests
+    public class PageTypeComponentDeserializerTests : PageTypeComponentUnitTests
     {
         [TestCase(null)]
         [TestCase("")]
         public void Deserialize_NullOrEmptyXml_ReturnsNull(string componentXml)
         {
-            var deserializer = new ContentComponentDeserializer();
+            var deserializer = new PageTypeComponentDeserializer();
 
             TreeNode actualUntyped = deserializer.Deserialize(PageMetadata.CLASS_NAME, componentXml);
             PageMetadata actualTyped = deserializer.Deserialize<PageMetadata>(componentXml);
@@ -26,13 +26,13 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
         [Test]
         public void Deserialize_Component_RetainsSerializedValues()
         {
-            var serializer = new ContentComponentSerializer();
+            var serializer = new PageTypeComponentSerializer();
 
             PageMetadata expected = TestData.PageMetadataComponent;
 
             string componentXml = serializer.Serialize(expected);
 
-            var deserializer = new ContentComponentDeserializer();
+            var deserializer = new PageTypeComponentDeserializer();
 
             TreeNode actual = deserializer.Deserialize(PageMetadata.CLASS_NAME, componentXml);
 
@@ -46,13 +46,13 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
         [Test]
         public void Deserialize_ComponentOfType_RetainsSerializedValues()
         {
-            var serializer = new ContentComponentSerializer();
+            var serializer = new PageTypeComponentSerializer();
 
             PageMetadata expected = TestData.PageMetadataComponent;
 
             string componentXml = serializer.Serialize(expected);
 
-            var deserializer = new ContentComponentDeserializer();
+            var deserializer = new PageTypeComponentDeserializer();
 
             PageMetadata actual = deserializer.Deserialize<PageMetadata>(componentXml);
 
@@ -66,17 +66,17 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
         [Test]
         public void Deserialize_NestedComponent_RetainsSerializedValues()
         {
-            var serializer = new ContentComponentSerializer();
+            var serializer = new PageTypeComponentSerializer();
 
             PageMetadata metadata = TestData.PageMetadataComponent;
             OpenGraphMetadata expected = metadata.OpenGraph;
 
             string componentXml = serializer.Serialize(metadata);
 
-            var deserializer = new ContentComponentDeserializer();
+            var deserializer = new PageTypeComponentDeserializer();
 
             TreeNode actual = deserializer.Deserialize(PageMetadata.CLASS_NAME, componentXml)
-                .GetContentComponent(OpenGraphMetadata.CLASS_NAME, nameof(PageMetadata.PageMetadataOpenGraph));
+                .GetPageTypeComponent(OpenGraphMetadata.CLASS_NAME, nameof(PageMetadata.PageMetadataOpenGraph));
 
             Assert.Multiple(() =>
             {
@@ -88,14 +88,14 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
         [Test]
         public void Deserialize_NestedComponentOfType_RetainsSerializedValues()
         {
-            var serializer = new ContentComponentSerializer();
+            var serializer = new PageTypeComponentSerializer();
 
             PageMetadata metadata = TestData.PageMetadataComponent;
             OpenGraphMetadata expected = metadata.OpenGraph;
 
             string componentXml = serializer.Serialize(metadata);
 
-            var deserializer = new ContentComponentDeserializer();
+            var deserializer = new PageTypeComponentDeserializer();
 
             OpenGraphMetadata actual = deserializer.Deserialize<PageMetadata>(componentXml).OpenGraph;
 

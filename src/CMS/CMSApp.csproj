@@ -1568,7 +1568,7 @@
     <Content Include="CMSAdminControls\UI\UniGrid\Pages\MassDelete.aspx" />
     <Content Include="CMSAdminControls\UI\Selectors\FaviconSelector.ascx" />
     <Content Include="CMSAdminControls\UI\FontIconSelector.ascx" />
-    <Content Include="CMSFormControls\Meeg.Kentico.ContentComponents.Cms.Admin\ContentComponent.ascx" />
+    <Content Include="CMSFormControls\Meeg.Kentico.ContentComponents.Cms.Admin\PageTypeComponent.ascx" />
     <Content Include="CMSInstall\Controls\WizardSteps\CollationDialog.ascx" />
     <Content Include="CMSModules\AdminControls\Controls\UIControls\SmartTipPlaceholder.ascx" />
     <Content Include="CMSModules\BizForms\FormControls\FormFieldSelector.ascx" />

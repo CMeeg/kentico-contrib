@@ -5,15 +5,15 @@ using CMS.Helpers;
 namespace Meeg.Kentico.ContentComponents.Cms
 {
     /// <summary>
-    /// This class can be used to deserialise Content Component data that has been serialised to XML.
+    /// This class can be used to deserialise Page Type Component data that has been serialised to XML.
     /// </summary>
-    public class ContentComponentDeserializer
+    public class PageTypeComponentDeserializer
     {
         /// <summary>
-        /// Deserialises Content Component XML and returns a new TreeNode instance containing component data.
+        /// Deserialises Page Type Component XML and returns a new TreeNode instance containing component data.
         /// </summary>
         /// <param name="pageType">The full class name of the component Page Type.</param>
-        /// <param name="componentXml">The Content Component XML to deserialise.</param>
+        /// <param name="componentXml">The Page Type Component XML to deserialise.</param>
         /// <returns>A new TreeNode instance containing the deserialised component data.</returns>
         public TreeNode Deserialize(string pageType, string componentXml)
         {
@@ -28,10 +28,10 @@ namespace Meeg.Kentico.ContentComponents.Cms
         }
 
         /// <summary>
-        /// Deserialises Content Component XML and returns a new TreeNode instance of type T containing component data.
+        /// Deserialises Page Type Component XML and returns a new TreeNode instance of type T containing component data.
         /// </summary>
         /// <typeparam name="T">A type representing the Page Type of the component.</typeparam>
-        /// <param name="componentXml">The Content Component XML to deserialise.</param>
+        /// <param name="componentXml">The Page Type Component XML to deserialise.</param>
         /// <returns>A new TreeNode instance of Type T containing the deserialised component data.</returns>
         public T Deserialize<T>(string componentXml)
             where T : TreeNode, new()

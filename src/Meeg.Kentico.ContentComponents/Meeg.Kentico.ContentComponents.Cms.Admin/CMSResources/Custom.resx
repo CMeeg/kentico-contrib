@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Meeg.Kentico.ContentComponents.FormControls.ContentComponent.DeserializationError" xml:space="preserve">
+  <data name="Meeg.Kentico.ContentComponents.FormControls.PageTypeComponent.DeserializationError" xml:space="preserve">
     <value>Could not deserialize content</value>
   </data>
-  <data name="Meeg.Kentico.ContentComponents.FormControls.ContentComponent.ValidationError" xml:space="preserve">
+  <data name="Meeg.Kentico.ContentComponents.FormControls.PageTypeComponent.ValidationError" xml:space="preserve">
     <value>Please correct the above validation errors.</value>
   </data>
 </root>

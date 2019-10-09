@@ -11,9 +11,9 @@ using CMS.Helpers;
 namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 {
     /// <summary>
-    /// Form Control used to edit Content Component data in the CMS.
+    /// Form Control used to edit Page Type Component data in the CMS.
     /// </summary>
-    public partial class ContentComponent : FormEngineUserControl
+    public partial class PageTypeComponent : FormEngineUserControl
     {
         private string deserializationError;
 
@@ -60,7 +60,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 
                 // Return the component node serialized to XML
 
-                var serializer = new ContentComponentSerializer();
+                var serializer = new PageTypeComponentSerializer();
                 return serializer.Serialize(ContentComponentNode);
             }
             set
@@ -79,7 +79,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 
                 // Deserialize the component XML to a TreeNode that represents the component
 
-                var deserializer = new ContentComponentDeserializer();
+                var deserializer = new PageTypeComponentDeserializer();
 
                 try
                 {
@@ -118,7 +118,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 
             if (!string.IsNullOrEmpty(deserializationError))
             {
-                string errorMessage = ResHelper.GetString("Meeg.Kentico.ContentComponents.FormControls.ContentComponent.DeserializationError");
+                string errorMessage = ResHelper.GetString("Meeg.Kentico.ContentComponents.FormControls.PageTypeComponent.DeserializationError");
 
                 ShowError($"{Field}: {errorMessage}", deserializationError);
             }
@@ -131,7 +131,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             ContentComponentForm.SubmitButton.Visible = false;
             ContentComponentForm.MessagesPlaceHolder = MessagesPlaceHolder;
 
-            ValidationError = ResHelper.GetString("Meeg.Kentico.ContentComponents.FormControls.ContentComponent.ValidationError");
+            ValidationError = ResHelper.GetString("Meeg.Kentico.ContentComponents.FormControls.PageTypeComponent.ValidationError");
 
             // Load and populate the form
 
