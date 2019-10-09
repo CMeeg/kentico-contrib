@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Meeg.Kentico.ContentComponents.Cms")]
-[assembly: AssemblyDescription("Content Components provide a way of constructing your content models (Page Types) in Kentico using composition rather than inheritance. This package provides the core functionality of the module and is not typically installed independently of Meeg.Kentico.ContentComponents or Meeg.Kentico.ContentComponents.Cms.")]
+[assembly: AssemblyDescription("Content Components provide a way of constructing Page Types in Kentico using composition rather than inheritance. This package provides the core functionality of the module and is not typically installed independently of `Meeg.Kentico.ContentComponents` or `Meeg.Kentico.ContentComponents.Cms.Admin`.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("meeg")]
 [assembly: AssemblyProduct("Meeg.Kentico.ContentComponents.Cms")]
@@ -34,4 +34,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: AssemblyInformationalVersion("0.1.0-beta003")]
+[assembly: AssemblyInformationalVersion("0.1.0-beta004")]

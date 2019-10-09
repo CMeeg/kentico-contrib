@@ -1601,6 +1601,7 @@
     <Content Include="CMSModules\ImportExport\Controls\Export\cms_resource.ascx" />
     <Content Include="CMSModules\ImportExport\Controls\Export\Site\community_group.ascx" />
     <Content Include="CMSModules\ImportExport\Controls\Import\ma_automationaction.ascx" />
+    <Content Include="CMSModules\Meeg.Kentico.ContentComponents.Cms.Admin\readme.txt" />
     <Content Include="CMSModules\Modules\Controls\NuGetPackages\ExportModule.ascx" />
     <Content Include="CMSModules\Newsletters\Controls\RecipientContactGroups.ascx" />
     <Content Include="CMSModules\Newsletters\Controls\IssueLinks.ascx" />
@@ -4596,7 +4597,6 @@
     <Content Include="CMSScripts\CMSModules\CMS.Charts\amCharts\plugins\responsive\responsive.min.js.map" />
     <Content Include="App_Themes\Default\CMSModules\cms.webanalytics\cms.autosaveform.less" />
     <Content Include="App_Themes\Default\CMSModules\cms.webanalytics\modal-dialog.less" />
-    <Content Include="CMSModules\Meeg.Kentico.ContentComponents.Cms.Admin\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

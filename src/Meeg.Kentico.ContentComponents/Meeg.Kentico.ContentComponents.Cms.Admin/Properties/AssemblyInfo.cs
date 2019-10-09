@@ -10,7 +10,7 @@ using CMS;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Meeg.Kentico.ContentComponents.Cms.Admin")]
-[assembly: AssemblyDescription("Content Components provide a way of constructing your content models (Page Types) in Kentico using composition rather than inheritance. This package is to be installed into your main CMS project (typically named CMSApp). For Kentico 12.0.39 and higher.")]
+[assembly: AssemblyDescription("Content Components provide a way of constructing Page Types in Kentico using composition rather than inheritance. This package is to be installed into your CMS Administration project (typically named `CMSApp`). For Kentico 12.0.39 and higher.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("meeg")]
 [assembly: AssemblyProduct("Meeg.Kentico.ContentComponents.Cms.Admin")]
@@ -37,4 +37,4 @@ using CMS;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: AssemblyInformationalVersion("0.1.0-beta001")]
+[assembly: AssemblyInformationalVersion("0.1.0-beta002")]

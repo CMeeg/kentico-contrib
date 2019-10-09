@@ -32,6 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Meeg.Kentico.ContentComponents.Cms.Admin.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +42,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Meeg.Kentico.ContentComponents.Cms.Admin.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CMS.Base">
@@ -118,7 +120,7 @@
   <ItemGroup>
     <Content Include="Meeg.Kentico.Cms.Module.props" />
     <Content Include="Meeg.Kentico.ContentComponents.Cms.Admin.nuspec" />
-    <Content Include="CMSModules\README.md" />
+    <Content Include="CMSModules\readme.txt" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

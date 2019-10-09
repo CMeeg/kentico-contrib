@@ -114,12 +114,12 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin
         {
             nuSpecManifest.Files = moduleManifest.Files;
 
-            string readmeSource = $"CMSModules\\{ModuleName}\\README.md";
+            string readmeSource = $"CMSModules\\{ModuleName}\\readme.txt";
 
             nuSpecManifest.Files.Add(new ManifestFile
             {
                 Source = readmeSource,
-                Target = ".\\readme.txt"
+                Target = string.Empty
             });
 
             return nuSpecManifest;

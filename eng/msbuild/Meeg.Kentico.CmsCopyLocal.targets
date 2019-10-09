@@ -10,7 +10,7 @@
   <ItemGroup>
     <CmsFiles Include="$(MSBuildProjectDirectory)\CMS*\*.ascx" />
     <CmsFiles Include="$(MSBuildProjectDirectory)\CMS*\*.resx" />
-    <CmsFiles Include="$(MSBuildProjectDirectory)\CMS*\README.md" />
+    <CmsFiles Include="$(MSBuildProjectDirectory)\CMS*\readme.txt" />
   </ItemGroup>
   <Target Name="CmsCopyLocal" Outputs="%(CmsFiles.Identity)">
     <ItemGroup>
