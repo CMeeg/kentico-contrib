@@ -1,8 +1,8 @@
-﻿using CMS.DocumentEngine;
-using CMS.Helpers;
 using System.Data;
+using CMS.DocumentEngine;
+using CMS.Helpers;
 
-namespace Meeg.Kentico.ContentComponents
+namespace Meeg.Kentico.ContentComponents.Cms
 {
     /// <summary>
     /// This class can be used to deserialise Content Component data that has been serialised to XML.

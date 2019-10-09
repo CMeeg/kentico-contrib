@@ -1,4 +1,4 @@
-# Meeg.Kentico.ContentComponents.Cms
+# Meeg.Kentico.ContentComponents.Cms.Admin
 
 Thanks for installing the Content Components module!
 

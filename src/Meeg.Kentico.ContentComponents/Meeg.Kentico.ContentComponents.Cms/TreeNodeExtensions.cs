@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using CMS.DocumentEngine;
 
-namespace Meeg.Kentico.ContentComponents
+namespace Meeg.Kentico.ContentComponents.Cms
 {
     /// <summary>
     /// TreeNode extension methods provided for convenience when using Content Components.

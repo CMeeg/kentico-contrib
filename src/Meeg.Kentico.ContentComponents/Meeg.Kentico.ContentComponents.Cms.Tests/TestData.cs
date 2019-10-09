@@ -1,7 +1,7 @@
-﻿using CMS.DocumentEngine;
+using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.KenticoContrib;
 
-namespace Meeg.Kentico.ContentComponents.Tests
+namespace Meeg.Kentico.ContentComponents.Cms.Tests
 {
     public static class TestData
     {

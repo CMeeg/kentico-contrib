@@ -1,8 +1,8 @@
-﻿using CMS.DataEngine.Serialization;
-using CMS.DocumentEngine;
 using System.Xml;
+using CMS.DataEngine.Serialization;
+using CMS.DocumentEngine;
 
-namespace Meeg.Kentico.ContentComponents
+namespace Meeg.Kentico.ContentComponents.Cms
 {
     /// <summary>
     /// This class can be used to serialise Content Component data to XML.

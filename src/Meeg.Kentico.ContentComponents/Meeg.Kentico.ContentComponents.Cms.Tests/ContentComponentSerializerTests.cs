@@ -1,8 +1,8 @@
-﻿using System.Xml;
+using System.Xml;
 using CMS.DocumentEngine.Types.KenticoContrib;
 using NUnit.Framework;
 
-namespace Meeg.Kentico.ContentComponents.Tests
+namespace Meeg.Kentico.ContentComponents.Cms.Tests
 {
     [TestFixture]
     public class ContentComponentSerializerTests : ContentComponentUnitTests

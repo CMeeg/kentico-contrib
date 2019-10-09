@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using CMS.Helpers;
 
-namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls
+namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 {
     /// <summary>
     /// Form Control used to edit Content Component data in the CMS.

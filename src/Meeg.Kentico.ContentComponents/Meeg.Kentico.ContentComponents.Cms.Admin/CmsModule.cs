@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using CMS;
 using CMS.Base;
@@ -9,16 +8,16 @@ using CMS.Modules;
 using NuGet;
 using Module = CMS.DataEngine.Module;
 
-[assembly:RegisterModule(typeof(Meeg.Kentico.ContentComponents.Cms.CmsModule))]
+[assembly:RegisterModule(typeof(Meeg.Kentico.ContentComponents.Cms.Admin.CmsModule))]
 
-namespace Meeg.Kentico.ContentComponents.Cms
+namespace Meeg.Kentico.ContentComponents.Cms.Admin
 {
     /// <summary>
-    /// Meeg.Kentico.ContentComponents.Cms CMS Module.
+    /// Meeg.Kentico.ContentComponents.Cms.Admin CMS Module.
     /// </summary>
     public class CmsModule : Module
     {
-        private const string ModuleName = "Meeg.Kentico.ContentComponents.Cms";
+        private const string ModuleName = "Meeg.Kentico.ContentComponents.Cms.Admin";
 
         private static readonly string NuSpecFilePath = $"..\\Meeg.Kentico.ContentComponents\\{ModuleName}\\{ModuleName}.nuspec";
 
@@ -120,7 +119,7 @@ namespace Meeg.Kentico.ContentComponents.Cms
             nuSpecManifest.Files.Add(new ManifestFile
             {
                 Source = readmeSource,
-                Target = string.Empty
+                Target = ".\\readme.txt"
             });
 
             return nuSpecManifest;

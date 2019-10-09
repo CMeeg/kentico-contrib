@@ -98,9 +98,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.csproj">
-      <Project>{3fd614a5-aa27-4352-9666-adf01fdd205c}</Project>
-      <Name>Meeg.Kentico.ContentComponents</Name>
+    <ProjectReference Include="..\..\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.Cms\Meeg.Kentico.ContentComponents.Cms.csproj">
+      <Project>{8a2b186d-a0a2-49dc-9eae-8036daa21ba2}</Project>
+      <Name>Meeg.Kentico.ContentComponents.Cms</Name>
     </ProjectReference>
     <ProjectReference Include="..\KenticoContrib.Content\KenticoContrib.Content.csproj">
       <Project>{fad608c9-9033-4a9d-8649-81972193cd15}</Project>

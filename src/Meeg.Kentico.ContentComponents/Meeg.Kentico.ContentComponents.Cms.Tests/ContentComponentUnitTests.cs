@@ -1,10 +1,10 @@
-﻿using CMS.DocumentEngine;
+using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.KenticoContrib;
 using CMS.Tests;
 using NUnit.Framework;
 using Tests.DocumentEngine;
 
-namespace Meeg.Kentico.ContentComponents.Tests
+namespace Meeg.Kentico.ContentComponents.Cms.Tests
 {
     public class ContentComponentUnitTests : UnitTests
     {

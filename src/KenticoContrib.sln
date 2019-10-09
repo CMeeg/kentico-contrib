@@ -4,11 +4,11 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KenticoContrib", "KenticoContrib\KenticoContrib.csproj", "{3924D5C0-6A63-40F0-B5A0-61E516233F69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meeg.Kentico.ContentComponents", "Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.csproj", "{3FD614A5-AA27-4352-9666-ADF01FDD205C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KenticoContrib.Content", "KenticoContrib.Content\KenticoContrib.Content\KenticoContrib.Content.csproj", "{FAD608C9-9033-4A9D-8649-81972193CD15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KenticoContrib.Content.Cms", "KenticoContrib.Content\KenticoContrib.Content.Cms\KenticoContrib.Content.Cms.csproj", "{918D7DE0-32E5-4B7D-8658-2F63A4EC0D79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meeg.Kentico.ContentComponents.Cms", "Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.Cms\Meeg.Kentico.ContentComponents.Cms.csproj", "{8A2B186D-A0A2-49DC-9EAE-8036DAA21BA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +20,6 @@ Global
 		{3924D5C0-6A63-40F0-B5A0-61E516233F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3924D5C0-6A63-40F0-B5A0-61E516233F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3924D5C0-6A63-40F0-B5A0-61E516233F69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3FD614A5-AA27-4352-9666-ADF01FDD205C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3FD614A5-AA27-4352-9666-ADF01FDD205C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3FD614A5-AA27-4352-9666-ADF01FDD205C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3FD614A5-AA27-4352-9666-ADF01FDD205C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FAD608C9-9033-4A9D-8649-81972193CD15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FAD608C9-9033-4A9D-8649-81972193CD15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAD608C9-9033-4A9D-8649-81972193CD15}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -32,6 +28,10 @@ Global
 		{918D7DE0-32E5-4B7D-8658-2F63A4EC0D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{918D7DE0-32E5-4B7D-8658-2F63A4EC0D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{918D7DE0-32E5-4B7D-8658-2F63A4EC0D79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2B186D-A0A2-49DC-9EAE-8036DAA21BA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2B186D-A0A2-49DC-9EAE-8036DAA21BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2B186D-A0A2-49DC-9EAE-8036DAA21BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2B186D-A0A2-49DC-9EAE-8036DAA21BA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

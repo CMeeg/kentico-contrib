@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Meeg.Kentico.ContentComponents.Cms.CMSFormControls {
+namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls {
     
     
     public partial class ContentComponent {

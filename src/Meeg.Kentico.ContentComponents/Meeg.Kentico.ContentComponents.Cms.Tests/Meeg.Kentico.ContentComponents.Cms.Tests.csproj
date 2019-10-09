@@ -7,8 +7,8 @@
     <ProjectGuid>{3DDB5B87-C80E-4FDD-9E8E-2A1E2EFD74EB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Meeg.Kentico.ContentComponents.Tests</RootNamespace>
-    <AssemblyName>Meeg.Kentico.ContentComponents.Tests</AssemblyName>
+    <RootNamespace>Meeg.Kentico.ContentComponents.Cms.Tests</RootNamespace>
+    <AssemblyName>Meeg.Kentico.ContentComponents.Cms.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -58,9 +58,9 @@
       <Project>{918d7de0-32e5-4b7d-8658-2f63a4ec0d79}</Project>
       <Name>KenticoContrib.Content.Cms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.csproj">
-      <Project>{3fd614a5-aa27-4352-9666-adf01fdd205c}</Project>
-      <Name>Meeg.Kentico.ContentComponents</Name>
+    <ProjectReference Include="..\Meeg.Kentico.ContentComponents.Cms\Meeg.Kentico.ContentComponents.Cms.csproj">
+      <Project>{8a2b186d-a0a2-49dc-9eae-8036daa21ba2}</Project>
+      <Name>Meeg.Kentico.ContentComponents.Cms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

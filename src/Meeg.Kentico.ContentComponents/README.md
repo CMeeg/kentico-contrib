@@ -8,24 +8,23 @@ Content Components provide a way of constructing your content models (Page Types
 
 ## Getting started
 
-This module is split into two NuGet packages:
+There are two NuGet packages you will need to install:
 
-* `Meeg.Kentico.ContentComponents.Cms` must be installed into your main CMS project (typically named `CMSApp`)
+* `Meeg.Kentico.ContentComponents.Cms.Admin` must be installed into your CMS Administration project (typically named `CMSApp`)
   * This package contains the `Content component` Form Control that is used to [add and edit content components](#usage) within your existing Page Types
-* `Meeg.Kentico.ContentComponents` must be installed into any project where you intend to [use the data stored in Content Component fields](#fetch-and-use-component-content)
-  * `Meeg.Kentico.ContentComponents.Cms` has a dependency on this package so if you intend to use it within your main CMS project you will not need to install it separately
+* `Meeg.Kentico.ContentComponents` must be installed into any project outside of your main CMS project where you intend to [use the data stored in Content Component fields](#fetch-and-use-component-content)
 
 > Please note that:
 >
 > * These packages require a minimum Kentico version of **12.0.39**
-> * Content Components has only been tested by the author in an MVC project, but there is no known reason why they couldn't be used on a project that uses the Portal Engine approach
+> * Content Components has only been tested in an MVC project, but there is no known reason why they couldn't be used on a project that uses the Portal Engine approach
 
 ## Usage
 
 To use Content Components you must:
 
 * Define the content model (Page Type) for your component(s)
-* Add the component(s) to other Page Types
+* Add the component(s) as fields on other Page Types
 * Fetch and use the component(s) content
 
 ### Define the component content model
@@ -66,7 +65,7 @@ To fetch Content Component data:
 
 To use content component data:
 
-* Add a `using` statement for `Meeg.Kentico.ContentComponents`
+* Add a `using` statement for `Meeg.Kentico.ContentComponents.Cms`
 * Use one of the `GetContentComponent` extension methods that exist in the above namespace on the `TreeNode` instances returned by your `DocumentQuery`
 
 There are three extension methods available:
@@ -83,7 +82,7 @@ There are three extension methods available:
 Examples:
 
 ```csharp
-using Meeg.Kentico.ContentComponents;
+using Meeg.Kentico.ContentComponents.Cms;
 
 // 1. Use this if you haven't generated a class for your component Page Type
 
@@ -122,7 +121,7 @@ In this example:
 
 // 1. In a new file, create a partial class to extend the `Home` Page Type
 
-using Meeg.Kentico.ContentComponents;
+using Meeg.Kentico.ContentComponents.Cms;
 
 namespace CMS.DocumentEngine.Types.Custom
 {
@@ -148,7 +147,7 @@ PageMetadata component = page.Metadata;
 
 ## How it works
 
-There are essentially three parts to this module:
+There are three main parts to this module:
 
 * The `Content component` form control
 * `ContentComponentSerializer`
@@ -172,7 +171,7 @@ The value of that field can then be retrieved via the [component](#fetch-and-use
 
 ## Composing content
 
-Content Components are intended to complement existing features for content modelling in Kentico such as Page Type inheritance and [Pages fields](https://docs.kentico.com/k12sp/developing-websites/defining-website-content-structure/creating-and-configuring-page-types/configuring-page-types/reusing-existing-page-content) - it gives you one more option.
+Content Components are intended to complement existing features for content modelling in Kentico such as Page Type inheritance and [Pages fields](https://docs.kentico.com/k12sp/developing-websites/defining-website-content-structure/creating-and-configuring-page-types/configuring-page-types/reusing-existing-page-content).
 
 As with all features there are some scenarios where Content Components will fit and others where they will not. Below is some further information about the intention of Content Components, [known limitations](#known-limitations) and trade-offs that you may wish to consider when choosing if they are suitable to use based on your requirements:
 
@@ -204,7 +203,7 @@ Known limitations with Content Components are described below along with a discu
 
 Content Components are based on Page Types so it is possible to configure [search fields](https://docs.kentico.com/k12sp/configuring-kentico/setting-up-search-on-your-website/using-locally-stored-search-indexes/creating-local-search-indexes/defining-local-page-indexes#Defininglocalpageindexes-Configuringsearchsettingsforpagefields) against them, but the indexer will not know how to extract the component data and apply the search configuration because the data is stored as XML.
 
-A possible workaround (that has not been tested by the author) is to:
+A possible workaround is to:
 
 * Handle events related to smart search for [local indexes](https://docs.kentico.com/k12sp/configuring-kentico/setting-up-search-on-your-website/customizing-the-content-of-search-indexes) or [Azure Search](#https://docs.kentico.com/k12sp/configuring-kentico/setting-up-search-on-your-website/using-azure-search/customizing-azure-search#CustomizingAzureSearch-Reference-AzureSearchevents)
 * In the event handler(s) [deserialise the component data](#fetch-and-use-component-content), fetch and apply search configuration, and operate on the search index as appropriate to index the component content alongside the standard page fields
@@ -212,3 +211,5 @@ A possible workaround (that has not been tested by the author) is to:
 ## Samples
 
 The repository that contains this module includes a sample site, "KenticoContrib", that uses Content Components and you can explore the code to discover how components are being used to set page metadata.
+
+Please see the main repo README for how to get started with the sample site.

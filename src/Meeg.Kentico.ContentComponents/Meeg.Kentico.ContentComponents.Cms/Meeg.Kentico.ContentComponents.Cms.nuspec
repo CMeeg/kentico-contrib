@@ -7,15 +7,8 @@
         <authors>$author$</authors>
         <projectUrl>https://github.com/CMeeg/kentico-contrib/tree/master/src/Meeg.Kentico.ContentComponents</projectUrl>
         <license type="expression">MIT</license>
-        <licenseUrl>https://github.com/CMeeg/kentico-contrib/tree/master/LICENSE</licenseUrl>
         <copyright>$copyright$</copyright>
         <tags>kentico</tags>
         <repository type="git" url="https://github.com/CMeeg/kentico-contrib.git" />
-        <dependencies>
-            <group targetFramework="net472">
-                <dependency id="NuGet.Core" version="[2.14.0,3.0.0)" />
-                <dependency id="Meeg.Kentico.ContentComponents" version="[0.0.0,1.0.0)" />
-            </group>
-        </dependencies>
     </metadata>
 </package>
