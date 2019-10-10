@@ -397,5 +397,6 @@ log.txt
 ## CMS project specific ignores
 ### Media library, page (attachments), and form files
 src/CMS/Files
+src/CMS/CMS*/Meeg.Kentico.*/
 
 ## MVC project specific ignores

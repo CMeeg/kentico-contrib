@@ -1568,6 +1568,7 @@
     <Content Include="CMSAdminControls\UI\UniGrid\Pages\MassDelete.aspx" />
     <Content Include="CMSAdminControls\UI\Selectors\FaviconSelector.ascx" />
     <Content Include="CMSAdminControls\UI\FontIconSelector.ascx" />
+    <Content Include="CMSFormControls\Meeg.Kentico.ContentComponents.Cms.Admin\PageTypeComponent.ascx" />
     <Content Include="CMSInstall\Controls\WizardSteps\CollationDialog.ascx" />
     <Content Include="CMSModules\AdminControls\Controls\UIControls\SmartTipPlaceholder.ascx" />
     <Content Include="CMSModules\BizForms\FormControls\FormFieldSelector.ascx" />
@@ -1600,6 +1601,7 @@
     <Content Include="CMSModules\ImportExport\Controls\Export\cms_resource.ascx" />
     <Content Include="CMSModules\ImportExport\Controls\Export\Site\community_group.ascx" />
     <Content Include="CMSModules\ImportExport\Controls\Import\ma_automationaction.ascx" />
+    <Content Include="CMSModules\Meeg.Kentico.ContentComponents.Cms.Admin\readme.txt" />
     <Content Include="CMSModules\Modules\Controls\NuGetPackages\ExportModule.ascx" />
     <Content Include="CMSModules\Newsletters\Controls\RecipientContactGroups.ascx" />
     <Content Include="CMSModules\Newsletters\Controls\IssueLinks.ascx" />
@@ -22265,6 +22267,16 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\AWSSDK.S3.3.1.9.0\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CMSResources\CMS.en-us.resx" />
+    <EmbeddedResource Include="CMSResources\Meeg.Kentico.ContentComponents.Cms.Admin\Custom.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.Cms.Admin\Meeg.Kentico.ContentComponents.Cms.Admin.csproj">
+      <Project>{0c4d4b15-4a02-488c-84e6-042e46c4bf73}</Project>
+      <Name>Meeg.Kentico.ContentComponents.Cms.Admin</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
