@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Meeg.Kentico.ContentComponents</id>
+        <version>0.1.0</version>
+        <description>Content Components provide a way of constructing Page Types in Kentico using composition rather than inheritance. This package is meant to be installed into any project except your CMS Administration project (see `Meeg.Kentico.ContentComponents`) where you intend to fetch and use data stored as Content Components.</description>
+        <authors>meeg</authors>
+        <projectUrl>https://github.com/CMeeg/kentico-contrib/tree/master/src/Meeg.Kentico.ContentComponents</projectUrl>
+        <license type="expression">MIT</license>
+        <copyright>Copyright 2019 Chris Meagher</copyright>
+        <tags>kentico</tags>
+        <repository type="git" url="https://github.com/CMeeg/kentico-contrib.git" />
+        <dependencies>
+            <dependency id="Kentico.Libraries" version="[12.0.39,12.1.0)" />
+            <dependency id="Meeg.Kentico.ContentComponents.Cms" version="[0.1.0,1.0.0)" />
+        </dependencies>
+    </metadata>
+</package>
