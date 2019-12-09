@@ -439,6 +439,12 @@
       <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Base, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Configuration.ConfigurationBuilders.Base.1.0.2\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.UserSecrets, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.1.0.2\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\..\packages\Microsoft.Data.Edm.5.6.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -880,6 +886,10 @@
     <ProjectReference Include="..\KenticoContrib.Content\KenticoContrib.Content\KenticoContrib.Content.csproj">
       <Project>{fad608c9-9033-4a9d-8649-81972193cd15}</Project>
       <Name>KenticoContrib.Content</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Meeg.Kentico.Configuration\Meeg.Kentico.Configuration.Cms\Meeg.Kentico.Configuration.Cms.csproj">
+      <Project>{beef31c0-a2d4-4d7b-b5f4-96d84d0595a4}</Project>
+      <Name>Meeg.Kentico.Configuration.Cms</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
