@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using CMS.DataEngine;
 using Meeg.Configuration;
 using Meeg.Kentico.Configuration.Cms.Sql;
 using Microsoft.Configuration.ConfigurationBuilders;
@@ -9,41 +8,48 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 {
     public class CmsSettingsConfigBuilder : KeyValueConfigBuilder
     {
-        public const string DefaultQueryName = "Meeg_Kentico_Configuration.QueryContainer.AllConfigCmsSettings";
         private const string QueryNameTag = "queryName";
+        private const string UseCategorySectionsTag = "useCategorySections";
 
         protected string QueryName { get; private set; }
 
-        protected ConfigCmsSettingsFactory ConfigSettingsFactory { get; private set; }
+        protected bool UseCategorySections { get; private set; }
+
+        internal CmsSettingsConfigBuilderInternal ConfigBuilder { get; private set; }
 
         public override void Initialize(string name, NameValueCollection config)
         {
-            QueryName = config[QueryNameTag] ?? DefaultQueryName;
+            QueryName = config[QueryNameTag];
 
-            ConfigSettingsFactory = new ConfigCmsSettingsFactory();
+            bool.TryParse(config[UseCategorySectionsTag] ?? "True", out bool useCategorySections);
+            UseCategorySections = useCategorySections;
+
+            // This class serves as an adapter for the actual config builder impl
+            // Config builders are based on the provider model and so we can't inject dependencies
+            // So we will compose our implementation and its dependencies here
+
+            var configuration = new AppConfiguration();
+            var sqlQueryExecutor = new SqlQueryExecutor(configuration);
+            var allSettingsQueryHandler = new AllConfigCmsSettingsQueryHandler(sqlQueryExecutor);
+            var configKeyNameFactory = new CmsSettingConfigKeyNameFactory(configuration, UseCategorySections);
+
+            ConfigBuilder = new CmsSettingsConfigBuilderInternal(
+                new CmsSettingsConfigBuilderOptions(QueryName, UseCategorySections),
+                allSettingsQueryHandler,
+                configKeyNameFactory
+            );
 
             base.Initialize(name, config);
         }
 
         public override string GetValue(string key)
         {
-            // Any prefix will be added back to the `key` if it has been stripped so we don't need to handle that here - we do need to handle site vs global settings though
-
-            SettingsKeyName settingsKeyName = ConfigSettingsFactory.CreateSettingsKeyName(key);
-
-            return SettingsKeyInfoProvider.GetValue(settingsKeyName);
+            return ConfigBuilder.GetValue(key);
         }
 
         public override ICollection<KeyValuePair<string, string>> GetAllValues(string prefix)
         {
-            var configuration = new AppConfiguration();
-            var sqlQueryExecutor = new SqlQueryExecutor(configuration);
-
-            var query = new AllConfigCmsSettingsQuery(QueryName, prefix);
-            var queryHandler = new AllConfigCmsSettingsQueryHandler(sqlQueryExecutor);
-            IReadOnlyCollection<CmsSetting> allConfigSettings = queryHandler.Handle(query);
-
-            return ConfigSettingsFactory.CreateConfigSettings(allConfigSettings);
+            return ConfigBuilder.GetAllValues(prefix);
         }
     }
 }

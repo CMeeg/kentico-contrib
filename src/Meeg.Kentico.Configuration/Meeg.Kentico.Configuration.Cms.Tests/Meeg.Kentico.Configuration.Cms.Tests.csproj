@@ -31,18 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CMS.Base, Version=12.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\CMS.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="CMS.Core, Version=12.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\CMS.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CMS.DataEngine, Version=12.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\CMS.DataEngine.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationBuilders\AllCmsConfigSettingsQueryHandlerTests.cs" />
-    <Compile Include="ConfigurationBuilders\ConfigCmsSettingsFactoryTests.cs" />
+    <Compile Include="ConfigurationBuilders\CmsSettingConfigKeyNameFactoryTests.cs" />
+    <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilderTests.cs" />
     <Compile Include="FindCmsQueryByNameQueryHandlerTests.cs" />
     <Compile Include="FindCmsQueryByNameQueryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,14 +63,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FakeItEasy">
+      <Version>5.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="FakeItEasy.Analyzer.CSharp">
+      <Version>5.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="Kentico.Libraries.Tests">
+      <Version>12.0.39</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Configuration.ConfigurationBuilders.Base">
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Configuration.ConfigurationBuilders.UserSecrets">
       <Version>1.0.2</Version>
-    </PackageReference>
-    <PackageReference Include="NUnit">
-      <Version>3.12.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

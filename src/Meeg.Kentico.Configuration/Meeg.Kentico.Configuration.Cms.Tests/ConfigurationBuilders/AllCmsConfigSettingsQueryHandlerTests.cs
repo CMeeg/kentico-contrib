@@ -21,7 +21,7 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
             );
         }
         
-        [TestCase(CmsSettingsConfigBuilder.DefaultQueryName)]
+        [TestCase(CmsSettingsConfigBuilderOptions.DefaultQueryName)]
         public void Handle_WithValidQueryName_ReturnsSettings(string queryName)
         {
             var query = new AllConfigCmsSettingsQuery(queryName, null);
@@ -31,7 +31,7 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
             CollectionAssert.IsNotEmpty(settings);
         }
 
-        [TestCase(CmsSettingsConfigBuilder.DefaultQueryName, "CMSSMTP")]
+        [TestCase(CmsSettingsConfigBuilderOptions.DefaultQueryName, "CMSSMTP")]
         public void Handle_WithValidQueryNameAndPrefix_ReturnsSettingsWithPrefix(string queryName, string prefix)
         {
             var query = new AllConfigCmsSettingsQuery(queryName, prefix);

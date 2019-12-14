@@ -4,6 +4,8 @@ namespace Meeg.Configuration
 {
     public class AppConfiguration : IAppConfiguration
     {
+        public string SectionDelimiter => ":";
+
         public string GetValue(string key)
         {
             return ConfigurationManager.AppSettings[key];

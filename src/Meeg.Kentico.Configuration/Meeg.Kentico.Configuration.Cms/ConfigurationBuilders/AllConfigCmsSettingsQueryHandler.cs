@@ -42,7 +42,8 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
                 dataReader => new CmsSetting(
                     dataReader.GetString(0),
                     dataReader.GetString(1),
-                    dataReader.GetString(2)
+                    dataReader.GetString(2),
+                    dataReader.GetString(3)
                 )
             );
         }

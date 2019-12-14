@@ -16,7 +16,7 @@ namespace Meeg.Kentico.Configuration.Cms.Tests
             Assert.That(actual, Is.Null);
         }
 
-        [TestCase(CmsSettingsConfigBuilder.DefaultQueryName)]
+        [TestCase(CmsSettingsConfigBuilderOptions.DefaultQueryName)]
         public void Handle_WithValidQueryName_ReturnsCmsQuery(string queryName)
         {
             const string settingsTableName = "CMS_SettingsKey";
