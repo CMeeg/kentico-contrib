@@ -6,11 +6,15 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 
         public string QueryName { get; }
         public bool UseCategorySections { get; }
+        public string KeyPrefix { get; }
+        public bool StripPrefix { get; }
 
-        public CmsSettingsConfigBuilderOptions(string queryName, bool useCategorySections)
+        public CmsSettingsConfigBuilderOptions(string queryName, bool useCategorySections, string keyPrefix, bool stripPrefix)
         {
             QueryName = queryName ?? DefaultQueryName;
             UseCategorySections = useCategorySections;
+            KeyPrefix = keyPrefix;
+            StripPrefix = stripPrefix;
         }
     }
 }

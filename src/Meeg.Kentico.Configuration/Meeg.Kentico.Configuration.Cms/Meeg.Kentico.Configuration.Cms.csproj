@@ -60,7 +60,6 @@
     <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilder.cs" />
     <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilderInternal.cs" />
     <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilderOptions.cs" />
-    <Compile Include="ConfigurationBuilders\ICmsSettingConfigKeyNameFactory.cs" />
     <Compile Include="FindCmsQueryByNameQuery.cs" />
     <Compile Include="FindCmsQueryByNameQueryHandler.cs" />
     <Compile Include="IQuery.cs" />
@@ -71,6 +70,7 @@
     <Compile Include="Sql\SqlQuery.cs" />
     <Compile Include="Sql\SqlQueryExecutor.cs" />
     <Compile Include="Sql\SqlQueryParameter.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Configuration.ConfigurationBuilders.Base">

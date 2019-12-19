@@ -48,6 +48,7 @@
     <Compile Include="FindCmsQueryByNameQueryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlQueryHandlerTests.cs" />
+    <Compile Include="StringExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Meeg.Configuration\Meeg.Configuration\Meeg.Configuration.csproj">

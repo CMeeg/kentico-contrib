@@ -9,7 +9,7 @@ namespace Meeg.Kentico.Configuration.Cms.Tests
         internal ISqlQueryExecutor SqlQueryExecutor { get; private set; }
 
         [OneTimeSetUp]
-        public void SetupDepenencies()
+        public void SetupDependencies()
         {
             var configuration = new AppConfiguration();
             SqlQueryExecutor = new SqlQueryExecutor(configuration);

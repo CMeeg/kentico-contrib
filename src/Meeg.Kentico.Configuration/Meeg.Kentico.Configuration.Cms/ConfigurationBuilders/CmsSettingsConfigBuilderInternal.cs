@@ -8,12 +8,12 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
     {
         private readonly CmsSettingsConfigBuilderOptions options;
         private readonly IQueryHandler<AllConfigCmsSettingsQuery, IReadOnlyCollection<CmsSetting>> allSettingsQueryHandler;
-        private readonly ICmsSettingConfigKeyNameFactory configKeyNameFactory;
+        private readonly CmsSettingConfigKeyNameFactory configKeyNameFactory;
 
         public CmsSettingsConfigBuilderInternal(
             CmsSettingsConfigBuilderOptions options,
             IQueryHandler<AllConfigCmsSettingsQuery, IReadOnlyCollection<CmsSetting>> allSettingsQueryHandler,
-            ICmsSettingConfigKeyNameFactory configKeyNameFactory
+            CmsSettingConfigKeyNameFactory configKeyNameFactory
         )
         {
             this.options = options;
@@ -23,9 +23,10 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 
         public string GetValue(string key)
         {
-            // TODO: I don't think StripPrefix is compatible with the Section concept - can it still work?
-
-            // Any prefix will be added back to the `key` if it has been stripped so we don't need to handle that here - we do need to handle site vs global settings though
+            if (string.IsNullOrEmpty(key))
+            {
+                return null;
+            }
 
             SettingsKeyName settingsKeyName = configKeyNameFactory.CreateSettingsKeyName(key);
 

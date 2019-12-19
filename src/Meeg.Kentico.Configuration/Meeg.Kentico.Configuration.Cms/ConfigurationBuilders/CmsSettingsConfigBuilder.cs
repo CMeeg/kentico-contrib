@@ -21,20 +21,27 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
         {
             QueryName = config[QueryNameTag];
 
-            bool.TryParse(config[UseCategorySectionsTag] ?? "True", out bool useCategorySections);
+            bool.TryParse(config[UseCategorySectionsTag] ?? "false", out bool useCategorySections);
             UseCategorySections = useCategorySections;
+
+            string keyPrefix = config[prefixTag] ?? string.Empty;
+
+            bool.TryParse(config[stripPrefixTag] ?? "false", out bool stripPrefix);
 
             // This class serves as an adapter for the actual config builder impl
             // Config builders are based on the provider model and so we can't inject dependencies
             // So we will compose our implementation and its dependencies here
 
+            var options = new CmsSettingsConfigBuilderOptions(QueryName, UseCategorySections, keyPrefix, stripPrefix);
+
             var configuration = new AppConfiguration();
             var sqlQueryExecutor = new SqlQueryExecutor(configuration);
             var allSettingsQueryHandler = new AllConfigCmsSettingsQueryHandler(sqlQueryExecutor);
-            var configKeyNameFactory = new CmsSettingConfigKeyNameFactory(configuration, UseCategorySections);
+
+            var configKeyNameFactory = new CmsSettingConfigKeyNameFactory(configuration, options);
 
             ConfigBuilder = new CmsSettingsConfigBuilderInternal(
-                new CmsSettingsConfigBuilderOptions(QueryName, UseCategorySections),
+                options,
                 allSettingsQueryHandler,
                 configKeyNameFactory
             );

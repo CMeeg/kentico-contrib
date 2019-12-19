@@ -5,15 +5,15 @@ using Meeg.Configuration;
 
 namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 {
-    internal class CmsSettingConfigKeyNameFactory : ICmsSettingConfigKeyNameFactory
+    internal class CmsSettingConfigKeyNameFactory
     {
         private readonly IAppConfiguration appConfig;
-        private readonly bool useCategorySections;
+        private readonly CmsSettingsConfigBuilderOptions options;
 
-        public CmsSettingConfigKeyNameFactory(IAppConfiguration appConfig, bool useCategorySections)
+        public CmsSettingConfigKeyNameFactory(IAppConfiguration appConfig, CmsSettingsConfigBuilderOptions options)
         {
             this.appConfig = appConfig;
-            this.useCategorySections = useCategorySections;
+            this.options = options;
         }
 
         public string CreateConfigKeyName(CmsSetting setting)
@@ -34,12 +34,19 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
                 keyName.Append($"{siteName}{appConfig.SectionDelimiter}");
             }
 
-            if (useCategorySections && !string.IsNullOrEmpty(categoryName))
+            if (options.UseCategorySections && !string.IsNullOrEmpty(categoryName))
             {
                 keyName.Append($"{categoryName}{appConfig.SectionDelimiter}");
             }
 
-            keyName.Append(settingKeyName);
+            if (options.StripPrefix && settingKeyName.StartsWith(options.KeyPrefix))
+            {
+                keyName.Append(settingKeyName.Substring(options.KeyPrefix.Length));
+            }
+            else
+            {
+                keyName.Append(settingKeyName);
+            }
 
             return keyName.ToString();
         }
@@ -53,19 +60,28 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 
             // Settings have up to three parts separated by a delimiter: An optional site name, an optional category name, and a setting key name
 
-            int lastSeparatorIndex = configKey.LastIndexOf(appConfig.SectionDelimiter, StringComparison.Ordinal);
+            string[] configKeyParts = configKey.SplitOnLastIndexOf(appConfig.SectionDelimiter, StringComparison.Ordinal);
 
-            if (lastSeparatorIndex == -1)
+            if (configKeyParts.Length == 1)
             {
                 // No separator present so this is just a key name
 
-                return new SettingsKeyName(configKey);
+                return CreateSettingsKeyName(configKey, null);
             }
 
-            // We have two parts so we need to figure out if the first part is a site name or not
+            // We have two parts - a "section" and a key
 
-            string sectionName = configKey.Substring(0, lastSeparatorIndex);
-            string keyName = configKey.Substring(lastSeparatorIndex + 1);
+            string sectionName = configKeyParts[0];
+            string keyName = configKeyParts[1];
+
+            // If the prefix has been stripped we need to make sure it hasn't been added back in the wrong place i.e. we need it to be a prefix on the key name, not on the site or category name
+
+            if (options.StripPrefix && sectionName.StartsWith(options.KeyPrefix))
+            {
+                sectionName = sectionName.Substring(options.KeyPrefix.Length);
+            }
+
+            // Now we need to extract the site name from the section name - if a site name is present it will come first
 
             string[] sectionNameParts = sectionName.Split(
                 appConfig.SectionDelimiter.ToCharArray(),
@@ -75,27 +91,46 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 
             string siteName = sectionNameParts[0];
 
-            if (sectionNameParts.Length == 2)
-            {
-                // We have a site name and category name - the first part must be the site name
+            return CreateSettingsKeyName(keyName, siteName);
+        }
 
-                return new SettingsKeyName(keyName, siteName);
+        private SettingsKeyName CreateSettingsKeyName(string keyName, string siteName)
+        {
+            string settingsKeyName = EnsureKeyPrefix(keyName);
+
+            if (IsValidSiteName(siteName))
+            {
+                return new SettingsKeyName(settingsKeyName, siteName);
             }
 
-            // We could have a site name or category name so we need to check
+            return new SettingsKeyName(settingsKeyName);
+        }
+
+        private string EnsureKeyPrefix(string keyName)
+        {
+            if (options.StripPrefix && !keyName.StartsWith(options.KeyPrefix))
+            {
+                return $"{options.KeyPrefix}{keyName}";
+            }
+
+            return keyName;
+        }
+
+        private bool IsValidSiteName(string siteName)
+        {
+            if (string.IsNullOrEmpty(siteName))
+            {
+                return false;
+            }
 
             var siteId = new SiteInfoIdentifier(siteName);
 
             if (siteId.ObjectID == 0)
             {
-                // It's not a valid site name so we will treat it as a global settings
-
-                return new SettingsKeyName(keyName);
+                return false;
             }
 
-            // This is a site setting
-
-            return new SettingsKeyName(keyName, siteName);
+            return true;
         }
     }
 }
