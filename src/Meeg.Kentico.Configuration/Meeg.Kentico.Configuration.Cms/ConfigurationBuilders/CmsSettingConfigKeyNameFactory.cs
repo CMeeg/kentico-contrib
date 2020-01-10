@@ -31,12 +31,12 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 
             if (!string.IsNullOrEmpty(siteName))
             {
-                keyName.Append($"{siteName}{appConfig.SectionDelimiter}");
+                keyName.Append($"{siteName}{AppConfigurationPath.KeyDelimiter}");
             }
 
             if (options.UseCategorySections && !string.IsNullOrEmpty(categoryName))
             {
-                keyName.Append($"{categoryName}{appConfig.SectionDelimiter}");
+                keyName.Append($"{categoryName}{AppConfigurationPath.KeyDelimiter}");
             }
 
             if (options.StripPrefix && settingKeyName.StartsWith(options.KeyPrefix))
@@ -60,7 +60,7 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 
             // Settings have up to three parts separated by a delimiter: An optional site name, an optional category name, and a setting key name
 
-            string[] configKeyParts = configKey.SplitOnLastIndexOf(appConfig.SectionDelimiter, StringComparison.Ordinal);
+            string[] configKeyParts = configKey.SplitOnLastIndexOf(AppConfigurationPath.KeyDelimiter, StringComparison.Ordinal);
 
             if (configKeyParts.Length == 1)
             {
@@ -84,7 +84,7 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
             // Now we need to extract the site name from the section name - if a site name is present it will come first
 
             string[] sectionNameParts = sectionName.Split(
-                appConfig.SectionDelimiter.ToCharArray(),
+                AppConfigurationPath.KeyDelimiter.ToCharArray(),
                 2,
                 StringSplitOptions.RemoveEmptyEntries
             );

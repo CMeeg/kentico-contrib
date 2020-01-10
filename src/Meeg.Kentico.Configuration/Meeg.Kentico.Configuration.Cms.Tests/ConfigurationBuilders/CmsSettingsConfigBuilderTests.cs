@@ -30,7 +30,8 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
             A.CallTo(() => allSettingsQueryHandler.Handle(A<AllConfigCmsSettingsQuery>.Ignored))
                 .Returns(settings);
 
-            var configuration = new AppConfiguration();
+            var configurationManager = new ConfigurationManagerAdapter();
+            var configuration = new AppConfiguration(configurationManager);
             var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, null, false);
             var configKeyNameFactory = new CmsSettingConfigKeyNameFactory(configuration, options);
 

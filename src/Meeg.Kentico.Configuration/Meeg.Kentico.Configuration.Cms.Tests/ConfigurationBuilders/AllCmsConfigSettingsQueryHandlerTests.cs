@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
 {
     [TestFixture]
-    public class AllCmsConfigSettingsQueryHandlerTests : SqlQueryHandlerTests
+    public class AllCmsConfigSettingsQueryHandlerTests : SqlQueryHandlerTestsBase
     {
         [TestCase("InvalidQueryName")]
         [TestCase("InvalidClassName.InvalidQueryName")]

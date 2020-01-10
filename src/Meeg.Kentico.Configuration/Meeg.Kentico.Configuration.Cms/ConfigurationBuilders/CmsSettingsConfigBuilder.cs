@@ -34,7 +34,8 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 
             var options = new CmsSettingsConfigBuilderOptions(QueryName, UseCategorySections, keyPrefix, stripPrefix);
 
-            var configuration = new AppConfiguration();
+            var configurationManager = new ConfigurationManagerAdapter();
+            var configuration = new AppConfiguration(configurationManager);
             var sqlQueryExecutor = new SqlQueryExecutor(configuration);
             var allSettingsQueryHandler = new AllConfigCmsSettingsQueryHandler(sqlQueryExecutor);
 

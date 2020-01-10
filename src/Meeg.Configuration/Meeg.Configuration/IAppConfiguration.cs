@@ -1,11 +1,13 @@
+using System.Collections.Generic;
+
 namespace Meeg.Configuration
 {
     public interface IAppConfiguration
     {
-        string SectionDelimiter { get; }
+        string this[string key] { get; }
 
-        string GetValue(string key);
+        IAppConfigurationSection GetSection(string key);
 
-        string GetConnectionString(string name);
+        IEnumerable<IAppConfigurationSection> GetChildren();
     }
 }

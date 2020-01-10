@@ -1,19 +1,33 @@
-using System.Configuration;
+using System.Collections.Generic;
 
 namespace Meeg.Configuration
 {
-    public class AppConfiguration : IAppConfiguration
+    public class AppConfiguration : IAppConfigurationRoot
     {
-        public string SectionDelimiter => ":";
+        private readonly IConfigurationManager configurationManager;
 
-        public string GetValue(string key)
+        public string[] AllKeys => configurationManager.AppSettings.AllKeys;
+
+        public string this[string key] => configurationManager.AppSettings[key];
+
+        public AppConfiguration(IConfigurationManager configurationManager)
         {
-            return ConfigurationManager.AppSettings[key];
+            this.configurationManager = configurationManager;
         }
 
-        public string GetConnectionString(string name)
+        public IAppConfigurationSection GetSection(string key)
         {
-            return ConfigurationManager.ConnectionStrings[name]?.ConnectionString;
+            if (key.Equals(ConnectionStringsAppConfigurationSection.SectionKey))
+            {
+                return new ConnectionStringsAppConfigurationSection(configurationManager, null);
+            }
+
+            return new AppConfigurationSection(this, key);
+        }
+
+        public IEnumerable<IAppConfigurationSection> GetChildren()
+        {
+            return this.GetChildren(null);
         }
     }
 }

@@ -43,7 +43,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfiguration.cs" />
+    <Compile Include="AppConfigurationExtensions.cs" />
+    <Compile Include="AppConfigurationKeyComparer.cs" />
+    <Compile Include="AppConfigurationPath.cs" />
+    <Compile Include="AppConfigurationSection.cs" />
+    <Compile Include="ConfigurationManagerAdapter.cs" />
+    <Compile Include="ConnectionStringsAppConfigurationSection.cs" />
     <Compile Include="IAppConfiguration.cs" />
+    <Compile Include="IAppConfigurationRoot.cs" />
+    <Compile Include="IAppConfigurationSection.cs" />
+    <Compile Include="IConfigurationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

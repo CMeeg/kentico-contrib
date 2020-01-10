@@ -4,14 +4,15 @@ using NUnit.Framework;
 
 namespace Meeg.Kentico.Configuration.Cms.Tests
 {
-    public class SqlQueryHandlerTests
+    public abstract class SqlQueryHandlerTestsBase
     {
         internal ISqlQueryExecutor SqlQueryExecutor { get; private set; }
 
         [OneTimeSetUp]
         public void SetupDependencies()
         {
-            var configuration = new AppConfiguration();
+            var configurationManager = new ConfigurationManagerAdapter();
+            var configuration = new AppConfiguration(configurationManager);
             SqlQueryExecutor = new SqlQueryExecutor(configuration);
         }
     }

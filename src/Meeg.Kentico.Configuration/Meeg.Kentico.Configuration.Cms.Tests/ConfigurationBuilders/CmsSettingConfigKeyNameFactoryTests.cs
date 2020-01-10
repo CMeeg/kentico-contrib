@@ -10,6 +10,15 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
     [TestFixture]
     public class CmsSettingConfigKeyNameFactoryTests : UnitTests
     {
+        private IAppConfiguration Configuration { get; set; }
+
+        [OneTimeSetUp]
+        public void SetupDependencies()
+        {
+            var configurationManager = new ConfigurationManagerAdapter();
+            Configuration = new AppConfiguration(configurationManager);
+        }
+
         [SetUp]
         public void SetUp()
         {
@@ -30,16 +39,15 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         [TestCase("Category:Key", "Site", null, false)]
         public void CreateConfigKeyName_WithSiteName_StartsWithSiteNameSection(string settingsKeyName, string siteName, string categoryName, bool useCategorySections)
         {
-            var configuration = new AppConfiguration();
             var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, null, false);
-            var sut = new CmsSettingConfigKeyNameFactory(configuration, options);
+            var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             var setting = new CmsSetting(settingsKeyName, string.Empty, categoryName, siteName);
             string actual = sut.CreateConfigKeyName(setting);
 
             Assert.That(
                 actual,
-                Does.StartWith($"{siteName}{configuration.SectionDelimiter}")
+                Does.StartWith($"{siteName}{AppConfigurationPath.KeyDelimiter}")
             );
         }
 
@@ -51,16 +59,15 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         [TestCase("Category:Key", "Site", null, false)]
         public void CreateConfigKeyName_WithCategoryName_ContainsCategoryNameSection(string settingsKeyName, string siteName, string categoryName, bool useCategorySections)
         {
-            var configuration = new AppConfiguration();
             var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, null, false);
-            var sut = new CmsSettingConfigKeyNameFactory(configuration, options);
+            var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             var setting = new CmsSetting(settingsKeyName, string.Empty, categoryName, siteName);
             string actual = sut.CreateConfigKeyName(setting);
 
             Assert.That(
                 actual,
-                Does.Contain($"{categoryName}{configuration.SectionDelimiter}")
+                Does.Contain($"{categoryName}{AppConfigurationPath.KeyDelimiter}")
             );
         }
 
@@ -76,9 +83,8 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         [TestCase("Site", "Category", "Prefix", "Key", true, true)]
         public void CreateConfigKeyName_WithKeyPrefix_StripsPrefixWhenDirected(string siteName, string categoryName, string keyPrefix, string keyName, bool stripPrefix, bool useCategorySections)
         {
-            var configuration = new AppConfiguration();
             var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, keyPrefix, stripPrefix);
-            var sut = new CmsSettingConfigKeyNameFactory(configuration, options);
+            var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             string settingsKeyName = $"{keyPrefix}{keyName}";
 
@@ -98,9 +104,8 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         public void CreateSettingsKeyName_WithSiteConfigKey_CreatesSiteSettingsKey(string settingsKeyName,
             string siteName, string categoryName, bool useCategorySections)
         {
-            var configuration = new AppConfiguration();
             var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, null, false);
-            var sut = new CmsSettingConfigKeyNameFactory(configuration, options);
+            var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             var setting = new CmsSetting(settingsKeyName, string.Empty, categoryName, siteName);
             string configKey = sut.CreateConfigKeyName(setting);
@@ -127,9 +132,8 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         [TestCase("Site", "Category", "Prefix", "Key", true, true)]
         public void CreateSettingsKeyName_WithKeyPrefix_RestoresPrefixWhenStripped(string siteName, string categoryName, string keyPrefix, string keyName, bool stripPrefix, bool useCategorySections)
         {
-            var configuration = new AppConfiguration();
             var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, keyPrefix, stripPrefix);
-            var sut = new CmsSettingConfigKeyNameFactory(configuration, options);
+            var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             string settingsKeyName = $"{keyPrefix}{keyName}";
 
@@ -152,9 +156,8 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         [TestCase("Key", null, "Category", false)]
         public void CreateSettingsKeyName_WithGlobalConfigKey_CreatesGlobalSettingsKey(string settingsKeyName, string siteName, string categoryName, bool useCategorySections)
         {
-            var configuration = new AppConfiguration();
             var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, null, false);
-            var sut = new CmsSettingConfigKeyNameFactory(configuration, options);
+            var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             var setting = new CmsSetting(settingsKeyName, string.Empty, categoryName, siteName);
             string configKey = sut.CreateConfigKeyName(setting);

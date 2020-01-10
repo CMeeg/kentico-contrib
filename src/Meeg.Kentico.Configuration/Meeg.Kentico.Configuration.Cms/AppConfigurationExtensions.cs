@@ -10,17 +10,17 @@ namespace Meeg.Kentico.Configuration.Cms
             {
                 // Return the "global" setting
 
-                return appConfig.GetValue(key);
+                return appConfig[key];
             }
 
             // Try to get the site setting
 
-            string siteConfigKey = $"{siteName}{appConfig.SectionDelimiter}{key}";
+            string siteConfigKey = AppConfigurationPath.Combine(siteName, key);
 
             // TODO: Can we check if the key exists? Does null always mean "not found" or can it genuinely be null - in which case we want to return it
             // https://stackoverflow.com/questions/3295293/how-to-check-if-an-appsettings-key-exists
 
-            string siteValue = appConfig.GetValue(siteConfigKey);
+            string siteValue = appConfig[siteConfigKey];
 
             if (siteValue != null)
             {
@@ -29,7 +29,7 @@ namespace Meeg.Kentico.Configuration.Cms
 
             // Default to "global" setting
 
-            return appConfig.GetValue(key);
+            return appConfig[key];
         }
     }
 }
