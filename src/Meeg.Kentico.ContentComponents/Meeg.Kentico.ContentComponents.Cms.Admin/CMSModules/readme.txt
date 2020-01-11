@@ -2,6 +2,9 @@
 
 Thanks for installing the Content Components module!
 
+* If you are updating from a previous version, please see the [changelog](https://github.com/CMeeg/kentico-contrib/blob/master/CHANGELOG.md) for a description of all notable changes to this project
+* If you are installing the package for the first time, please read on for getting started instructions
+
 ## Getting started
 
 After installing this package there are a few things you will need to do before you can get started:
