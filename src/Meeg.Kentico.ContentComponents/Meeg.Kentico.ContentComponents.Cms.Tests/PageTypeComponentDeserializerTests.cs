@@ -105,5 +105,18 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
                 Assert.That(actual.OpenGraphMetadataDescription, Is.EqualTo(expected.OpenGraphMetadataDescription));
             });
         }
+
+        [Test]
+        public void Deserialize_ComponentWithNullValues_DoesNotThrowException()
+        {
+            var node = TreeNode.New<ContentComponentTest>();
+
+            var serialiser = new PageTypeComponentSerializer();
+            string nodeXml = serialiser.Serialize(node);
+
+            var deserializer = new PageTypeComponentDeserializer();
+
+            Assert.That(() => deserializer.Deserialize<ContentComponentTest>(nodeXml), Throws.Nothing);
+        }
     }
 }

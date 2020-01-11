@@ -201,6 +201,10 @@ A possible (currently untested) workaround is to:
 
 The repository that contains this module includes a sample site, "KenticoContrib", that uses Content Components and you can explore the code to discover how components are being used to set page metadata.
 
+## Changelog
+
+All notable changes to this project will be documented in the [changelog](CHANGELOG.md).
+
 ## Contributing
 
 Please see the [main README](../../README.md) for more information about how to get started with the sample site, and how to contribute, ask questions and raise bugs.
