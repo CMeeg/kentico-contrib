@@ -170,13 +170,36 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             {
                 FormEngineUserControl field = ContentComponentForm.FieldControls[fieldName];
 
+                if (!HasValue(field))
+                {
+                    return;
+                }
+
                 object fieldValue = field.Value;
+
                 bool fieldIsSystem = field.FieldInfo.System;
 
                 componentFieldCollection.AddField(fieldName, fieldValue, fieldIsSystem);
             });
 
             return componentFieldCollection;
+        }
+
+        private bool HasValue(FormEngineUserControl field)
+        {
+            if (field == null || !field.HasValue)
+            {
+                return false;
+            }
+
+            // field.HasValue can return true even if the field doesn't have a value so we need to check the actual value also
+
+            if (field.Value == null || string.IsNullOrEmpty(field.Value.ToString()))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private TreeNode GetContentComponentNode(ContentComponentFieldCollection componentFields)

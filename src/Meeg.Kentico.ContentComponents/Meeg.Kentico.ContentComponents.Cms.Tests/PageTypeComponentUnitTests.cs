@@ -19,6 +19,9 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
 
             DocumentGenerator.RegisterDocumentType<Page>(Page.CLASS_NAME);
             Fake().DocumentType<Page>(Page.CLASS_NAME);
+
+            DocumentGenerator.RegisterDocumentType<ContentComponentTest>(ContentComponentTest.CLASS_NAME);
+            Fake().DocumentType<ContentComponentTest>(ContentComponentTest.CLASS_NAME);
         }
     }
 }
