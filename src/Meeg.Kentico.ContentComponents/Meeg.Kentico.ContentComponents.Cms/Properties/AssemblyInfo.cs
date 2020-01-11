@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("meeg")]
 [assembly: AssemblyProduct("Meeg.Kentico.ContentComponents.Cms")]
-[assembly: AssemblyCopyright("Copyright 2019 Chris Meagher")]
+[assembly: AssemblyCopyright("Copyright 2020 Chris Meagher")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

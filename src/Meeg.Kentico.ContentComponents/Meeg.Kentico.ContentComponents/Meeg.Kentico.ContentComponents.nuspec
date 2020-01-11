@@ -7,7 +7,7 @@
         <authors>meeg</authors>
         <projectUrl>https://github.com/CMeeg/kentico-contrib/tree/master/src/Meeg.Kentico.ContentComponents</projectUrl>
         <license type="expression">MIT</license>
-        <copyright>Copyright 2019 Chris Meagher</copyright>
+        <copyright>Copyright 2020 Chris Meagher</copyright>
         <tags>kentico</tags>
         <repository type="git" url="https://github.com/CMeeg/kentico-contrib.git" />
         <dependencies>
