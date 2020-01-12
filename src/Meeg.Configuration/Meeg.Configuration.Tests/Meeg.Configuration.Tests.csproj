@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfigurationBinderCollectionTests.cs" />
+    <Compile Include="AppConfigurationBinderTestFixtures.cs" />
+    <Compile Include="AppConfigurationBinderTests.cs" />
     <Compile Include="AppConfigurationTests.cs" />
     <Compile Include="ConfigurationManagerFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

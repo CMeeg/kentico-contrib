@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfiguration.cs" />
+    <Compile Include="AppConfigurationBinder.cs" />
+    <Compile Include="AppConfigurationBinderOptions.cs" />
     <Compile Include="AppConfigurationExtensions.cs" />
     <Compile Include="AppConfigurationKeyComparer.cs" />
     <Compile Include="AppConfigurationPath.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="IAppConfigurationSection.cs" />
     <Compile Include="IConfigurationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

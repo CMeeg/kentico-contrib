@@ -10,13 +10,11 @@ namespace Meeg.Configuration.Tests
         [Test]
         public void AllKeys_WithAppSettingsAndConnectionStrings_ReturnsOnlyAppSettingsKeys()
         {
-            var configManagerFixture = new ConfigurationManagerFixture();
-
-            configManagerFixture.WithAppSetting("Key", "Value1");
-            configManagerFixture.WithAppSetting("Section:Key", "Value2");
-            configManagerFixture.WithConnectionString("Name", "ConnString");
-
-            var configManager = configManagerFixture.Build();
+            var configManager = new ConfigurationManagerFixture()
+                .WithAppSetting("Key", "Value1")
+                .WithAppSetting("Section:Key", "Value2")
+                .WithConnectionString("Name", "ConnString")
+                .Build();
 
             var appConfig = new AppConfiguration(configManager);
 
@@ -30,11 +28,9 @@ namespace Meeg.Configuration.Tests
         [Test]
         public void KeyIndexer_WithNotPresentKey_ReturnsNull()
         {
-            var configManagerFixture = new ConfigurationManagerFixture();
-
-            configManagerFixture.WithAppSetting("Key", "Value1");
-
-            IConfigurationManager configManager = configManagerFixture.Build();
+            var configManager = new ConfigurationManagerFixture()
+                .WithAppSetting("Key", "Value1")
+                .Build();
 
             var appConfig = new AppConfiguration(configManager);
 
@@ -47,11 +43,9 @@ namespace Meeg.Configuration.Tests
         [TestCase("Section:Key", "Value2")]
         public void KeyIndexer_WithKey_ReturnsValue(string key, string value)
         {
-            var configManagerFixture = new ConfigurationManagerFixture();
-
-            configManagerFixture.WithAppSetting(key, value);
-
-            IConfigurationManager configManager = configManagerFixture.Build();
+            var configManager = new ConfigurationManagerFixture()
+                .WithAppSetting(key, value)
+                .Build();
 
             var appConfig = new AppConfiguration(configManager);
 
@@ -63,11 +57,9 @@ namespace Meeg.Configuration.Tests
         [Test]
         public void GetSection_WithNotPresentSection_ReturnsEmptySection()
         {
-            var configManagerFixture = new ConfigurationManagerFixture();
-
-            configManagerFixture.WithAppSetting("Section:Key", "Value1");
-
-            IConfigurationManager configManager = configManagerFixture.Build();
+            var configManager = new ConfigurationManagerFixture()
+                .WithAppSetting("Section:Key", "Value1")
+                .Build();
 
             var appConfig = new AppConfiguration(configManager);
 
@@ -81,11 +73,9 @@ namespace Meeg.Configuration.Tests
         [TestCase("Key", "Value1")]
         public void GetSection_WithKeyWithNoSection_ReturnsKeyAsSection(string key, string value)
         {
-            var configManagerFixture = new ConfigurationManagerFixture();
-
-            configManagerFixture.WithAppSetting(key, value);
-
-            IConfigurationManager configManager = configManagerFixture.Build();
+            var configManager = new ConfigurationManagerFixture()
+                .WithAppSetting(key, value)
+                .Build();
 
             var appConfig = new AppConfiguration(configManager);
 
@@ -178,11 +168,9 @@ namespace Meeg.Configuration.Tests
         [Test]
         public void GetConnectionString_WithNotPresentName_ReturnsNull()
         {
-            var configManagerFixture = new ConfigurationManagerFixture();
-
-            configManagerFixture.WithConnectionString("Name", "ConnString");
-
-            IConfigurationManager configManager = configManagerFixture.Build();
+            var configManager = new ConfigurationManagerFixture()
+                .WithConnectionString("Name", "ConnString")
+                .Build();
 
             var appConfig = new AppConfiguration(configManager);
 
@@ -195,11 +183,9 @@ namespace Meeg.Configuration.Tests
         [TestCase("Section:Key", "Value2")]
         public void GetConnectionString_WithName_ReturnsConnectionString(string name, string connectionString)
         {
-            var configManagerFixture = new ConfigurationManagerFixture();
-
-            configManagerFixture.WithConnectionString(name, connectionString);
-
-            IConfigurationManager configManager = configManagerFixture.Build();
+            var configManager = new ConfigurationManagerFixture()
+                .WithConnectionString(name, connectionString)
+                .Build();
 
             var appConfig = new AppConfiguration(configManager);
 
