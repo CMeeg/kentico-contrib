@@ -29,6 +29,7 @@ namespace Meeg.Configuration
             {
                 throw new ArgumentNullException(nameof(pathSegments));
             }
+
             return string.Join(KeyDelimiter, pathSegments);
         }
     }

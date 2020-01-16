@@ -1,35 +1,43 @@
+using System.Collections.Generic;
+using System.Linq;
 using Meeg.Configuration;
 
 namespace Meeg.Kentico.Configuration.Cms
 {
     public static class AppConfigurationExtensions
     {
-        public static string GetValue(this IAppConfiguration appConfig, string key, string siteName)
+        public static string GetValue(this IAppConfigurationRoot appConfig, string key, string siteName)
+        {
+            return appConfig.GetValue<string>(key, siteName);
+        }
+
+        public static string GetValue(this IAppConfigurationRoot appConfig, string key, string siteName, string defaultValue)
+        {
+            return appConfig.GetValue<string>(key, siteName, defaultValue);
+        }
+
+        public static IAppConfigurationSection GetSection(this IAppConfigurationRoot appConfig, string key, string siteName)
         {
             if (string.IsNullOrEmpty(siteName))
             {
-                // Return the "global" setting
+                // Return the "global" section 
 
-                return appConfig[key];
+                return appConfig.GetSection(key);
             }
 
-            // Try to get the site setting
+            return new CmsAppConfigurationSection(appConfig, key, siteName);
+        }
 
-            string siteConfigKey = AppConfigurationPath.Combine(siteName, key);
-
-            // TODO: Can we check if the key exists? Does null always mean "not found" or can it genuinely be null - in which case we want to return it
-            // https://stackoverflow.com/questions/3295293/how-to-check-if-an-appsettings-key-exists
-
-            string siteValue = appConfig[siteConfigKey];
-
-            if (siteValue != null)
+        public static IEnumerable<IAppConfigurationSection> GetChildren(this IAppConfigurationRoot appConfig, string siteName)
+        {
+            if (string.IsNullOrEmpty(siteName))
             {
-                return siteValue;
+                return Enumerable.Empty<IAppConfigurationSection>();
             }
 
-            // Default to "global" setting
+            IAppConfigurationSection section = new CmsAppConfigurationSection(appConfig, siteName);
 
-            return appConfig[key];
+            return section.GetChildren();
         }
     }
 }

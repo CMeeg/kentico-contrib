@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfigurationExtensionsTests.cs" />
     <Compile Include="ConfigurationBuilders\AllCmsConfigSettingsQueryHandlerTests.cs" />
     <Compile Include="ConfigurationBuilders\CmsSettingConfigKeyNameFactoryTests.cs" />
     <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilderTests.cs" />
+    <Compile Include="ConfigurationManagerFixture.cs" />
     <Compile Include="FindCmsQueryByNameQueryHandlerTests.cs" />
     <Compile Include="FindCmsQueryByNameQueryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

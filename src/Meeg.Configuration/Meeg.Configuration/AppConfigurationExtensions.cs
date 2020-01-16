@@ -38,7 +38,7 @@ namespace Meeg.Configuration
             return childKeys.Select(key => root.GetSection(path == null
                 ? key
                 : AppConfigurationPath.Combine(path, key))
-            ); 
+            );
         }
 
         private static IEnumerable<string> GetChildKeys(IAppConfigurationRoot root, string parentPath)
