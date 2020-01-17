@@ -852,6 +852,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Infrastructure\Autofac\AppModule.cs" />
     <Compile Include="Infrastructure\Autofac\AutoMapperModule.cs" />
     <Compile Include="Infrastructure\Autofac\MediatrModule.cs" />
     <Compile Include="Infrastructure\Autofac\MvcModule.cs" />
@@ -886,6 +887,10 @@
     <ProjectReference Include="..\KenticoContrib.Content\KenticoContrib.Content\KenticoContrib.Content.csproj">
       <Project>{fad608c9-9033-4a9d-8649-81972193cd15}</Project>
       <Name>KenticoContrib.Content</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Meeg.Configuration\Meeg.Configuration\Meeg.Configuration.csproj">
+      <Project>{e19f6f12-5308-474a-b1a2-b0ead435d055}</Project>
+      <Name>Meeg.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\Meeg.Kentico.Configuration\Meeg.Kentico.Configuration.Cms\Meeg.Kentico.Configuration.Cms.csproj">
       <Project>{beef31c0-a2d4-4d7b-b5f4-96d84d0595a4}</Project>
