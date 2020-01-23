@@ -75,15 +75,12 @@
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Meeg.Configuration">
+      <Version>0.1.0-alpha0002</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Configuration.ConfigurationBuilders.Base">
       <Version>1.0.2</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Meeg.Configuration\Meeg.Configuration\Meeg.Configuration.csproj">
-      <Project>{e19f6f12-5308-474a-b1a2-b0ead435d055}</Project>
-      <Name>Meeg.Configuration</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

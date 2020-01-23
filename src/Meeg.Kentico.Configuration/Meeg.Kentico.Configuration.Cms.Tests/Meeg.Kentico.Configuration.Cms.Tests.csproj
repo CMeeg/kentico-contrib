@@ -54,10 +54,6 @@
     <Compile Include="StringExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Meeg.Configuration\Meeg.Configuration\Meeg.Configuration.csproj">
-      <Project>{e19f6f12-5308-474a-b1a2-b0ead435d055}</Project>
-      <Name>Meeg.Configuration</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Meeg.Kentico.Configuration.Cms\Meeg.Kentico.Configuration.Cms.csproj">
       <Project>{beef31c0-a2d4-4d7b-b5f4-96d84d0595a4}</Project>
       <Name>Meeg.Kentico.Configuration.Cms</Name>

@@ -407,6 +407,9 @@
     <Reference Include="MediatR, Version=7.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MediatR.7.0.0\lib\net461\MediatR.dll</HintPath>
     </Reference>
+    <Reference Include="Meeg.Configuration, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Meeg.Configuration.0.1.0-alpha0002\lib\net472\Meeg.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -887,10 +890,6 @@
     <ProjectReference Include="..\KenticoContrib.Content\KenticoContrib.Content\KenticoContrib.Content.csproj">
       <Project>{fad608c9-9033-4a9d-8649-81972193cd15}</Project>
       <Name>KenticoContrib.Content</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Meeg.Configuration\Meeg.Configuration\Meeg.Configuration.csproj">
-      <Project>{e19f6f12-5308-474a-b1a2-b0ead435d055}</Project>
-      <Name>Meeg.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\Meeg.Kentico.Configuration\Meeg.Kentico.Configuration.Cms\Meeg.Kentico.Configuration.Cms.csproj">
       <Project>{beef31c0-a2d4-4d7b-b5f4-96d84d0595a4}</Project>
