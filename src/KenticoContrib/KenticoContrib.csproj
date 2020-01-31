@@ -407,8 +407,11 @@
     <Reference Include="MediatR, Version=7.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MediatR.7.0.0\lib\net461\MediatR.dll</HintPath>
     </Reference>
-    <Reference Include="Meeg.Configuration, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Meeg.Configuration.0.1.0-alpha0002\lib\net472\Meeg.Configuration.dll</HintPath>
+    <Reference Include="Meeg.Configuration, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Meeg.Configuration.0.1.1\lib\net46\Meeg.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Meeg.Configuration.Extensions, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Meeg.Configuration.Extensions.0.1.1\lib\net46\Meeg.Configuration.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>

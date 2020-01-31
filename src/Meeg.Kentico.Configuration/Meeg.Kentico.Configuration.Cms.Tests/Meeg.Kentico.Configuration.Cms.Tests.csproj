@@ -41,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppConfigurationBinderExtensionsTests.cs" />
-    <Compile Include="AppConfigurationExtensionsTests.cs" />
     <Compile Include="ConfigurationBuilders\AllCmsConfigSettingsQueryHandlerTests.cs" />
     <Compile Include="ConfigurationBuilders\CmsSettingConfigKeyNameFactoryTests.cs" />
     <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilderTests.cs" />

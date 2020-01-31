@@ -51,9 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppConfigurationBinderExtensions.cs" />
-    <Compile Include="AppConfigurationExtensions.cs" />
-    <Compile Include="CmsAppConfigurationSection.cs" />
     <Compile Include="CmsQuery.cs" />
     <Compile Include="ConfigurationBuilders\AllConfigCmsSettingsQuery.cs" />
     <Compile Include="CmsSetting.cs" />
@@ -76,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Meeg.Configuration">
-      <Version>0.1.0-alpha0002</Version>
+      <Version>0.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Configuration.ConfigurationBuilders.Base">
       <Version>1.0.2</Version>

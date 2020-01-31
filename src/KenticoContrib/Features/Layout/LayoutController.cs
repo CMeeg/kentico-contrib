@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using MediatR;
 using Meeg.Configuration;
-using Meeg.Kentico.Configuration.Cms;
+using Meeg.Configuration.Extensions.MultiTenant;
 
 namespace KenticoContrib.Features.Layout
 {
@@ -39,7 +39,7 @@ namespace KenticoContrib.Features.Layout
             string currentSiteName = "KenticoContrib";
 
             var faviconOptions = appConfig
-                .Get<FaviconOptions>("KenticoContrib");
+                .Get<FaviconOptions>(currentSiteName);
 
             string faviconPath = faviconOptions.CmsFaviconPath;
 
