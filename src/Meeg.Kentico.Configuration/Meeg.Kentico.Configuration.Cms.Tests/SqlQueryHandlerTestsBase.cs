@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace Meeg.Kentico.Configuration.Cms.Tests
 {
+    [Integration]
     public abstract class SqlQueryHandlerTestsBase
     {
         internal ISqlQueryExecutor SqlQueryExecutor { get; private set; }

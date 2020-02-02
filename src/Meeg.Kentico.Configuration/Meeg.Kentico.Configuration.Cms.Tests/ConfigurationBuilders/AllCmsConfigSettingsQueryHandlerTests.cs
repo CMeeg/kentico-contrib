@@ -8,19 +8,6 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
     [TestFixture]
     public class AllCmsConfigSettingsQueryHandlerTests : SqlQueryHandlerTestsBase
     {
-        [TestCase("InvalidQueryName")]
-        [TestCase("InvalidClassName.InvalidQueryName")]
-        public void Handler_WithInvalidQueryName_ThrowsException(string queryName)
-        {
-            var query = new AllConfigCmsSettingsQuery(queryName, null);
-            var queryHandler = new AllConfigCmsSettingsQueryHandler(SqlQueryExecutor);
-
-            Assert.That(
-                () => queryHandler.Handle(query),
-                Throws.ArgumentException
-            );
-        }
-        
         [TestCase(CmsSettingsConfigBuilderOptions.DefaultQueryName)]
         public void Handle_WithValidQueryName_ReturnsSettings(string queryName)
         {
