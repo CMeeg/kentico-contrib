@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meeg.Kentico.Configuration.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Content", "Content", "{E72ABEC7-624A-445E-80B9-CFD754C9C8E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meeg.Kentico.ContentComponents.Cms.Tests", "Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.Cms.Tests\Meeg.Kentico.ContentComponents.Cms.Tests.csproj", "{3DDB5B87-C80E-4FDD-9E8E-2A1E2EFD74EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{9788AAFA-7247-4383-9F00-7924F20503ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9788AAFA-7247-4383-9F00-7924F20503ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9788AAFA-7247-4383-9F00-7924F20503ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DDB5B87-C80E-4FDD-9E8E-2A1E2EFD74EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DDB5B87-C80E-4FDD-9E8E-2A1E2EFD74EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DDB5B87-C80E-4FDD-9E8E-2A1E2EFD74EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DDB5B87-C80E-4FDD-9E8E-2A1E2EFD74EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{8A2B186D-A0A2-49DC-9EAE-8036DAA21BA2} = {E72ABEC7-624A-445E-80B9-CFD754C9C8E0}
 		{BEEF31C0-A2D4-4D7B-B5F4-96D84D0595A4} = {F3691EBC-A267-45F8-A7F3-7038FD79E975}
 		{9788AAFA-7247-4383-9F00-7924F20503ED} = {F3691EBC-A267-45F8-A7F3-7038FD79E975}
+		{3DDB5B87-C80E-4FDD-9E8E-2A1E2EFD74EB} = {E72ABEC7-624A-445E-80B9-CFD754C9C8E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C6500213-6CF9-462C-B95D-DCF91FC64889}

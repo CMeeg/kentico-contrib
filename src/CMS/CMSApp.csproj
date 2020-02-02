@@ -22279,6 +22279,10 @@
     <EmbeddedResource Include="CMSResources\Meeg.Kentico.ContentComponents.Cms.Admin\Custom.resx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Meeg.Kentico.Configuration\Meeg.Kentico.Configuration.Cms\Meeg.Kentico.Configuration.Cms.csproj">
+      <Project>{beef31c0-a2d4-4d7b-b5f4-96d84d0595a4}</Project>
+      <Name>Meeg.Kentico.Configuration.Cms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.Cms.Admin\Meeg.Kentico.ContentComponents.Cms.Admin.csproj">
       <Project>{0c4d4b15-4a02-488c-84e6-042e46c4bf73}</Project>
       <Name>Meeg.Kentico.ContentComponents.Cms.Admin</Name>
