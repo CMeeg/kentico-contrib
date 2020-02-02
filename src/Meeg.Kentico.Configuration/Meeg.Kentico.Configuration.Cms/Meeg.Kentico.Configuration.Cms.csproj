@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BEEF31C0-A2D4-4D7B-B5F4-96D84D0595A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Meeg.Kentico.Configuration.Cms</RootNamespace>
+    <AssemblyName>Meeg.Kentico.Configuration.Cms</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CMS.Base">
+      <HintPath>..\..\Lib\CMS.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.Core">
+      <HintPath>..\..\Lib\CMS.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.DataEngine">
+      <HintPath>..\..\Lib\CMS.DataEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CmsQuery.cs" />
+    <Compile Include="ConfigurationBuilders\AllConfigCmsSettingsQuery.cs" />
+    <Compile Include="CmsSetting.cs" />
+    <Compile Include="ConfigurationBuilders\AllConfigCmsSettingsQueryHandler.cs" />
+    <Compile Include="ConfigurationBuilders\CmsSettingConfigKeyNameFactory.cs" />
+    <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilder.cs" />
+    <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilderInternal.cs" />
+    <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilderOptions.cs" />
+    <Compile Include="FindCmsQueryByNameQuery.cs" />
+    <Compile Include="FindCmsQueryByNameQueryHandler.cs" />
+    <Compile Include="IQuery.cs" />
+    <Compile Include="IQueryHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sql\ISqlQueryExecutor.cs" />
+    <Compile Include="Sql\SqlQueryDataReader.cs" />
+    <Compile Include="Sql\SqlQuery.cs" />
+    <Compile Include="Sql\SqlQueryExecutor.cs" />
+    <Compile Include="Sql\SqlQueryParameter.cs" />
+    <Compile Include="StringExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Meeg.Configuration">
+      <Version>0.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Configuration.ConfigurationBuilders.Base">
+      <Version>1.0.2</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
