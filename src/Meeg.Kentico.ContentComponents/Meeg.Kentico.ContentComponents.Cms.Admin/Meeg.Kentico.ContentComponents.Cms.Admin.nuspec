@@ -7,10 +7,8 @@
         <authors>$author$</authors>
         <projectUrl>https://github.com/CMeeg/kentico-contrib/tree/master/src/Meeg.Kentico.ContentComponents</projectUrl>
         <license type="expression">MIT</license>
-        <licenseUrl>https://github.com/CMeeg/kentico-contrib/tree/master/LICENSE</licenseUrl>
         <copyright>$copyright$</copyright>
         <tags>kentico</tags>
-        <repository type="git" url="https://github.com/CMeeg/kentico-contrib.git" />
         <dependencies>
             <group targetFramework="net461">
                 <dependency id="Meeg.Kentico.ContentComponents.Cms" version="[0.2.0,1.0.0)" />
@@ -18,4 +16,12 @@
             </group>
         </dependencies>
     </metadata>
+    <files>
+        <file src="bin\$id$.dll" target="lib\net461" />
+        <file src="bin\$id$.pdb" target="lib\net461" />
+        <file src="$cmspath$\App_Data\CMSModules\Modules\tools\Install.ps1" target="tools" />
+        <file src="CMSFormControls\*.ascx" target="content\CMSFormControls\$cmsmodulename$" />
+        <file src="CMSModules\readme.txt" target="" />
+        <file src="CMSResources\*.resx" target="content\CMSResources\$cmsmodulename$" />
+    </files>
 </package>

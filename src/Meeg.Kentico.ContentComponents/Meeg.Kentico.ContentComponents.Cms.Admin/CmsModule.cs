@@ -21,8 +21,8 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin
 
         private static readonly string NuSpecFilePath = $"..\\Meeg.Kentico.ContentComponents\\{ModuleName}\\{ModuleName}.nuspec";
 
-        private AssemblyInfo assemblyInfo;
-        private AssemblyInfo AssemblyInfo => assemblyInfo ?? (assemblyInfo = new AssemblyInfo(Assembly.GetExecutingAssembly()));
+        private AssemblyInfoAccessor assemblyInfo;
+        private AssemblyInfoAccessor AssemblyInfo => assemblyInfo ?? (assemblyInfo = new AssemblyInfoAccessor(Assembly.GetExecutingAssembly()));
 
         public CmsModule()
             : base(ModuleName, true)
@@ -81,9 +81,9 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin
 
         private class AssemblyInfoPropertyProvider : IPropertyProvider
         {
-            private readonly AssemblyInfo assemblyInfo;
+            private readonly AssemblyInfoAccessor assemblyInfo;
 
-            private static readonly Dictionary<string, Func<AssemblyInfo, string>> Replacements = new Dictionary<string, Func<AssemblyInfo, string>>
+            private static readonly Dictionary<string, Func<AssemblyInfoAccessor, string>> Replacements = new Dictionary<string, Func<AssemblyInfoAccessor, string>>
             {
                 { "id", assemblyInfo => assemblyInfo.Title },
                 { "version", assemblyInfo => assemblyInfo.InformationalVersion },
@@ -92,7 +92,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin
                 { "copyright", assemblyInfo => assemblyInfo.Copyright }
             };
 
-            public AssemblyInfoPropertyProvider(AssemblyInfo assemblyInfo)
+            public AssemblyInfoPropertyProvider(AssemblyInfoAccessor assemblyInfo)
             {
                 this.assemblyInfo = assemblyInfo;
             }

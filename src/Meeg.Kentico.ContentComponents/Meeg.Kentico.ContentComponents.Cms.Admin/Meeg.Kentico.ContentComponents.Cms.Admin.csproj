@@ -104,7 +104,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AssemblyInfoAccessor.cs" />
     <Compile Include="CMSFormControls\PageTypeComponent.ascx.cs">
       <DependentUpon>PageTypeComponent.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

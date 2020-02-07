@@ -9,7 +9,6 @@
         <license type="expression">MIT</license>
         <copyright>$copyright$</copyright>
         <tags>kentico</tags>
-        <repository type="git" url="https://github.com/CMeeg/kentico-contrib.git" />
         <dependencies>
             <group targetFramework="net461" />
         </dependencies>
