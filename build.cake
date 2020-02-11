@@ -103,30 +103,40 @@ Task("NuGet-Pack")
 {
     // If the package already exists then don't package it
 
+    string packageName = package.PackageName;
     string packageVersion = package.PackageVersion;
-    string packageSource = FindPackageSource(package.PackageName, packageVersion);
+    string releaseVersion = packageVersion;
+    string packageSource = FindPackageSource(packageName, packageVersion);
+
+    if (!string.IsNullOrEmpty(packageSource))
+    {
+        Information("Skipping: {0} version {1} already exists on source {2}", packageName, packageVersion, packageSource);
+
+        return;
+    }
 
     if (string.IsNullOrEmpty(packageSource) && package.IsPreRelease)
     {
         // We also need to check that the we're not attempting to pre-release a package that has already been released
 
-        packageVersion = package.GitVersion.MajorMinorPatch;
-        packageSource = FindPackageSource(package.PackageName, packageVersion);
-    }
+        releaseVersion = package.GitVersion.MajorMinorPatch;
+        packageSource = FindPackageSource(packageName, releaseVersion);
 
-    if (!string.IsNullOrEmpty(packageSource))
-    {
-        Information("Skipping: {0} version {1} already exists on source {2}", package.PackageName, packageVersion, packageSource);
+        if (!string.IsNullOrEmpty(packageSource))
+        {
+            Information("Skipping: {0} cannot pre-release version {1} of package {2} that already exists on source {3}", packageName, packageVersion, releaseVersion, packageSource);
 
-        return;
+            return;
+        }
     }
 
     // Create the NuGet package
 
-    Information("Packaging: {0} version {1}", package.PackageName, package.PackageVersion);
+    Information("Packaging: {0} version {1}", package.PackageName, packageVersion);
 
     var properties = new Dictionary<string, string> {
-        { "version", package.PackageVersion },
+        { "version", packageVersion },
+        { "releaseVersion", releaseVersion },
         { "configuration", data.Configuration }
     };
 
@@ -139,8 +149,8 @@ Task("NuGet-Pack")
         properties.Add("author", assemblyInfo.Company);
         properties.Add("copyright", assemblyInfo.Copyright);
         // TODO: Get these values from the props file
-        properties.Add("cmspath", @"..\..\CMS");
-        properties.Add("cmsmodulename", assemblyInfo.Title);
+        properties.Add("cmsPath", @"..\..\CMS");
+        properties.Add("cmsModuleName", assemblyInfo.Title);
     }
 
     var settings = new NuGetPackSettings {
