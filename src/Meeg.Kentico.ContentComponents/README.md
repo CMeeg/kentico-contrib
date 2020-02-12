@@ -34,6 +34,7 @@ Create the content model for your component by [creating a Page Type](https://do
 * Use a content-only page type
 * Add categories and fields as you normally would including required fields and validation rules etc
   * A component Page Type can itself have Content Component fields if you want to compose components using other components
+  * `Pages` fields are supported, but please read the section on [fetching data from Pages fields](#fetching-data-from-pages-fields)
 * Unless you want to use it for [creating content items](#composing-content) also, remove all allowed parent types
 * Assign it to the appropriate site(s)
 * Save and create your Page Type
@@ -46,9 +47,9 @@ Create a new Page Type or edit an existing Page Type that will use your componen
 * Set the data type to `Long text`
 * (Optional) Instead of setting a field caption you may want to consider placing the component under a category as this puts the component fields in its own "section" when editing the content
 * Change the form control to `Page type component`
-* Under "Editing control settings" set the `Page type` to the Page Type that represents your component content model
+* Under "Editing control settings" set the `Page type` to the Page Type that represents your [component content model](#define-the-component-content-model)
 * (Optional) Enter the code name of an [Alternative form](https://docs.kentico.com/k12sp/developing-websites/defining-website-content-structure/creating-and-configuring-page-types/configuring-page-types/creating-alternative-forms-for-page-types) that will be used to present your component on the editing form (Form or Content tab)
-* Add any additional fields required for your content model
+* Add any other fields required for your content model to your Page Type as normal
 * Save the field
 
 Create or edit a Page that includes a Content Component:
@@ -134,6 +135,67 @@ PageMetadata component = page.Metadata;
 ...
 ```
 
+#### Fetching data from Pages fields
+
+`Pages` fields create an ad-hoc relationship between the "source" page where the field is defined and zero-to-many "related" pages. A content component is not a "page" in the usual sense so it cannot be used as the "source" of an ad-hoc relationship.
+
+A content component Page Type that [defines](#define-the-component-content-model) a `Pages` field will instead use its "parent" page (i.e. the page that uses the component) as the "source" page in the ad-hoc relationship.
+
+> `Pages` fields should not be confused with [`Page` fields](#page-fields) - the former defines relationships between pages; the latter are fields defined by the system.
+
+Adding and editing a `Pages` field on a content component Page Type [works in the same way](https://docs.kentico.com/k12sp/managing-website-content/working-with-pages/reusing-other-pages-when-editing-content) as on a "standard" Page Type, but there are some additional steps to perform when fetching and using `Pages` fields from a content component.
+
+Assuming you are following the [recommended approach](#recommendations) for working with content components, the additional steps are described below:
+
+```c#
+// The below is an extension of the example code provided in the "Recommendations" section above
+
+// 1. We have added a new content component that defines fields for a "Hero slider" component - one of the fields is a `Pages` fields that allows for the selection of one or more "Hero" pages
+
+using Meeg.Kentico.ContentComponents.Cms;
+
+namespace CMS.DocumentEngine.Types.Custom
+{
+    public partial class Home
+    {
+        public PageMetadata Metadata => this.GetPageTypeComponent<PageMetadata>(nameof(HomeMetadata));
+
+        public HeroSlider HeroSlider => this.GetPageTypeComponent<HeroSlider>(nameof(HomeHero));
+    }
+}
+
+// 2. In a new file, create a partial class to extend the `HeroSlider` content component Page Type, make it inherit from `IContentComponent`, and add a property to access the related "Hero" pages from the `Pages` field using the `GetRelatedDocumentsForComponent` extension method
+
+using System.Collections.Generic;
+using Meeg.Kentico.ContentComponents.Cms;
+
+namespace CMS.DocumentEngine.Types.Custom
+{
+    public partial class HeroSlider : IContentComponent
+    {
+        public IEnumerable<TreeNode> Heroes => this.GetRelatedDocumentsForComponent(nameof(Fields.HeroSliderHeroes));
+    }
+}
+
+// 3. Wherever you want to fetch and use the component, make sure that you include the `NodeID` and `NodeParentID` columns in your document query, and then use the property from the partial class to access the component's related pages
+
+...
+
+Home page = DocumentHelper.GetDocuments<Home>()
+    .Columns(
+      nameof(TreeNode.NodeID),
+      nameof(TreeNode.NodeParentID),
+      nameof(Home.HomeMetadata),
+      nameof(Home.HomeHero)
+    ) // Add other columns as necessary
+    .ToList()
+    .FirstOrDefault();
+
+IEnumerable<TreeNode> heroes = page.HeroSlider.Heroes;
+
+...
+```
+
 ## How it works
 
 There are three main parts to this module:
@@ -177,6 +239,7 @@ As with all features there are some scenarios where Content Components will fit 
   * For example, if you have a `BasePage` that has some fields that are common to all Page Types and then a `BasePageWithHero` that inherits from `BasePage`, but also has some fields that are common to a subset of Page Types that need a "Hero" element - you could instead still stick with a `BasePage`, but also have a `Hero` Content Component, or scrap the `BasePage` and have discreet components for common groups of fields
 * ❌ Do not use components if you require the component data to have its own versioning and workflow separate to the page
   * Consider using [Pages fields](https://docs.kentico.com/k12sp/developing-websites/defining-website-content-structure/creating-and-configuring-page-types/configuring-page-types/reusing-existing-page-content) instead
+  * ⚠ Consider combining [content components with Pages fields](#fetching-data-from-pages-fields)
 * ❌ Do not use components where you need to easily query the component data via SQL or as part of a `DocumentQuery`
   * The data is stored as XML and although it is possible to query it, it's not going to be as straight-forward or performant as using Standard or Inherited fields
   * ⚠ An exception is if you only need to query against [Page fields](#page-fields) as these are also set directly against the page
