@@ -60,6 +60,13 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 
                 SetPageSystemFields(componentFields);
 
+                // Set the parent of the component to the node that is currently being edited
+
+                if (ParentNode.NodeID > 0)
+                {
+                    ContentComponentNode.NodeParentID = ParentNode.NodeID;
+                }
+
                 // Return the component node serialized to XML
 
                 var serializer = new PageTypeComponentSerializer();
@@ -102,7 +109,8 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             set;
         }
 
-        private TreeNode ParentNode => Form.EditedObject as TreeNode;
+        private TreeNode parentNode;
+        private TreeNode ParentNode => parentNode ?? (parentNode = GetParentNode(Form));
 
         protected override void OnInit(EventArgs e)
         {
@@ -250,6 +258,23 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             });
 
             return componentFieldCollection;
+        }
+
+        private TreeNode GetParentNode(BasicForm form)
+        {
+            var formControl = form.Parent as FormEngineUserControl;
+
+            if (formControl == null)
+            {
+                return form.EditedObject as TreeNode;
+            }
+
+            if (formControl.GetType() == GetType())
+            {
+                return GetParentNode(formControl.Form);
+            }
+
+            return form.EditedObject as TreeNode;
         }
 
         private bool HasValue(FormEngineUserControl field)

@@ -28,9 +28,7 @@ namespace Meeg.Kentico.ContentComponents.Cms
                 return null;
             }
 
-            // Set the parent of the component to the node that the component "belongs" to
-
-            component.NodeParentID = node.NodeID;
+            SetParentNode(component, node);
 
             return component;
         }
@@ -56,9 +54,7 @@ namespace Meeg.Kentico.ContentComponents.Cms
                 return null;
             }
 
-            // Set the parent of the component to the node that the component "belongs" to
-
-            component.NodeParentID = node.NodeID;
+            SetParentNode(component, node);
 
             return component;
         }
@@ -86,11 +82,37 @@ namespace Meeg.Kentico.ContentComponents.Cms
                 return null;
             }
 
-            // Set the parent of the component to the node that the component "belongs" to
-
-            component.NodeParentID = page.NodeID;
+            SetParentNode(component, page);
 
             return component;
+        }
+
+        private static void SetParentNode(TreeNode component, TreeNode parentNode)
+        {
+            if (parentNode == null)
+            {
+                return;
+            }
+
+            if (component.NodeParentID > 0)
+            {
+                // Parent is already set
+
+                return;
+            }
+
+            if (parentNode is IContentComponent)
+            {
+                // The node is a component so we will try again with its parent
+
+                SetParentNode(component, parentNode.Parent);
+
+                return;
+            }
+
+            // Set the parent of the component to the node that the component "belongs" to
+
+            component.NodeParentID = parentNode.NodeID;
         }
     }
 }
