@@ -199,6 +199,11 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
                 return;
             }
 
+            if (editedObject.NodeID == 0)
+            {
+                return;
+            }
+
             // The form control is a UserControl in the CMSApp project so we have to use reflection as we don't know the type
 
             const string propertyName = "TreeNode";
