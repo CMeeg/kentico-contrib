@@ -245,7 +245,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             {
                 FormEngineUserControl field = ContentComponentForm.FieldControls[fieldName];
 
-                if (!HasValue(field))
+                if (!FieldControlHasValue(field))
                 {
                     return;
                 }
@@ -277,7 +277,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             return form.EditedObject as TreeNode;
         }
 
-        private bool HasValue(FormEngineUserControl field)
+        private bool FieldControlHasValue(FormEngineUserControl field)
         {
             if (field == null || !field.HasValue)
             {
