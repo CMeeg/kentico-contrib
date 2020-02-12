@@ -102,6 +102,8 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             set;
         }
 
+        private TreeNode ParentNode => Form.EditedObject as TreeNode;
+
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -163,39 +165,63 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 
             ContentComponentForm.ReloadData();
 
+            // Ensure that the form fields are loaded correctly
 
+            LoadContentComponentFormFields();
+        }
+
+        private void LoadContentComponentFormFields()
+        {
             ContentComponentForm.Fields.ForEach(fieldName =>
             {
                 FormEngineUserControl field = ContentComponentForm.FieldControls[fieldName];
 
-                if (ContentComponentForm.FieldControls["Pages"]?.FieldInfo.DataType != "docrelationships")
+                switch (field.FieldInfo.DataType.ToLowerInvariant())
                 {
-                    return;
+                    case "docrelationships":
+                        LoadContentComponentPagesField(field);
+
+                        return;
+                    default:
+                        return;
                 }
-
-                var editedObject = Form.EditedObject as TreeNode;
-
-                if (editedObject == null)
-                {
-                    return;
-                }
-
-                PropertyInfo fieldProperty = field.GetType().GetProperty("TreeNode", BindingFlags.Public | BindingFlags.Instance);
-
-                if (fieldProperty == null || !fieldProperty.CanWrite)
-                {
-                    return;
-                }
-
-                fieldProperty.SetValue(field, editedObject);
-
-                field.ReloadControl();
-
-                var dataClass = DataClassInfoProvider.GetDataClassInfo(editedObject.ClassName);
-
-                RelationshipNameInfoProvider.EnsureAdHocRelationshipNameInfo(dataClass,
-                    field.FieldInfo);
             });
+        }
+
+        private void LoadContentComponentPagesField(FormEngineUserControl field)
+        {
+            // Set the TreeNode that the relationships are to be added to to the "Parent" node of this component
+
+            var editedObject = ParentNode;
+
+            if (editedObject == null)
+            {
+                return;
+            }
+
+            // The form control is a UserControl in the CMSApp project so we have to use reflection as we don't know the type
+
+            const string propertyName = "TreeNode";
+
+            PropertyInfo fieldProperty = field.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+
+            if (fieldProperty == null || !fieldProperty.CanWrite)
+            {
+                return;
+            }
+
+            fieldProperty.SetValue(field, editedObject);
+
+            // Reload the control to make sure it loads correctly with the TreeNode property set
+
+            field.ReloadControl();
+
+            // We also need to make sure that the ad-hoc relationship name has been created
+
+            var dataClass = DataClassInfoProvider.GetDataClassInfo(editedObject.ClassName);
+
+            RelationshipNameInfoProvider.EnsureAdHocRelationshipNameInfo(dataClass,
+                field.FieldInfo);
         }
 
         private ContentComponentFieldCollection GetContentComponentFormFields()
@@ -249,7 +275,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 
         private void SetPageSystemFields(ContentComponentFieldCollection componentFields)
         {
-            var page = Form.EditedObject as TreeNode;
+            var page = ParentNode;
 
             componentFields.ApplyFieldsTo(page, field => field.IsSystem);
         }
