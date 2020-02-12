@@ -28,6 +28,8 @@ namespace Meeg.Kentico.ContentComponents.Cms
                 return null;
             }
 
+            // Set the parent of the component to the node that the component "belongs" to
+
             component.NodeParentID = node.NodeID;
 
             return component;
@@ -53,6 +55,8 @@ namespace Meeg.Kentico.ContentComponents.Cms
             {
                 return null;
             }
+
+            // Set the parent of the component to the node that the component "belongs" to
 
             component.NodeParentID = node.NodeID;
 
@@ -81,6 +85,8 @@ namespace Meeg.Kentico.ContentComponents.Cms
             {
                 return null;
             }
+
+            // Set the parent of the component to the node that the component "belongs" to
 
             component.NodeParentID = page.NodeID;
 

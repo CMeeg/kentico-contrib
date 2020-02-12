@@ -1,14 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
-using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.FormEngine;
 using CMS.Relationships;
 
 namespace Meeg.Kentico.ContentComponents.Cms
 {
+    /// <summary>
+    /// IContentComponent extension methods to use with Content Components.
+    /// </summary>
     public static class ContentComponentExtensions
     {
+        /// <summary>
+        /// Get related pages for a Pages field specified on a component.
+        /// </summary>
+        /// <param name="component">The component that has the Pages field.</param>
+        /// <param name="fieldName">The code name of the Pages field on the component.</param>
+        /// <returns>The related pages for the specified component field.</returns>
         public static IEnumerable<TreeNode> GetRelatedDocumentsForComponent(this IContentComponent component, string fieldName)
         {
             TreeNode parent = component.Parent;
