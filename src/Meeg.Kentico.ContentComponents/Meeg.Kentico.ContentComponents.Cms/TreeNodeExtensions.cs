@@ -21,7 +21,16 @@ namespace Meeg.Kentico.ContentComponents.Cms
 
             var deserializer = new PageTypeComponentDeserializer();
 
-            return deserializer.Deserialize(pageType, componentXml);
+            var component = deserializer.Deserialize(pageType, componentXml);
+
+            if (component == null)
+            {
+                return null;
+            }
+
+            component.NodeParentID = node.NodeID;
+
+            return component;
         }
 
         /// <summary>
@@ -38,7 +47,16 @@ namespace Meeg.Kentico.ContentComponents.Cms
 
             var deserializer = new PageTypeComponentDeserializer();
 
-            return deserializer.Deserialize<T>(componentXml);
+            var component = deserializer.Deserialize<T>(componentXml);
+
+            if (component == null)
+            {
+                return null;
+            }
+
+            component.NodeParentID = node.NodeID;
+
+            return component;
         }
 
         /// <summary>
@@ -57,7 +75,16 @@ namespace Meeg.Kentico.ContentComponents.Cms
 
             var deserializer = new PageTypeComponentDeserializer();
 
-            return deserializer.Deserialize<TComponent>(componentXml);
+            var component = deserializer.Deserialize<TComponent>(componentXml);
+
+            if (component == null)
+            {
+                return null;
+            }
+
+            component.NodeParentID = page.NodeID;
+
+            return component;
         }
     }
 }

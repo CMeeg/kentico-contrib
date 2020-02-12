@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using CMS.DataEngine;
 using CMS.Helpers;
+using CMS.Relationships;
 
 namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 {
@@ -160,6 +162,40 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             // Reload the form to populate the UI controls with component data
 
             ContentComponentForm.ReloadData();
+
+
+            ContentComponentForm.Fields.ForEach(fieldName =>
+            {
+                FormEngineUserControl field = ContentComponentForm.FieldControls[fieldName];
+
+                if (ContentComponentForm.FieldControls["Pages"]?.FieldInfo.DataType != "docrelationships")
+                {
+                    return;
+                }
+
+                var editedObject = Form.EditedObject as TreeNode;
+
+                if (editedObject == null)
+                {
+                    return;
+                }
+
+                PropertyInfo fieldProperty = field.GetType().GetProperty("TreeNode", BindingFlags.Public | BindingFlags.Instance);
+
+                if (fieldProperty == null || !fieldProperty.CanWrite)
+                {
+                    return;
+                }
+
+                fieldProperty.SetValue(field, editedObject);
+
+                field.ReloadControl();
+
+                var dataClass = DataClassInfoProvider.GetDataClassInfo(editedObject.ClassName);
+
+                RelationshipNameInfoProvider.EnsureAdHocRelationshipNameInfo(dataClass,
+                    field.FieldInfo);
+            });
         }
 
         private ContentComponentFieldCollection GetContentComponentFormFields()
