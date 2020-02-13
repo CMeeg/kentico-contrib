@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 using KenticoContrib.Content.Cms.Infrastructure.Autofac;
@@ -17,6 +17,7 @@ namespace KenticoContrib
             builder.RegisterModule<MvcModule>();
             builder.RegisterModule<MediatrModule>();
             builder.RegisterModule<AutoMapperModule>();
+            builder.RegisterModule<AppModule>();
 
             // Register external (from outside of this assembly) modules
 

@@ -21,7 +21,16 @@ namespace Meeg.Kentico.ContentComponents.Cms
 
             var deserializer = new PageTypeComponentDeserializer();
 
-            return deserializer.Deserialize(pageType, componentXml);
+            var component = deserializer.Deserialize(pageType, componentXml);
+
+            if (component == null)
+            {
+                return null;
+            }
+
+            SetParentNode(component, node);
+
+            return component;
         }
 
         /// <summary>
@@ -38,7 +47,16 @@ namespace Meeg.Kentico.ContentComponents.Cms
 
             var deserializer = new PageTypeComponentDeserializer();
 
-            return deserializer.Deserialize<T>(componentXml);
+            var component = deserializer.Deserialize<T>(componentXml);
+
+            if (component == null)
+            {
+                return null;
+            }
+
+            SetParentNode(component, node);
+
+            return component;
         }
 
         /// <summary>
@@ -57,7 +75,44 @@ namespace Meeg.Kentico.ContentComponents.Cms
 
             var deserializer = new PageTypeComponentDeserializer();
 
-            return deserializer.Deserialize<TComponent>(componentXml);
+            var component = deserializer.Deserialize<TComponent>(componentXml);
+
+            if (component == null)
+            {
+                return null;
+            }
+
+            SetParentNode(component, page);
+
+            return component;
+        }
+
+        private static void SetParentNode(TreeNode component, TreeNode parentNode)
+        {
+            if (parentNode == null)
+            {
+                return;
+            }
+
+            if (component.NodeParentID > 0)
+            {
+                // Parent is already set
+
+                return;
+            }
+
+            if (parentNode is IContentComponent)
+            {
+                // The node is a component so we will try again with its parent
+
+                SetParentNode(component, parentNode.Parent);
+
+                return;
+            }
+
+            // Set the parent of the component to the node that the component "belongs" to
+
+            component.NodeParentID = parentNode.NodeID;
         }
     }
 }

@@ -97,6 +97,12 @@
       <HintPath>..\..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Base, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Configuration.ConfigurationBuilders.Base.1.0.1\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.UserSecrets, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.1.0.2\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
@@ -22273,6 +22279,10 @@
     <EmbeddedResource Include="CMSResources\Meeg.Kentico.ContentComponents.Cms.Admin\Custom.resx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Meeg.Kentico.Configuration\Meeg.Kentico.Configuration.Cms\Meeg.Kentico.Configuration.Cms.csproj">
+      <Project>{beef31c0-a2d4-4d7b-b5f4-96d84d0595a4}</Project>
+      <Name>Meeg.Kentico.Configuration.Cms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Meeg.Kentico.ContentComponents\Meeg.Kentico.ContentComponents.Cms.Admin\Meeg.Kentico.ContentComponents.Cms.Admin.csproj">
       <Project>{0c4d4b15-4a02-488c-84e6-042e46c4bf73}</Project>
       <Name>Meeg.Kentico.ContentComponents.Cms.Admin</Name>

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Meeg.Kentico.ContentComponents.Cms")]
-[assembly: AssemblyDescription("Content Components provide a way of constructing Page Types in Kentico using composition rather than inheritance. This package provides the core functionality of the module and is not typically installed independently of `Meeg.Kentico.ContentComponents` or `Meeg.Kentico.ContentComponents.Cms.Admin`.")]
+[assembly: AssemblyTitle("Meeg.Kentico.Configuration.Cms")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("meeg")]
-[assembly: AssemblyProduct("Meeg.Kentico.ContentComponents.Cms")]
-[assembly: AssemblyCopyright("Copyright 2020 Chris Meagher")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Meeg.Kentico.Configuration.Cms")]
+[assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8a2b186d-a0a2-49dc-9eae-8036daa21ba2")]
+[assembly: Guid("beef31c0-a2d4-4d7b-b5f4-96d84d0595a4")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,6 +32,8 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.3.0.0")]
-[assembly: AssemblyFileVersion("0.3.0.0")]
-[assembly: AssemblyInformationalVersion("0.3.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+
+[assembly: InternalsVisibleTo("Meeg.Kentico.Configuration.Cms.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
