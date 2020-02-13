@@ -6,4 +6,5 @@
     IsLiveSite="false"
     MarkRequiredFields="true"
     ShowValidationErrorMessage="false"
+    FormCssClass="form-horizontal form-content-component"
 />
