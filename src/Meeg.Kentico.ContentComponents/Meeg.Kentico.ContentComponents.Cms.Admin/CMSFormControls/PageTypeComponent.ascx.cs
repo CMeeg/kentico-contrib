@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using CMS.DataEngine;
 using CMS.Helpers;
+using CMS.Relationships;
 
 namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 {
@@ -58,6 +60,13 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 
                 SetPageSystemFields(componentFields);
 
+                // Set the parent of the component to the node that is currently being edited
+
+                if (ParentNode.NodeID > 0)
+                {
+                    ContentComponentNode.NodeParentID = ParentNode.NodeID;
+                }
+
                 // Return the component node serialized to XML
 
                 var serializer = new PageTypeComponentSerializer();
@@ -99,6 +108,9 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             get;
             set;
         }
+
+        private TreeNode parentNode;
+        private TreeNode ParentNode => parentNode ?? (parentNode = GetParentNode(Form));
 
         protected override void OnInit(EventArgs e)
         {
@@ -160,6 +172,69 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             // Reload the form to populate the UI controls with component data
 
             ContentComponentForm.ReloadData();
+
+            // Ensure that the form fields are loaded correctly
+
+            LoadContentComponentFormFields();
+        }
+
+        private void LoadContentComponentFormFields()
+        {
+            ContentComponentForm.Fields.ForEach(fieldName =>
+            {
+                FormEngineUserControl field = ContentComponentForm.FieldControls[fieldName];
+
+                switch (field.FieldInfo.DataType.ToLowerInvariant())
+                {
+                    case "docrelationships":
+                        LoadContentComponentPagesField(field);
+
+                        return;
+                    default:
+                        return;
+                }
+            });
+        }
+
+        private void LoadContentComponentPagesField(FormEngineUserControl field)
+        {
+            // Set the TreeNode that the relationships are to be added to to the "Parent" node of this component
+
+            var editedObject = ParentNode;
+
+            if (editedObject == null)
+            {
+                return;
+            }
+
+            if (editedObject.NodeID == 0)
+            {
+                return;
+            }
+
+            // The form control is a UserControl in the CMSApp project so we have to use reflection as we don't know the type
+
+            const string propertyName = "TreeNode";
+
+            PropertyInfo fieldProperty = field.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+
+            if (fieldProperty == null || !fieldProperty.CanWrite)
+            {
+                return;
+            }
+
+            fieldProperty.SetValue(field, editedObject);
+
+            // Reload the control to make sure it loads correctly with the TreeNode property set
+
+            field.ReloadControl();
+
+            // We also need to make sure that the ad-hoc relationship name has been created
+
+            var dataClass = DataClassInfoProvider.GetDataClassInfo(editedObject.ClassName);
+
+            RelationshipNameInfoProvider.EnsureAdHocRelationshipNameInfo(dataClass,
+                field.FieldInfo);
         }
 
         private ContentComponentFieldCollection GetContentComponentFormFields()
@@ -170,7 +245,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             {
                 FormEngineUserControl field = ContentComponentForm.FieldControls[fieldName];
 
-                if (!HasValue(field))
+                if (!FieldControlHasValue(field))
                 {
                     return;
                 }
@@ -185,7 +260,24 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             return componentFieldCollection;
         }
 
-        private bool HasValue(FormEngineUserControl field)
+        private TreeNode GetParentNode(BasicForm form)
+        {
+            var formControl = form.Parent as FormEngineUserControl;
+
+            if (formControl == null)
+            {
+                return form.EditedObject as TreeNode;
+            }
+
+            if (formControl.GetType() == GetType())
+            {
+                return GetParentNode(formControl.Form);
+            }
+
+            return form.EditedObject as TreeNode;
+        }
+
+        private bool FieldControlHasValue(FormEngineUserControl field)
         {
             if (field == null || !field.HasValue)
             {
@@ -213,7 +305,7 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 
         private void SetPageSystemFields(ContentComponentFieldCollection componentFields)
         {
-            var page = Form.EditedObject as TreeNode;
+            var page = ParentNode;
 
             componentFields.ApplyFieldsTo(page, field => field.IsSystem);
         }
