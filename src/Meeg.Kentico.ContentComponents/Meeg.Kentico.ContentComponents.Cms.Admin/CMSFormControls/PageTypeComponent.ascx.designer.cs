@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls {
-    
-    
-    public partial class PageTypeComponent {
-        
+namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
+{
+
+
+    public partial class PageTypeComponent
+    {
+
         /// <summary>
         /// ContentComponentForm control.
         /// </summary>
