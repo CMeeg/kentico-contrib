@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.3.0 (2020-02-13)
+
+### Features
+
+* Add support for `Pages` fields to content components ([1cb0f6b](https://github.com/CMeeg/kentico-contrib/commit/1cb0f6b))
+  * `Pages` fields are now suported on content components - please see the readme for more info.
+
 ## 0.2.0 (2020-01-11)
 
 ### Features
