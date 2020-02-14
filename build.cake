@@ -90,14 +90,26 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does<BuildData>(data =>
 {
-    NUnit3(
-        data.TestAssemblies,
-        new NUnit3Settings
+
+    var testAssemblies = GetFiles(
+        "./src/**/bin/" + configuration + "/*.Tests.dll",
+        new GlobberSettings
         {
-            NoResults = true,
-            Where = "cat != Integration"
+            FilePredicate = file => file.Path.GetFilename().FullPath.ToUpper() != "CMS.TESTS.DLL"
         }
     );
+
+    var settings = new NUnit3Settings
+    {
+        NoResults = true
+    };
+
+    if (!BuildSystem.IsLocalBuild)
+    {
+        settings.Where = "cat != Integration";
+    }
+
+    NUnit3(testAssemblies, settings);
 });
 
 Task("NuGet-Pack")

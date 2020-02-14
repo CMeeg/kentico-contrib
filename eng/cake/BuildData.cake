@@ -7,7 +7,6 @@ public class BuildData
     public string RepositoryUrl { get; }
     public ConvertableDirectoryPath DistDirectory { get; set; }
     public IEnumerable<FilePath> SolutionFiles { get; set; }
-    public IEnumerable<FilePath> TestAssemblies { get; set; }
     public IEnumerable<Package> Packages => packages;
 
     public BuildData(ICakeContext context, string configuration, string repositoryUrl)
@@ -19,14 +18,6 @@ public class BuildData
         RepositoryUrl = repositoryUrl;
         DistDirectory = context.Directory("./.dist");
         SolutionFiles = context.GetFiles("./src/**/*.sln");
-
-        TestAssemblies = context.GetFiles(
-            "./src/**/bin/" + configuration + "/*.Tests.dll",
-            new GlobberSettings
-            {
-                FilePredicate = file => file.Path.GetFilename().FullPath.ToUpper() != "CMS.TESTS.DLL"
-            }
-        );
     }
 
     public BuildData AddPackages(string packagesPath)
