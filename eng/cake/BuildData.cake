@@ -62,11 +62,14 @@ public class BuildData
 
         var project = CreatePackageProject(packageDir);
 
+        var cmsModule = CreatePackageCmsModule(packageDir);
+
         return new Package
         {
             PackageDirectory = packageDir,
             NuSpec = nuspec,
-            Project = project
+            Project = project,
+            CmsModule = cmsModule
         };
     }
 
@@ -115,6 +118,35 @@ public class BuildData
         };
     }
 
+    private PackageCmsModule CreatePackageCmsModule(ConvertableDirectoryPath packageDir)
+    {
+        var modulePropsFiles = context.GetFiles(packageDir.Path + "/Meeg.Kentico.Cms.Module.props");
+
+        if (modulePropsFiles.Count == 0)
+        {
+            return null;
+        }
+
+        var modulePropsFile = ToConvertable(modulePropsFiles.First());
+
+        string cmsPath = context.XmlPeek(
+            modulePropsFile,
+            "/Project/PropertyGroup/CmsPath"
+        );
+
+        string moduleName = context.XmlPeek(
+            modulePropsFile,
+            "/Project/PropertyGroup/CmsModuleName"
+        );
+
+        return new PackageCmsModule
+        {
+            PropsFile = modulePropsFile,
+            CmsPath = cmsPath,
+            ModuleName = moduleName
+        };
+    }
+
     private ConvertableFilePath ToConvertable(FilePath path)
     {
         return context.File(path.FullPath);
@@ -137,11 +169,14 @@ public class Package
     public string PackageName => GetPackageName();
     public PackageNuSpec NuSpec { get; set; }
     public PackageProject Project { get; set; }
+    public PackageCmsModule CmsModule { get; set; }
     public GitVersion GitVersion { get; private set; }
     public string PackageVersion { get; private set; }
+    public string PackageReleaseVersion { get; private set; }
     public bool IsPreRelease { get; private set; }
 
     public bool IsMetaPackage => Project == null;
+    public bool IsCmsModule => CmsModule != null;
 
     private string GetPackageName()
     {
@@ -153,7 +188,7 @@ public class Package
         return NuSpec.PackageId;
     }
 
-    public void SetGitVersion(GitVersion gitVersion)
+    public void SetVersion(GitVersion gitVersion)
     {
         GitVersion = gitVersion ?? throw new ArgumentNullException(nameof(gitVersion));
 
@@ -162,6 +197,8 @@ public class Package
         PackageVersion = IsPreRelease
             ? $"{GitVersion.NuGetVersion}{GitVersion.BuildMetaDataPadded}"
             : GitVersion.NuGetVersion;
+
+        PackageReleaseVersion = GitVersion.MajorMinorPatch;
     }
 }
 
@@ -177,3 +214,10 @@ public class PackageProject
     public ConvertableDirectoryPath BinDirectory { get; set; }
     public AssemblyInfoParseResult AssemblyInfo { get; set; }
 }
+
+public class PackageCmsModule
+{
+    public ConvertableFilePath PropsFile { get; set; }
+    public string CmsPath { get; set; }
+    public string ModuleName { get; set; }
+};

@@ -7,6 +7,7 @@
 #addin "nuget:?package=Cake.Incubator&version=5.1.0"
 #l "local:?path=eng/cake/BuildData.cake"
 #l "local:?path=eng/cake/NuGet.cake"
+#l "local:?path=eng/cake/Kentico.cake"
 
 //////////////////////////////////////////////////////////////////////
 // Arguments
@@ -64,11 +65,12 @@ Task("Version")
         WorkingDirectory = package.PackageDirectory
     });
 
-    package.SetGitVersion(gitVersion);
+    package.SetVersion(gitVersion);
 
     Information("Versioning: {0}", package.PackageDirectory);
     Information(package.GitVersion.Dump());
-    Information($"PackageVersion: {package.PackageVersion}");
+    Information("PackageVersion: {0}", package.PackageVersion);
+    Information("PackageReleaseVersion: {0}", package.PackageReleaseVersion);
 });
 
 Task("Build")
@@ -92,7 +94,8 @@ Task("Run-Unit-Tests")
         data.TestAssemblies,
         new NUnit3Settings
         {
-            NoResults = true
+            NoResults = true,
+            Where = "cat != Integration"
         }
     );
 });
@@ -103,14 +106,11 @@ Task("NuGet-Pack")
 {
     // If the package already exists then don't package it
 
-    string packageName = package.PackageName;
-    string packageVersion = package.PackageVersion;
-    string releaseVersion = packageVersion;
-    string packageSource = FindPackageSource(packageName, packageVersion);
+    string packageSource = FindPackageSource(package.PackageName, package.PackageVersion);
 
     if (!string.IsNullOrEmpty(packageSource))
     {
-        Information("Skipping: {0} version {1} already exists on source {2}", packageName, packageVersion, packageSource);
+        Information("Skipping: {0} version {1} already exists on source {2}", package.PackageName, package.PackageVersion, packageSource);
 
         return;
     }
@@ -119,12 +119,11 @@ Task("NuGet-Pack")
     {
         // We also need to check that the we're not attempting to pre-release a package that has already been released
 
-        releaseVersion = package.GitVersion.MajorMinorPatch;
-        packageSource = FindPackageSource(packageName, releaseVersion);
+        packageSource = FindPackageSource(package.PackageName, package.PackageReleaseVersion);
 
         if (!string.IsNullOrEmpty(packageSource))
         {
-            Information("Skipping: {0} cannot pre-release version {1} of package {2} that already exists on source {3}", packageName, packageVersion, releaseVersion, packageSource);
+            Information("Skipping: {0} cannot pre-release version {1} of package {2} that already exists on source {3}", package.PackageName, package.PackageVersion, package.PackageReleaseVersion, packageSource);
 
             return;
         }
@@ -132,11 +131,11 @@ Task("NuGet-Pack")
 
     // Create the NuGet package
 
-    Information("Packaging: {0} version {1}", package.PackageName, packageVersion);
+    Information("Packaging: {0} version {1}", package.PackageName, package.PackageVersion);
 
     var properties = new Dictionary<string, string> {
-        { "version", packageVersion },
-        { "releaseVersion", releaseVersion },
+        { "version", package.PackageVersion },
+        { "releaseVersion", package.PackageReleaseVersion },
         { "configuration", data.Configuration }
     };
 
@@ -148,9 +147,24 @@ Task("NuGet-Pack")
         properties.Add("description", assemblyInfo.Description);
         properties.Add("author", assemblyInfo.Company);
         properties.Add("copyright", assemblyInfo.Copyright);
-        // TODO: Get these values from the props file
-        properties.Add("cmsPath", @"..\..\CMS");
-        properties.Add("cmsModuleName", assemblyInfo.Title);
+    }
+
+    if (package.IsCmsModule)
+    {
+        properties.Add("cmsPath", package.CmsModule.CmsPath);
+        properties.Add("cmsModuleName", package.CmsModule.ModuleName);
+
+        // Modify the module metadata verion to match the package version
+        // TODO: Maybe just generate this file instead of having Kent output it?
+
+        var metadataFile = package.PackageDirectory + Directory("Package") + Directory(package.PackageReleaseVersion) + File("ModuleMetaData.xml");
+
+        if (!FileExists(metadataFile))
+        {
+            Error("Cannot find module metadata file - have you exported the module?: {0}", metadataFile);
+        }
+
+        XmlPoke(metadataFile, "/moduleInstallationMetaData/version", package.PackageVersion);
     }
 
     var settings = new NuGetPackSettings {
@@ -200,6 +214,33 @@ Task("NuGet-Publish")
     );
 });
 
+Task("Cms-Module-Export")
+    .IsDependentOn("Version")
+    //.IsDependentOn("Run-Unit-Tests")
+    .DoesForEach<BuildData, Package>(data => data.Packages, (data, package, context) =>
+{
+    if (!package.IsCmsModule)
+    {
+        // This package is not a cms module so no need to go any further
+
+        return;
+    }
+
+    // TODO: Form the desired output directory as part of this script and pass it to Kent rather than having Kent define the output path
+    // TODO: Clean the output dirctory before export
+
+    Information("Exporting module: {0} version {1}", package.CmsModule.ModuleName, package.PackageReleaseVersion);
+
+    if (KentExport(package.PackageDirectory, package.PackageReleaseVersion))
+    {
+        Information("Success {0}", ":)");
+    }
+    else
+    {
+        Error("Failure {0}", ":(");
+    }
+});
+
 //////////////////////////////////////////////////////////////////////
 // Targets
 //////////////////////////////////////////////////////////////////////
@@ -212,6 +253,9 @@ Task("Package")
 
 Task("Publish")
     .IsDependentOn("NuGet-Publish");
+
+Task("Export")
+    .IsDependentOn("Cms-Module-Export");
 
 //////////////////////////////////////////////////////////////////////
 // Execution

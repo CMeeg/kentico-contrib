@@ -18,11 +18,12 @@
     <files>
         <file src="bin\$id$.dll" target="lib\net461" />
         <file src="bin\$id$.pdb" target="lib\net461" />
+        <file src="bin\$id$.xml" target="lib\net461" />
         <file src="$cmsPath$\App_Data\CMSModules\Modules\tools\Install.ps1" target="tools" />
-        <file src="$cmsPath$\App_Data\CMSModules\$cmsModuleName$\Package\$releaseVersion$\MetaData.xml" target="content\App_Data\CMSModules\CMSInstallation\Packages\$cmsModuleName$_$version$.xml" />
-        <file src="$cmsPath$\App_Data\CMSModules\$cmsModuleName$\Package\$releaseVersion$\ModuleExport.zip" target="content\App_Data\CMSModules\$cmsModuleName$\Install\$cmsModuleName$_$version$.zip" />
-        <file src="$cmsPath$\CMSFormControls\$cmsModuleName$\*.ascx" target="content\CMSFormControls\$cmsModuleName$" />
-        <file src="$cmsPath$\CMSModules\$cmsModuleName$\readme.txt" target="" />
-        <file src="$cmsPath$\CMSResources\$cmsModuleName$\*.resx" target="content\CMSResources\$cmsModuleName$" />
+        <file src="CMSFormControls\*.ascx" target="content\CMSFormControls\$cmsModuleName$" />
+        <file src="CMSModules\readme.txt" target="" />
+        <file src="CMSResources\*.resx" target="content\CMSResources\$cmsModuleName$" />
+        <file src="Package\$releaseVersion$\ModuleMetaData.xml" target="content\App_Data\CMSModules\CMSInstallation\Packages\$cmsModuleName$_$version$.xml" />
+        <file src="Package\$releaseVersion$\ModuleExport.zip" target="content\App_Data\CMSModules\$cmsModuleName$\Install\$cmsModuleName$_$version$.zip" />
     </files>
 </package>
