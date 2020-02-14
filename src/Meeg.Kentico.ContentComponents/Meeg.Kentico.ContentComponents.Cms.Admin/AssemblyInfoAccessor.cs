@@ -3,11 +3,11 @@ using System.Reflection;
 
 namespace Meeg.Kentico.ContentComponents.Cms.Admin
 {
-    internal class AssemblyInfo
+    internal class AssemblyInfoAccessor
     {
         private readonly Assembly assembly;
 
-        public AssemblyInfo(Assembly assembly)
+        public AssemblyInfoAccessor(Assembly assembly)
         {
             this.assembly = assembly;
         }
