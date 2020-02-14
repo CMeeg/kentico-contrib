@@ -11,32 +11,42 @@ stages:
 - stage: Build
   pool:
     vmImage: 'windows-latest'
+  variables:
+    distDir: '.dist'
   jobs:
-  - job: Build
+  - job: BuildArtifacts
     steps:
     - task: PowerShell@2
-      displayName: Build artifacts
+      displayName: Run build script
       inputs:
         filePath: './build.ps1'
         arguments: '-Target Package'
         pwsh: true
-    - task: CopyFiles@2
-      displayName: Copy artifacts
+    - task: PowerShell@2
+      name: checkArtifacts
+      displayName: Check artifacts exist
       inputs:
-        sourceFolder: '.dist'
-        contents: '**'
-        targetFolder: $(Build.ArtifactStagingDirectory)
-    - task: PublishBuildArtifacts@1
-      displayName: Publish artifacts
+        targetType: inline
+        script: |
+          $artifactsExist = Test-Path -Path $(distDir)/*
+          Write-Host "##vso[task.setvariable variable=artifactsExist;isOutput=true]$artifactsExist"
+          Write-Host "Artifacts exist: $artifactsExist"
+        pwsh: true
+  - job: PublishArtifacts
+    dependsOn: BuildArtifacts
+    condition: eq(dependencies.BuildArtifacts.outputs['checkArtifacts.artifactsExist'], true)
+    steps:
+    - task: PublishPipelineArtifact@1
+      displayName: Publish NuGet artifacts
       inputs:
-        pathToPublish: $(Build.ArtifactStagingDirectory)
-        artifactName: Package
-- stage: Publish
+        targetPath: $(distDir)
+        artifactName: NuGet
+- stage: Release
   condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'), eq(variables['Build.Reason'], 'Manual')))
   pool:
     vmImage: 'windows-latest'
   jobs:
-  - deployment: Publish
+  - deployment: NuGet
     environment: NuGet-Public
     strategy:
       runOnce:
@@ -50,6 +60,6 @@ stages:
             displayName: 'NuGet push packages'
             inputs:
               command: push
-              packagesToPush: '$(Agent.BuildDirectory)/Package/*.nupkg'
+              packagesToPush: '$(Pipeline.Workspace)/NuGet/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: 'NuGet - Meeg'
