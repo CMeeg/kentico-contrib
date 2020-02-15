@@ -43,7 +43,6 @@ Task("Clean")
 });
 
 Task("Restore-NuGet-Packages")
-    .IsDependentOn("Clean")
     .DoesForEach<BuildData, FilePath>(data => data.SolutionFiles, (data, sln, context) =>
 {
     Information("Restoring: {0}", sln);
@@ -57,7 +56,6 @@ Task("Restore-NuGet-Packages")
 });
 
 Task("Version")
-    .IsDependentOn("Restore-NuGet-Packages")
     .DoesForEach<BuildData, Package>(data => data.Packages, (data, package, context) =>
 {
     var gitVersion = GitVersion(new GitVersionSettings {
@@ -74,7 +72,6 @@ Task("Version")
 });
 
 Task("Build")
-    .IsDependentOn("Version")
     .DoesForEach<BuildData, FilePath>(data => data.SolutionFiles, (data, sln, context) =>
 {
     Information("Building: {0}", sln);
@@ -87,7 +84,6 @@ Task("Build")
 });
 
 Task("Run-Unit-Tests")
-    .IsDependentOn("Build")
     .Does<BuildData>(data =>
 {
 
@@ -113,7 +109,6 @@ Task("Run-Unit-Tests")
 });
 
 Task("NuGet-Pack")
-    .IsDependentOn("Run-Unit-Tests")
     .DoesForEach<BuildData, Package>(data => data.Packages, (data, package, context) =>
 {
     // If the package already exists then don't package it
@@ -201,7 +196,6 @@ Task("NuGet-Pack")
 });
 
 Task("NuGet-Publish")
-    .IsDependentOn("NuGet-Pack")
     .Does<BuildData>(data =>
 {
     if (!BuildSystem.IsLocalBuild)
@@ -227,17 +221,8 @@ Task("NuGet-Publish")
 });
 
 Task("Cms-Module-Export")
-    .IsDependentOn("Version")
-    //.IsDependentOn("Run-Unit-Tests")
-    .DoesForEach<BuildData, Package>(data => data.Packages, (data, package, context) =>
+    .DoesForEach<BuildData, Package>(data => data.Packages.Where(p => p.IsCmsModule), (data, package, context) =>
 {
-    if (!package.IsCmsModule)
-    {
-        // This package is not a cms module so no need to go any further
-
-        return;
-    }
-
     // TODO: Form the desired output directory as part of this script and pass it to Kent rather than having Kent define the output path
     // TODO: Clean the output dirctory before export
 
@@ -258,15 +243,25 @@ Task("Cms-Module-Export")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Restore-NuGet-Packages")
+    .IsDependentOn("Version")
+    .IsDependentOn("Build")
     .IsDependentOn("Run-Unit-Tests");
 
 Task("Package")
+    .IsDependentOn("Default")
     .IsDependentOn("NuGet-Pack");
 
 Task("Publish")
+    .IsDependentOn("Package")
     .IsDependentOn("NuGet-Publish");
 
 Task("Export")
+    .IsDependentOn("Restore-NuGet-Packages")
+    .IsDependentOn("Version")
+    .IsDependentOn("Build")
+    .IsDependentOn("Run-Unit-Tests")
     .IsDependentOn("Cms-Module-Export");
 
 //////////////////////////////////////////////////////////////////////
