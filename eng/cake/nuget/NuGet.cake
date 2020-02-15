@@ -13,7 +13,7 @@ private string FindPackageSource(string packageName, string packageVersion)
             {
                 args.Append("-NoProfile")
                     .AppendSwitch("-ExecutionPolicy", "Bypass")
-                    .AppendSwitch("-File", "./eng/cake/Find-PackageSource.ps1")
+                    .AppendSwitch("-File", "./eng/cake/nuget/Find-PackageSource.ps1")
                     .AppendSwitchQuoted("-PackageName", packageName)
                     .AppendSwitchQuoted("-PackageVersion", packageVersion);
             }),

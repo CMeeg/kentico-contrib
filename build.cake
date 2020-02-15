@@ -6,8 +6,8 @@
 #tool nuget:?package=NUnit.ConsoleRunner&version=3.10.0
 #addin "nuget:?package=Cake.Incubator&version=5.1.0"
 #l "local:?path=eng/cake/BuildData.cake"
-#l "local:?path=eng/cake/NuGet.cake"
-#l "local:?path=eng/cake/Kentico.cake"
+#l "local:?path=eng/cake/nuget/NuGet.cake"
+#l "local:?path=eng/cake/kentico/Kentico.cake"
 
 //////////////////////////////////////////////////////////////////////
 // Arguments
@@ -161,17 +161,7 @@ Task("NuGet-Pack")
         properties.Add("cmsPath", package.CmsModule.CmsPath);
         properties.Add("cmsModuleName", package.CmsModule.ModuleName);
 
-        // Modify the module metadata verion to match the package version
-        // TODO: Maybe just generate this file instead of having Kent output it?
-
-        var metadataFile = package.PackageDirectory + Directory("Package") + Directory(package.PackageReleaseVersion) + File("ModuleMetaData.xml");
-
-        if (!FileExists(metadataFile))
-        {
-            Error("Cannot find module metadata file - have you exported the module?: {0}", metadataFile);
-        }
-
-        XmlPoke(metadataFile, "/moduleInstallationMetaData/version", package.PackageVersion);
+        WriteModuleMetadata(package);
     }
 
     var settings = new NuGetPackSettings {
@@ -223,18 +213,15 @@ Task("NuGet-Publish")
 Task("Cms-Module-Export")
     .DoesForEach<BuildData, Package>(data => data.Packages.Where(p => p.IsCmsModule), (data, package, context) =>
 {
-    // TODO: Form the desired output directory as part of this script and pass it to Kent rather than having Kent define the output path
-    // TODO: Clean the output dirctory before export
+    Information("Exporting module: {0}", package.CmsModule.ModuleName);
 
-    Information("Exporting module: {0} version {1}", package.CmsModule.ModuleName, package.PackageReleaseVersion);
-
-    if (KentExport(package.PackageDirectory, package.PackageReleaseVersion))
+    if (KentExport(package))
     {
         Information("Success {0}", ":)");
     }
     else
     {
-        Error("Failure {0}", ":(");
+        Error("Failure :(");
     }
 });
 
