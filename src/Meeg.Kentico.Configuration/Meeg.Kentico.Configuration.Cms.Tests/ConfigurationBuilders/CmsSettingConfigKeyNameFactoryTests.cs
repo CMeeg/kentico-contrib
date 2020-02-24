@@ -39,7 +39,11 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         [TestCase("Category:Key", "Site", null, false)]
         public void CreateConfigKeyName_WithSiteName_StartsWithSiteNameSection(string settingsKeyName, string siteName, string categoryName, bool useCategorySections)
         {
-            var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, null, false);
+            var options = new CmsSettingsConfigBuilderOptions
+            {
+                UseCategorySections = useCategorySections
+            };
+
             var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             var setting = new CmsSetting(settingsKeyName, string.Empty, categoryName, siteName);
@@ -59,7 +63,11 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         [TestCase("Category:Key", "Site", null, false)]
         public void CreateConfigKeyName_WithCategoryName_ContainsCategoryNameSection(string settingsKeyName, string siteName, string categoryName, bool useCategorySections)
         {
-            var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, null, false);
+            var options = new CmsSettingsConfigBuilderOptions
+            {
+                UseCategorySections = useCategorySections
+            };
+
             var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             var setting = new CmsSetting(settingsKeyName, string.Empty, categoryName, siteName);
@@ -83,7 +91,13 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         [TestCase("Site", "Category", "Prefix", "Key", true, true)]
         public void CreateConfigKeyName_WithKeyPrefix_StripsPrefixWhenDirected(string siteName, string categoryName, string keyPrefix, string keyName, bool stripPrefix, bool useCategorySections)
         {
-            var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, keyPrefix, stripPrefix);
+            var options = new CmsSettingsConfigBuilderOptions
+            {
+                UseCategorySections = useCategorySections,
+                KeyPrefix = keyPrefix,
+                StripPrefix = stripPrefix
+            };
+
             var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             string settingsKeyName = $"{keyPrefix}{keyName}";
@@ -104,7 +118,11 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         public void CreateSettingsKeyName_WithSiteConfigKey_CreatesSiteSettingsKey(string settingsKeyName,
             string siteName, string categoryName, bool useCategorySections)
         {
-            var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, null, false);
+            var options = new CmsSettingsConfigBuilderOptions
+            {
+                UseCategorySections = useCategorySections
+            };
+
             var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             var setting = new CmsSetting(settingsKeyName, string.Empty, categoryName, siteName);
@@ -132,7 +150,13 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         [TestCase("Site", "Category", "Prefix", "Key", true, true)]
         public void CreateSettingsKeyName_WithKeyPrefix_RestoresPrefixWhenStripped(string siteName, string categoryName, string keyPrefix, string keyName, bool stripPrefix, bool useCategorySections)
         {
-            var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, keyPrefix, stripPrefix);
+            var options = new CmsSettingsConfigBuilderOptions
+            {
+                UseCategorySections = useCategorySections,
+                KeyPrefix = keyPrefix,
+                StripPrefix = stripPrefix
+            };
+
             var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             string settingsKeyName = $"{keyPrefix}{keyName}";
@@ -156,7 +180,11 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
         [TestCase("Key", null, "Category", false)]
         public void CreateSettingsKeyName_WithGlobalConfigKey_CreatesGlobalSettingsKey(string settingsKeyName, string siteName, string categoryName, bool useCategorySections)
         {
-            var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, null, false);
+            var options = new CmsSettingsConfigBuilderOptions
+            {
+                UseCategorySections = useCategorySections
+            };
+
             var sut = new CmsSettingConfigKeyNameFactory(Configuration, options);
 
             var setting = new CmsSetting(settingsKeyName, string.Empty, categoryName, siteName);

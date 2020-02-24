@@ -17,8 +17,10 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 
         internal CmsSettingsConfigBuilderInternal ConfigBuilder { get; private set; }
 
-        public override void Initialize(string name, NameValueCollection config)
+        protected override void LazyInitialize(string name, NameValueCollection config)
         {
+            base.LazyInitialize(name, config);
+
             QueryName = config[QueryNameTag];
 
             bool.TryParse(config[UseCategorySectionsTag] ?? "false", out bool useCategorySections);
@@ -32,7 +34,14 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
             // Config builders are based on the provider model and so we can't inject dependencies
             // So we will compose our implementation and its dependencies here
 
-            var options = new CmsSettingsConfigBuilderOptions(QueryName, UseCategorySections, keyPrefix, stripPrefix);
+            var options = new CmsSettingsConfigBuilderOptions
+            {
+                QueryName = QueryName,
+                UseCategorySections = UseCategorySections,
+                KeyPrefix = keyPrefix,
+                StripPrefix = stripPrefix,
+                Optional = Optional
+            };
 
             var configurationManager = new ConfigurationManagerAdapter();
             var configuration = new AppConfiguration(configurationManager);
@@ -46,8 +55,6 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
                 allSettingsQueryHandler,
                 configKeyNameFactory
             );
-
-            base.Initialize(name, config);
         }
 
         public override string GetValue(string key)

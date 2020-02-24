@@ -32,7 +32,10 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
 
             var configurationManager = new ConfigurationManagerAdapter();
             var configuration = new AppConfiguration(configurationManager);
-            var options = new CmsSettingsConfigBuilderOptions(null, useCategorySections, null, false);
+            var options = new CmsSettingsConfigBuilderOptions
+            {
+                UseCategorySections = useCategorySections
+            };
             var configKeyNameFactory = new CmsSettingConfigKeyNameFactory(configuration, options);
 
             var sut = new CmsSettingsConfigBuilderInternal(
