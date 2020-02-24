@@ -2,13 +2,13 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 {
     internal class CmsSettingsConfigBuilderOptions
     {
-        public const string DefaultQueryName = "Meeg_Kentico_Configuration.QueryContainer.AllConfigCmsSettings";
+        public const string DefaultProcName = "Proc_Meeg_Configuration_AllConfigCmsSettings";
 
-        private string queryName;
-        public string QueryName
+        private string procName;
+        public string ProcName
         {
-            get => queryName ?? DefaultQueryName;
-            set => queryName = value;
+            get => procName ?? DefaultProcName;
+            set => procName = value;
         }
 
         public bool UseCategorySections { get; set; }

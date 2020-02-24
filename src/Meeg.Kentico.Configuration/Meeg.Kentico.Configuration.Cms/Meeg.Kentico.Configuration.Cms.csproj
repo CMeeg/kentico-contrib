@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CmsQuery.cs" />
     <Compile Include="ConfigurationBuilders\AllConfigCmsSettingsQuery.cs" />
     <Compile Include="CmsSetting.cs" />
     <Compile Include="ConfigurationBuilders\AllConfigCmsSettingsQueryHandler.cs" />
@@ -59,8 +58,6 @@
     <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilder.cs" />
     <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilderInternal.cs" />
     <Compile Include="ConfigurationBuilders\CmsSettingsConfigBuilderOptions.cs" />
-    <Compile Include="FindCmsQueryByNameQuery.cs" />
-    <Compile Include="FindCmsQueryByNameQueryHandler.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="IQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

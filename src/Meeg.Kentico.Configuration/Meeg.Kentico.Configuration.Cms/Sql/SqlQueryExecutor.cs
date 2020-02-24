@@ -55,7 +55,10 @@ namespace Meeg.Kentico.Configuration.Cms.Sql
 
         private SqlCommand CreateSqlCommand(SqlQuery query, SqlConnection connection)
         {
-            var command = new SqlCommand(query.QueryText, connection);
+            var command = new SqlCommand(query.QueryText, connection)
+            {
+                CommandType = query.CommandType
+            };
 
             foreach (SqlQueryParameter parameter in query.Parameters)
             {

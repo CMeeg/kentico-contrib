@@ -54,7 +54,7 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
             {
                 // Get all settings
 
-                var query = new AllConfigCmsSettingsQuery(options.QueryName, prefix);
+                var query = new AllConfigCmsSettingsQuery(options.ProcName, prefix);
                 IReadOnlyCollection<CmsSetting> settings = allSettingsQueryHandler.Handle(query);
 
                 // Group settings by site (global settings represented by an empty string) so we can split up processing

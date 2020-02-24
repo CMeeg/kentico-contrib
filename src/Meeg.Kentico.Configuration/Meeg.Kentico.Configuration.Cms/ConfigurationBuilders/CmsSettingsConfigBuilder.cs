@@ -8,10 +8,10 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 {
     public class CmsSettingsConfigBuilder : KeyValueConfigBuilder
     {
-        private const string QueryNameTag = "queryName";
+        private const string ProcNameTag = "procName";
         private const string UseCategorySectionsTag = "useCategorySections";
 
-        protected string QueryName { get; private set; }
+        protected string ProcName { get; private set; }
 
         protected bool UseCategorySections { get; private set; }
 
@@ -21,7 +21,7 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
         {
             base.LazyInitialize(name, config);
 
-            QueryName = config[QueryNameTag];
+            ProcName = config[ProcNameTag];
 
             bool.TryParse(config[UseCategorySectionsTag] ?? "false", out bool useCategorySections);
             UseCategorySections = useCategorySections;
@@ -36,7 +36,7 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 
             var options = new CmsSettingsConfigBuilderOptions
             {
-                QueryName = QueryName,
+                ProcName = ProcName,
                 UseCategorySections = UseCategorySections,
                 KeyPrefix = keyPrefix,
                 StripPrefix = stripPrefix,
