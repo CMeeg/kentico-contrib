@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Meeg.Kentico.Configuration</id>
+        <version>$version$</version>
+        <description>A configuration builder that provides access to Kentico CMS settings alongside your other application configuration settings. This package is meant to be installed into any project except your CMS Administration project.</description>
+        <authors>meeg</authors>
+        <projectUrl>https://github.com/CMeeg/kentico-contrib/tree/master/src/Meeg.Kentico.Configuration</projectUrl>
+        <license type="expression">MIT</license>
+        <copyright>Copyright 2020 Chris Meagher</copyright>
+        <tags>kentico configuration</tags>
+        <dependencies>
+            <group targetFramework="net472">
+                <dependency id="Kentico.Libraries" version="[12.0.39,12.1.0)" />
+                <dependency id="Meeg.Configuration.Extensions" version="[0.1.1,1.0.0)" />
+                <dependency id="Meeg.Kentico.Configuration.Cms" version="[0.0.0,1.0.0)" />
+            </group>
+        </dependencies>
+    </metadata>
+</package>
