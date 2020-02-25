@@ -21,4 +21,3 @@ BEGIN
 		ISNULL(sk.SiteID, 0) DESC,
 		KeyName ASC
 END
-GO
