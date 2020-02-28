@@ -22,25 +22,11 @@ stages:
         filePath: './build.ps1'
         arguments: '-Target Package'
         pwsh: true
-    - task: PowerShell@2
-      name: checkArtifacts
-      displayName: Check artifacts exist
-      inputs:
-        targetType: inline
-        script: |
-          $artifactsExist = Test-Path -Path $(distDir)/*
-          Write-Host "##vso[task.setvariable variable=artifactsExist;isOutput=true]$artifactsExist"
-          Write-Host "Artifacts exist: $artifactsExist"
-        pwsh: true
-  - job: PublishArtifacts
-    dependsOn: BuildArtifacts
-    condition: eq(dependencies.BuildArtifacts.outputs['checkArtifacts.artifactsExist'], true)
-    steps:
     - task: PublishPipelineArtifact@1
       displayName: Publish NuGet artifacts
       inputs:
         targetPath: $(distDir)
-        artifactName: NuGet
+        artifactName: 'NuGet'
 - stage: Release
   condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'), eq(variables['Build.Reason'], 'Manual')))
   pool:
@@ -52,6 +38,10 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: 'NuGet'
+              path: $(Pipeline.Workspace)/NuGet
           - task: NuGetToolInstaller@1
             displayName: 'Use NuGet 5.4.0'
             inputs:
