@@ -9,6 +9,7 @@ KenticoContrib is a playground/sandbox for developing an approach to building Ke
 
 To date the following modules have been released:
 
+* [Meeg.Kentico.Configuration](src/Meeg.Kentico.Configuration)
 * [Meeg.Kentico.ContentComponents](src/Meeg.Kentico.ContentComponents)
 
 ## Contributing

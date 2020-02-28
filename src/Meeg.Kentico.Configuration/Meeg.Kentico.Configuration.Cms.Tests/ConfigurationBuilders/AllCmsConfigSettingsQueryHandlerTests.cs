@@ -8,20 +8,20 @@ namespace Meeg.Kentico.Configuration.Cms.Tests.ConfigurationBuilders
     [TestFixture]
     public class AllCmsConfigSettingsQueryHandlerTests : SqlQueryHandlerTestsBase
     {
-        [TestCase(CmsSettingsConfigBuilderOptions.DefaultQueryName)]
-        public void Handle_WithValidQueryName_ReturnsSettings(string queryName)
+        [TestCase(CmsSettingsConfigBuilderOptions.DefaultProcName)]
+        public void Handle_WithValidProcName_ReturnsSettings(string procName)
         {
-            var query = new AllConfigCmsSettingsQuery(queryName, null);
+            var query = new AllConfigCmsSettingsQuery(procName, null);
             var queryHandler = new AllConfigCmsSettingsQueryHandler(SqlQueryExecutor);
             IReadOnlyCollection<CmsSetting> settings = queryHandler.Handle(query);
 
             CollectionAssert.IsNotEmpty(settings);
         }
 
-        [TestCase(CmsSettingsConfigBuilderOptions.DefaultQueryName, "CMSSMTP")]
-        public void Handle_WithValidQueryNameAndPrefix_ReturnsSettingsWithPrefix(string queryName, string prefix)
+        [TestCase(CmsSettingsConfigBuilderOptions.DefaultProcName, "CMSSMTP")]
+        public void Handle_WithValidProcNameAndPrefix_ReturnsSettingsWithPrefix(string procName, string prefix)
         {
-            var query = new AllConfigCmsSettingsQuery(queryName, prefix);
+            var query = new AllConfigCmsSettingsQuery(procName, prefix);
             var queryHandler = new AllConfigCmsSettingsQueryHandler(SqlQueryExecutor);
             IReadOnlyCollection<CmsSetting> settings = queryHandler.Handle(query);
 

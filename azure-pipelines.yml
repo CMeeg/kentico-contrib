@@ -1,0 +1,51 @@
+trigger:
+- master
+- develop
+- release/*
+
+pr:
+- master
+- develop
+
+stages:
+- stage: Build
+  pool:
+    vmImage: 'windows-latest'
+  variables:
+    distDir: '.dist'
+  jobs:
+  - job: BuildArtifacts
+    steps:
+    - task: PowerShell@2
+      displayName: Run build script
+      inputs:
+        filePath: './build.ps1'
+        arguments: '-Target Package'
+        pwsh: true
+    - task: PublishPipelineArtifact@1
+      displayName: Publish NuGet artifacts
+      inputs:
+        targetPath: $(distDir)
+        artifactName: 'NuGet'
+- stage: Release
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'), eq(variables['Build.Reason'], 'Manual')))
+  pool:
+    vmImage: 'windows-latest'
+  jobs:
+  - deployment: NuGet
+    environment: NuGet-Public
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: NuGetToolInstaller@1
+            displayName: 'Use NuGet 5.4.0'
+            inputs:
+              versionSpec: 5.4.0
+          - task: NuGetCommand@2
+            displayName: 'NuGet push packages'
+            inputs:
+              command: push
+              packagesToPush: '$(Pipeline.Workspace)/NuGet/*.nupkg'
+              nuGetFeedType: external
+              publishFeedCredentials: 'NuGet - Meeg'

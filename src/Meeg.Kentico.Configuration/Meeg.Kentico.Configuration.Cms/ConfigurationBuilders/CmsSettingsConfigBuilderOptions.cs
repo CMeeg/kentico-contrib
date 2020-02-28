@@ -2,19 +2,18 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 {
     internal class CmsSettingsConfigBuilderOptions
     {
-        public const string DefaultQueryName = "Meeg_Kentico_Configuration.QueryContainer.AllConfigCmsSettings";
+        public const string DefaultProcName = "Proc_Meeg_Configuration_AllConfigCmsSettings";
 
-        public string QueryName { get; }
-        public bool UseCategorySections { get; }
-        public string KeyPrefix { get; }
-        public bool StripPrefix { get; }
-
-        public CmsSettingsConfigBuilderOptions(string queryName, bool useCategorySections, string keyPrefix, bool stripPrefix)
+        private string procName;
+        public string ProcName
         {
-            QueryName = queryName ?? DefaultQueryName;
-            UseCategorySections = useCategorySections;
-            KeyPrefix = keyPrefix;
-            StripPrefix = stripPrefix;
+            get => procName ?? DefaultProcName;
+            set => procName = value;
         }
+
+        public bool UseCategorySections { get; set; }
+        public string KeyPrefix { get; set; }
+        public bool StripPrefix { get; set; }
+        public bool Optional { get; set; }
     }
 }

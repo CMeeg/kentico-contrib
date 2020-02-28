@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>$id$</id>
+        <version>$version$</version>
+        <description>$description$</description>
+        <authors>$author$</authors>
+        <projectUrl>https://github.com/CMeeg/kentico-contrib/tree/master/src/Meeg.Kentico.Configuration</projectUrl>
+        <license type="expression">MIT</license>
+        <copyright>$copyright$</copyright>
+        <tags>kentico configuration</tags>
+        <dependencies>
+            <group targetFramework="net472">
+                <dependency id="Meeg.Configuration" version="[0.1.1,1.0.0)" />
+                <dependency id="Microsoft.Configuration.ConfigurationBuilders.Base" version="[2.0.0,3.0.0)" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$configuration$\$id$.dll" target="lib\net472" />
+        <file src="bin\$configuration$\$id$.pdb" target="lib\net472" />
+    </files>
+</package>

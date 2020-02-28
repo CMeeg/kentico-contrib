@@ -5,17 +5,17 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 {
     internal class AllConfigCmsSettingsQuery : IQuery<IReadOnlyCollection<CmsSetting>>
     {
-        public string QueryName { get; }
+        public string ProcName { get; }
         public string Prefix { get; }
 
-        public AllConfigCmsSettingsQuery(string queryName, string prefix)
+        public AllConfigCmsSettingsQuery(string procName, string prefix)
         {
-            if (string.IsNullOrEmpty(queryName))
+            if (string.IsNullOrEmpty(procName))
             {
-                throw new ArgumentException("Please provide the name of the CMS query to execute.", nameof(queryName));
+                throw new ArgumentException("Please provide the name of the stored procedure that will query the database for CMS settings.", nameof(procName));
             }
 
-            QueryName = queryName;
+            ProcName = procName;
             Prefix = prefix;
         }
     }
