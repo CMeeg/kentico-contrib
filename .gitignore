@@ -400,3 +400,6 @@ src/CMS/Files
 src/CMS/CMS*/Meeg.Kentico.*/
 
 ## MVC project specific ignores
+
+## CMS Modules
+ModuleMetaData.xml

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using CMS.DataEngine;
 using Meeg.Kentico.Configuration.Cms.Sql;
 
 namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
@@ -17,19 +19,13 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
         {
             // Using Kentico's InfoProvider, ObjectQuery, DataQuery, ConnectionHelper all result in calls to get appSettings, infinite loops and stack overflows - so we will use ADO.NET directly
 
-            CmsQuery cmsQuery = GetConfigSettingsQuery(query.QueryName);
-
-            if (cmsQuery == null)
-            {
-                throw new ArgumentException($"Query could not be found: `{query.QueryName}`.");
-            }
-
             string prefix = query.Prefix ?? string.Empty;
 
             const string keyNamePrefixParam = "@KeyNamePrefix";
 
             var sqlQuery = new SqlQuery(
-                cmsQuery.Text,
+                query.ProcName,
+                CommandType.StoredProcedure,
                 new []
                 {
                     new SqlQueryParameter(keyNamePrefixParam, $"{prefix}%")
@@ -38,7 +34,7 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
 
             return sqlQueryExecutor.ExecuteReader(
                 sqlQuery,
-                cmsQuery.ConnectionStringName,
+                ConnectionHelper.DEFAULT_CONNECTIONSTRING_NAME,
                 dataReader => new CmsSetting(
                     dataReader.GetString(0),
                     dataReader.GetString(1),
@@ -46,13 +42,6 @@ namespace Meeg.Kentico.Configuration.Cms.ConfigurationBuilders
                     dataReader.GetString(3)
                 )
             );
-        }
-
-        private CmsQuery GetConfigSettingsQuery(string queryName)
-        {
-            var query = new FindCmsQueryByNameQuery(queryName);
-            var queryHandler = new FindCmsQueryByNameQueryHandler(sqlQueryExecutor);
-            return queryHandler.Handle(query);
         }
     }
 }

@@ -22,6 +22,7 @@ var configuration = Argument("configuration", "Release");
 
 Setup<BuildData>(setupContext => {
     return new BuildData(setupContext, configuration, "https://github.com/CMeeg/kentico-contrib.git")
+        .AddPackages("./src/Meeg.Kentico.Configuration")
         .AddPackages("./src/Meeg.Kentico.ContentComponents");
 });
 
@@ -66,7 +67,7 @@ Task("Version")
     package.SetVersion(gitVersion);
 
     Information("Versioning: {0}", package.PackageDirectory);
-    Information(package.GitVersion.Dump());
+    // Information(package.GitVersion.Dump());
     Information("PackageVersion: {0}", package.PackageVersion);
     Information("PackageReleaseVersion: {0}", package.PackageReleaseVersion);
 });

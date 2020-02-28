@@ -1,0 +1,6 @@
+<Project>
+ <PropertyGroup>
+    <CmsPath>..\..\CMS</CmsPath>
+    <CmsModuleName>Meeg.Configuration</CmsModuleName>
+ </PropertyGroup>
+</Project>

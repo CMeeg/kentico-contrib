@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Meeg.Kentico.Configuration.Cms")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A configuration builder that provides access to Kentico CMS settings alongside your other application configuration settings. This package provides the core functionality of the module and is not typically installed independently of `Meeg.Kentico.Configuration` or `Meeg.Kentico.Configuration.Cms.Admin`.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("meeg")]
 [assembly: AssemblyProduct("Meeg.Kentico.Configuration.Cms")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright © 2020 Chris Meagher")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
