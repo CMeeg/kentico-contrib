@@ -296,7 +296,8 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
 
         private TreeNode GetContentComponentNode(ContentComponentFieldCollection componentFields)
         {
-            var componentNode = TreeNode.New(PageType);
+            var componentNodeFactory = new PageTypeContentComponentFactory();
+            var componentNode = componentNodeFactory.Create(PageType);
 
             componentFields.ApplyFieldsTo(componentNode);
 

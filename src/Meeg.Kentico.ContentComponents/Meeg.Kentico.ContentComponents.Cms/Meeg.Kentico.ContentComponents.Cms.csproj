@@ -73,6 +73,7 @@
     <Compile Include="IContentComponent.cs" />
     <Compile Include="PageTypeComponentDeserializer.cs" />
     <Compile Include="PageTypeComponentSerializer.cs" />
+    <Compile Include="PageTypeContentComponentFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TreeNodeExtensions.cs" />
   </ItemGroup>

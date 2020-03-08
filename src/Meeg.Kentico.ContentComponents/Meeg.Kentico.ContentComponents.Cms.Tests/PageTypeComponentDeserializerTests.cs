@@ -109,7 +109,8 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
         [Test]
         public void Deserialize_ComponentWithNullValues_DoesNotThrowException()
         {
-            var node = TreeNode.New<ContentComponentTest>();
+            var nodeFactory = new PageTypeContentComponentFactory();
+            var node = nodeFactory.Create<ContentComponentTest>();
 
             var serialiser = new PageTypeComponentSerializer();
             string nodeXml = serialiser.Serialize(node);

@@ -45,6 +45,7 @@
     <Compile Include="PageTypeComponentDeserializerTests.cs" />
     <Compile Include="PageTypeComponentSerializerTests.cs" />
     <Compile Include="PageTypeComponentUnitTests.cs" />
+    <Compile Include="PageTypeContentComponentFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData.cs" />
     <Compile Include="TreeNodeExtensionsTests.cs" />
