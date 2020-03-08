@@ -12,7 +12,7 @@
         <dependencies>
             <group targetFramework="net461">
                 <dependency id="Kentico.Libraries" version="[12.0.39,12.1.0)" />
-                <dependency id="Meeg.Kentico.ContentComponents.Cms" version="[0.3.0,1.0.0)" />
+                <dependency id="Meeg.Kentico.ContentComponents.Cms" version="[0.3.1,1.0.0)" />
             </group>
         </dependencies>
     </metadata>

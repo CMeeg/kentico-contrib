@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.3.1 (2020-03-08)
+
+### Bug fixes
+
+* Do not persist `NodeParentID` in component data ([93990d1](https://github.com/CMeeg/kentico-contrib/commit/93990d145392e988559c6d4241a2e40389654f75))
+  * This could cause issues in certain scenarios (such as restoring pages that use content components via CI) because the `NodeParentID` doesn't get translated when the CI process runs, which can result in the wrong node being referenced.
+
 ## 0.3.0 (2020-02-13)
 
 ### Features
