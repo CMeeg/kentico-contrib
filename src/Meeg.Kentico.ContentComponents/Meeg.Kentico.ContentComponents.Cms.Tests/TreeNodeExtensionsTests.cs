@@ -1,3 +1,4 @@
+using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.KenticoContrib;
 using NUnit.Framework;
@@ -10,8 +11,10 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
         [Test]
         public void GetContentComponent_NonComponentField_ReturnsNull()
         {
-            var page = TreeNode.New<Page>();
-            page.DocumentName = "Fake page";
+            var page = TreeNode.New<Page>().With(node =>
+            {
+                node.DocumentName = "Fake page";
+            });
 
             // `page.Metadata` uses the extension method we are testing
             PageMetadata actual = page.Metadata;
@@ -26,9 +29,11 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
 
             var expected = TestData.PageMetadataComponent;
 
-            var page = TreeNode.New<Page>();
-            page.DocumentName = "Fake page";
-            page.PageMetadata = serializer.Serialize(expected);
+            var page = TreeNode.New<Page>().With(node =>
+            {
+                node.DocumentName = "Fake page";
+                node.PageMetadata = serializer.Serialize(expected);
+            });
 
             // `page.Metadata` uses the extension method we are testing
             PageMetadata actual = page.Metadata;
@@ -40,6 +45,14 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
                 Assert.That(actual.OpenGraph.OpenGraphMetadataTitle, Is.EqualTo(expected.OpenGraph.OpenGraphMetadataTitle));
                 Assert.That(actual.OpenGraph.OpenGraphMetadataDescription, Is.EqualTo(expected.OpenGraph.OpenGraphMetadataDescription));
             });
+        }
+
+        [Test]
+        public void IsContentComponent_WithNewTreeNode_IsNotContentComponent()
+        {
+            var node = TreeNode.New<Page>();
+
+            Assert.That(node.IsContentComponent(), Is.False);
         }
     }
 }

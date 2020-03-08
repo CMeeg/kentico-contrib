@@ -22,6 +22,8 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("8a2b186d-a0a2-49dc-9eae-8036daa21ba2")]
 
+[assembly: InternalsVisibleTo("Meeg.Kentico.ContentComponents.Cms.Tests")]
+
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version
