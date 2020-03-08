@@ -16,4 +16,7 @@
             </group>
         </dependencies>
     </metadata>
+    <files>
+        <file src="*" exclude="GitVersion.yml" />
+    </files>
 </package>
