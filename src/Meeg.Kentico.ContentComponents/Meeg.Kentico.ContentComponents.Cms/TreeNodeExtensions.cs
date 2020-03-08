@@ -1,4 +1,5 @@
 using System;
+using CMS.Base;
 using CMS.DocumentEngine;
 
 namespace Meeg.Kentico.ContentComponents.Cms
@@ -94,14 +95,7 @@ namespace Meeg.Kentico.ContentComponents.Cms
                 return;
             }
 
-            if (component.NodeParentID > 0)
-            {
-                // Parent is already set
-
-                return;
-            }
-
-            if (parentNode is IContentComponent)
+            if (parentNode.IsContentComponent())
             {
                 // The node is a component so we will try again with its parent
 
@@ -113,6 +107,23 @@ namespace Meeg.Kentico.ContentComponents.Cms
             // Set the parent of the component to the node that the component "belongs" to
 
             component.NodeParentID = parentNode.NodeID;
+        }
+
+        internal static bool IsContentComponent(this TreeNode node)
+        {
+            if (node == null || node.NodeID > 0)
+            {
+                // This node is not a component
+
+                return false;
+            }
+
+            if (node.NodeCustomData.TryGetValue(PageTypeContentComponentFactory.IsContentComponentFieldName, out object isContentComponent) && isContentComponent.ToBoolean(false))
+            {
+                return true;
+            }
+
+            return node is IContentComponent;
         }
     }
 }

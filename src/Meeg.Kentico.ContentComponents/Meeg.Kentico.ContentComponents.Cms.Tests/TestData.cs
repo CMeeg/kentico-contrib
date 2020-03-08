@@ -1,4 +1,3 @@
-using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.KenticoContrib;
 
 namespace Meeg.Kentico.ContentComponents.Cms.Tests
@@ -14,7 +13,8 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
 
         private static PageMetadata CreatePageMetadataComponent()
         {
-            var node = TreeNode.New<PageMetadata>();
+            var nodeFactory = new PageTypeContentComponentFactory();
+            var node = nodeFactory.Create<PageMetadata>();
             node.SetValue(nameof(PageMetadata.DocumentPageTitle), "Fake page title");
             node.SetValue(nameof(PageMetadata.DocumentPageDescription), "Fake page description");
 
@@ -26,7 +26,8 @@ namespace Meeg.Kentico.ContentComponents.Cms.Tests
 
         private static OpenGraphMetadata CreateOpenGraphMetadataComponent()
         {
-            var node = TreeNode.New<OpenGraphMetadata>();
+            var nodeFactory = new PageTypeContentComponentFactory();
+            var node = nodeFactory.Create<OpenGraphMetadata>();
             node.SetValue(nameof(OpenGraphMetadata.OpenGraphMetadataTitle), "Fake Open Graph title");
             node.SetValue(nameof(OpenGraphMetadata.OpenGraphMetadataDescription), "Fake Open Graph description");
 
