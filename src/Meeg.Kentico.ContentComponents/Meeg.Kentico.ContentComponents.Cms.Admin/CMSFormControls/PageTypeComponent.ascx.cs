@@ -56,17 +56,6 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
                 ContentComponentFieldCollection componentFields = GetContentComponentFormFields();
                 ContentComponentNode = GetContentComponentNode(componentFields);
 
-                // Use the field data to set any system fields on the page this component belongs to
-
-                SetPageSystemFields(componentFields);
-
-                // Set the parent of the component to the node that is currently being edited
-
-                if (ParentNode.NodeID > 0)
-                {
-                    ContentComponentNode.NodeParentID = ParentNode.NodeID;
-                }
-
                 // Return the component node serialized to XML
 
                 var serializer = new PageTypeComponentSerializer();
@@ -299,16 +288,17 @@ namespace Meeg.Kentico.ContentComponents.Cms.Admin.CMSFormControls
             var componentNodeFactory = new PageTypeContentComponentFactory();
             var componentNode = componentNodeFactory.Create(PageType);
 
+            // Set node properties from editing form fields
+
             componentFields.ApplyFieldsTo(componentNode);
 
-            return componentNode;
-        }
+            // Use the field data to set any system fields on the page this component belongs to
 
-        private void SetPageSystemFields(ContentComponentFieldCollection componentFields)
-        {
             var page = ParentNode;
 
             componentFields.ApplyFieldsTo(page, field => field.IsSystem);
+
+            return componentNode;
         }
 
         /// <summary>
